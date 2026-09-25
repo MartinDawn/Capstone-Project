@@ -1,0 +1,3 @@
+com.bk.research.pqc.provider.ES384HybridKeyProviderFactory
+com.bk.research.pqc.provider.ES256HybridKeyProviderFactory
+com.bk.research.pqc.provider.PS256HybridKeyProviderFactory

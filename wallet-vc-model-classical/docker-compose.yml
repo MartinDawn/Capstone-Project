@@ -1,0 +1,15 @@
+# ============================================================
+# VDAM Classical Cryptography Baseline (B1-C0)
+# Master Compose File (Docker Compose v2.20+ `include:`)
+# ============================================================
+# Usage:
+#   docker compose up -d --build
+#   docker compose down
+# ============================================================
+
+name: vdam-classical-baseline
+
+include:
+  - bank/docker-compose.yml
+  - wallet/docker-compose.yml
+  - tpp/docker-compose.yml

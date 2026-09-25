@@ -1,0 +1,26 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "state": "sealed_smoke_handoff",
+  "is_g4_final_freeze": false,
+  "campaign_id": "smoke-vm-conf-002",
+  "effective_config_digest": "522c1fcbe2ba05b584e2cb2b23ee97923361dae2710040d252978102e1640874",
+  "run_ids": [
+    "smoke-vm-conf-002-conf-b0",
+    "smoke-vm-conf-002-conf-b1",
+    "smoke-vm-conf-002-conf-b2"
+  ],
+  "run_source_digests": {
+    "B0-C0": "17ad1fbd71de929aa15985147a808fd96acdf89b4cb0bccc24c77941ebb942af",
+    "B1-C0": "5e3cf1ab19d7aeb81e1bc6adcefbfa5f13f464c7da46d7d484b6d2f48431cf0e",
+    "B1-C2": "1ea38149362aeecfabcbe0ca7e907ce06e760470151c7751ae8ce907958eea80"
+  },
+  "disposition": "partial_conformance_smoke",
+  "limitations": [
+    "The effective configuration was amended after the campaign to add critical-blocker guards; the campaign manifest retains the executed digest.",
+    "B0-C0 live cases were not run because the public-IP endpoint did not match the certificate SAN.",
+    "B1-C0 has five failed cases.",
+    "B1-C2 case execution passed, but unresolved issuance-binding durability prevents G3 acceptance.",
+    "No performance observations were collected."
+  ]
+}

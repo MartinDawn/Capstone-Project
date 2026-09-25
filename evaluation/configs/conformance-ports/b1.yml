@@ -1,0 +1,23 @@
+# Conformance only. Publishes the VDAM application ports that the suite calls directly (B1-C0 and B1-C2 share
+# the service names). The perf runs never use this file.
+#   docker compose -f wallet-vc-model-classical/docker-compose.yml -f evaluation/configs/conformance-ports/b1.yml up -d --no-build
+services:
+  keycloak:
+    ports:
+      - "8080:8080"
+  bank-issuer:
+    ports:
+      - "7000:7000"
+    environment:
+      SPRING_PROFILES_ACTIVE: "conformance"
+  resource-server:
+    ports:
+      - "4000:4000"
+  wallet:
+    ports:
+      - "5000:5000"
+  tpp-java:
+    ports:
+      - "6001:6001"
+    environment:
+      SPRING_PROFILES_ACTIVE: "conformance"

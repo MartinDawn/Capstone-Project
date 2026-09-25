@@ -1,0 +1,12 @@
+{
+  "name": "traditional-fapi-benchmark",
+  "version": "1.0.0",
+  "description": "Benchmark and comparative performance evaluator for FAPI 2.0 vs PQC Wallet",
+  "main": "benchmark_fapi.js",
+  "scripts": {
+    "start": "node benchmark_fapi.js"
+  },
+  "dependencies": {
+    "jose": "^5.2.4"
+  }
+}

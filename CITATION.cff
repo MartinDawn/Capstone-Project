@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "VDAM: Verifiable Delegation Authorization for Open Banking - prototypes and evaluation harness"
+type: software
+authors:
+  - family-names: "<FAMILY NAME>"
+    given-names: "<GIVEN NAME>"
+    affiliation: "<AFFILIATION>"
+version: "1.0.0"
+date-released: "2026-09-25"
+license: MIT
+repository-code: "<REPOSITORY URL>"
+keywords:
+  - open banking
+  - FAPI 2.0
+  - verifiable credentials
+  - delegated authorization
+  - post-quantum cryptography
+  - ML-DSA

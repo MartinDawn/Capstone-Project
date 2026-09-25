@@ -1,0 +1,322 @@
+[
+  {
+    "case_id": "VD-F05-B01-S-SC",
+    "restricted_dimension": "S",
+    "restrictive_entity": "SC",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B02-S-H",
+    "restricted_dimension": "S",
+    "restrictive_entity": "H",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B03-S-R",
+    "restricted_dimension": "S",
+    "restrictive_entity": "R",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B04-S-T",
+    "restricted_dimension": "S",
+    "restrictive_entity": "T",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B05-S-P",
+    "restricted_dimension": "S",
+    "restrictive_entity": "P",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B06-A-SC",
+    "restricted_dimension": "A",
+    "restrictive_entity": "SC",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B07-A-H",
+    "restricted_dimension": "A",
+    "restrictive_entity": "H",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B08-A-R",
+    "restricted_dimension": "A",
+    "restrictive_entity": "R",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B09-A-T",
+    "restricted_dimension": "A",
+    "restrictive_entity": "T",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B10-A-P",
+    "restricted_dimension": "A",
+    "restrictive_entity": "P",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B11-V-SC",
+    "restricted_dimension": "V",
+    "restrictive_entity": "SC",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788932000, "end": 1789364000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B12-V-H",
+    "restricted_dimension": "V",
+    "restrictive_entity": "H",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788932000, "end": 1789364000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B13-V-R",
+    "restricted_dimension": "V",
+    "restrictive_entity": "R",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788932000, "end": 1789364000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B14-V-T",
+    "restricted_dimension": "V",
+    "restrictive_entity": "T",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788932000, "end": 1789364000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B15-V-P",
+    "restricted_dimension": "V",
+    "restrictive_entity": "P",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788932000, "end": 1789364000},
+      "data_predicate": {
+        "history_days_window": 90,
+        "max_page_size": 50,
+        "fields": ["account_id", "amount", "balance", "date", "operation", "type"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B16-D-SC",
+    "restricted_dimension": "D",
+    "restrictive_entity": "SC",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 30,
+        "max_page_size": 10,
+        "fields": ["account_id", "balance"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B17-D-H",
+    "restricted_dimension": "D",
+    "restrictive_entity": "H",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 30,
+        "max_page_size": 10,
+        "fields": ["account_id", "balance"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B18-D-R",
+    "restricted_dimension": "D",
+    "restrictive_entity": "R",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 30,
+        "max_page_size": 10,
+        "fields": ["account_id", "balance"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B19-D-T",
+    "restricted_dimension": "D",
+    "restrictive_entity": "T",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 30,
+        "max_page_size": 10,
+        "fields": ["account_id", "balance"]
+      }
+    }
+  },
+  {
+    "case_id": "VD-F05-B20-D-P",
+    "restricted_dimension": "D",
+    "restrictive_entity": "P",
+    "expected_permitted": true,
+    "expected_authority": {
+      "services": ["accounts", "balances", "transactions"],
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "validity": {"start": 1788500000, "end": 1791092000},
+      "data_predicate": {
+        "history_days_window": 30,
+        "max_page_size": 10,
+        "fields": ["account_id", "balance"]
+      }
+    }
+  }
+]

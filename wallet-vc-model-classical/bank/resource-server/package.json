@@ -1,0 +1,15 @@
+{
+  "name": "banking-resource-server-classical",
+  "version": "1.0.0",
+  "description": "Classical Banking Resource Server with SQLite Berka integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jose": "^5.2.3",
+    "sqlite3": "^5.1.7"
+  }
+}

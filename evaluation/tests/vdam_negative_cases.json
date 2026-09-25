@@ -1,0 +1,649 @@
+[
+  {
+    "case_id": "VD-N01-AudKB",
+    "name": "Negative: Wrong Key Binding Audience",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS KB-JWT Verification (:7000)",
+    "proven_requirements": "DAS rejects Holder KB-JWT targeted at an invalid audience identifier",
+    "uncovered_aspects": null,
+    "mutation": "Mutate aud field inside Holder KB-JWT to invalid target",
+    "expected_boundary": "DAS KB-JWT Verification",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_INVALID_KB_AUDIENCE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N01-Nonce",
+    "name": "Negative: Challenge Nonce Mismatch in KB-JWT",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Challenge Verification (:7000)",
+    "proven_requirements": "DAS rejects Holder KB-JWT with mismatched challenge nonce",
+    "uncovered_aspects": null,
+    "mutation": "Replace challenge nonce in KB-JWT with stale/random nonce",
+    "expected_boundary": "DAS Challenge Verification",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_NONCE_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N01-SdHash",
+    "name": "Negative: Altered Selective Disclosure Hash (sd_hash)",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS SD-JWT Binding Validation (:7000)",
+    "proven_requirements": "DAS rejects Holder KB-JWT when sd_hash does not match the SHA-256 digest of the presented SD-JWT",
+    "uncovered_aspects": null,
+    "mutation": "Modify sd_hash digest inside KB-JWT payload",
+    "expected_boundary": "DAS SD-JWT Binding Validation",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_CORRUPTED_SD_HASH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N02-AudG",
+    "name": "Negative: Wrong Grant Audience (Aud_G)",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Grant Audience Enforcement (:7000)",
+    "proven_requirements": "DAS rejects VP grant assertions targeted at a different authorization service URL",
+    "uncovered_aspects": null,
+    "mutation": "Present grant assertion targeted at another authorization service",
+    "expected_boundary": "DAS Grant Audience Enforcement",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_INVALID_GRANT_AUDIENCE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N02-PresentationBinding",
+    "name": "Negative: Altered Exact F4 Presentation Binding",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS F4 Presentation Binding (:7000)",
+    "proven_requirements": "DAS rejects altered F4 presentation bindings when inner challenge or credentials mismatch",
+    "uncovered_aspects": null,
+    "mutation": "Alter the signed F4 presentation binding while keeping prerequisite signatures and credentials valid",
+    "expected_boundary": "DAS F4 Presentation Binding",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_PRESENTATION_BINDING_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N02-CrossContextParent",
+    "name": "Negative: Cross-Context Parent and Delegation Pair",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Credential Lineage Binding (:7000)",
+    "proven_requirements": "DAS rejects attempts to pair a valid Scope VC from one issuance context with a Delegation VC from another context",
+    "uncovered_aspects": null,
+    "mutation": "Pair an issuer-valid Scope VC from one F1 context with a Wallet-valid Delegation VC from another issuance context",
+    "expected_boundary": "DAS Credential Lineage Binding",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_MISMATCHED_ISSUANCE_CONTEXT",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-PresenterMismatch",
+    "name": "Negative: Presenter Certificate Continuity Violation",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "TLS Termination & Inbound Proxy Binding (:7000)",
+    "proven_requirements": "DAS rejects VP assertions where the mTLS client certificate does not match the registered TPP client",
+    "uncovered_aspects": null,
+    "mutation": "Submit VP signed by Holder A over mTLS channel authenticated by Holder B",
+    "expected_boundary": "TLS Termination & Inbound Proxy Binding",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_PRESENTER_CERTIFICATE_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-WrongDelegationSigner",
+    "name": "Negative: Wrong Delegation VC Signer",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "fixture_signing"
+    ],
+    "production_boundary": "DAS Delegation Verification (:7000)",
+    "proven_requirements": "DAS rejects Delegation VCs signed with keys not associated with the authoritative Holder issuance record",
+    "uncovered_aspects": null,
+    "mutation": "Sign Delegation VC using an unauthorized key not matching the Bank issuance record",
+    "expected_boundary": "DAS Delegation Verification",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_WRONG_DELEGATION_SIGNER",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-WrongKbSigner",
+    "name": "Negative: Wrong Key Binding Signer",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "fixture_signing"
+    ],
+    "production_boundary": "DAS KB-JWT Verification (:7000)",
+    "proven_requirements": "DAS rejects KB-JWTs signed with keys other than the issuer-protected PK_H",
+    "uncovered_aspects": null,
+    "mutation": "Sign KB-JWT with a key different from the authenticated Holder key PK_H",
+    "expected_boundary": "DAS KB-JWT Verification",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_WRONG_KB_SIGNER",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-SubstitutedHolderKey",
+    "name": "Negative: Substituted Signer with Untrusted Replacement-Key Hint",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "fixture_signing"
+    ],
+    "production_boundary": "DAS Issuance-Binding Enforcement (:7000)",
+    "proven_requirements": "DAS rejects self-asserted or substituted holder key hints and strictly verifies against the authoritative issuance record",
+    "uncovered_aspects": null,
+    "mutation": "Supply an untrusted replacement JWK hint in header/payload attempting to override PK_H",
+    "expected_boundary": "DAS Issuance-Binding Enforcement",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_SUBSTITUTED_HOLDER_KEY",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-MismatchedIssuanceRecord",
+    "name": "Negative: Mismatched Issuance Binding Record",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Association Lookup (:7000)",
+    "proven_requirements": "DAS rejects presented credentials with corrupted or mismatching holder_cert_ref references",
+    "uncovered_aspects": null,
+    "mutation": "Mutate holder subject, wallet thumbprint tau_W, or status reference in presented credential",
+    "expected_boundary": "DAS Issuance-Binding Association Lookup",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_MISMATCHED_ISSUANCE_RECORD",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-BindingHolderMismatch",
+    "name": "Negative: Issuance Record Holder Mismatch",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Association Lookup (:7000)",
+    "proven_requirements": "DAS detects and rejects Holder subject mismatch between presented Scope VC and authoritative record store",
+    "uncovered_aspects": "State mutation helper is used to inject an altered holder subject into the binding store",
+    "mutation": "Change the authoritative binding Holder while preserving the issuer-signed credential",
+    "expected_boundary": "DAS Issuance-Binding Association Lookup",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_HOLDER_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-BindingKeySetMismatch",
+    "name": "Negative: Issuance Record Holder Key-Set Mismatch",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Key Resolution (:7000)",
+    "proven_requirements": "DAS rejects presentations when the stored Holder key material does not match the presented credential key",
+    "uncovered_aspects": "State mutation helper is used to alter the recorded key set in the binding store",
+    "mutation": "Change the authoritative binding Holder verification key set while preserving the issuer-signed credential",
+    "expected_boundary": "DAS Issuance-Binding Key Resolution",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_KEY_SET_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-BindingWalletThumbprintMismatch",
+    "name": "Negative: Issuance Record Wallet Certificate Mismatch",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Certificate Association (:7000)",
+    "proven_requirements": "DAS rejects credentials associated with an invalid or mismatched Wallet certificate thumbprint",
+    "uncovered_aspects": "State mutation helper alters the recorded wallet thumbprint",
+    "mutation": "Change the authoritative Wallet certificate thumbprint while preserving the issuer-signed credential",
+    "expected_boundary": "DAS Issuance-Binding Certificate Association",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_WALLET_CERTIFICATE_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-BindingProfileMismatch",
+    "name": "Negative: Issuance Record Cryptographic Profile Mismatch",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Profile Guard (:7000)",
+    "proven_requirements": "DAS rejects tokens when the stored issuance profile is unsupported or incompatible",
+    "uncovered_aspects": "State mutation helper alters the recorded binding profile identifier",
+    "mutation": "Change the authoritative binding cryptographic profile while preserving the issuer-signed credential",
+    "expected_boundary": "DAS Issuance-Binding Profile Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_PROFILE_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N03-BindingCredentialStatusMismatch",
+    "name": "Negative: Issuance Record Credential or Status Reference Mismatch",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Credential Identity (:7000)",
+    "proven_requirements": "DAS rejects credentials when status-list references mismatch the authoritative record",
+    "uncovered_aspects": "State mutation helper alters the recorded status list reference",
+    "mutation": "Change the authoritative credential digest or status reference while preserving the issuer-signed credential",
+    "expected_boundary": "DAS Issuance-Binding Credential Identity",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_CREDENTIAL_STATUS_MISMATCH",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N04-SequentialReplay",
+    "name": "Negative: Sequential Replay of Single-Use Credential",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [],
+    "production_boundary": "DAS JTI & Challenge Cache (:7000)",
+    "proven_requirements": "DAS rejects sequential replay of previously consumed VP assertions or challenges",
+    "uncovered_aspects": null,
+    "mutation": "Re-submit identical F4 presentation package in sequential transaction",
+    "expected_boundary": "DAS JTI & Challenge Cache",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_REPLAYED_CREDENTIAL",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N04-ConcurrentDuplicate",
+    "name": "Negative: Concurrent Replay Race Condition",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "barrier_synchronization"
+    ],
+    "production_boundary": "DAS Atomic JTI Invalidation (:7000)",
+    "proven_requirements": "DAS atomic consumption guarantees exactly one permit and rejects concurrent duplicate presentation attempts",
+    "uncovered_aspects": null,
+    "mutation": "Send concurrent duplicate presentation packages with synchronization barrier",
+    "expected_boundary": "DAS Atomic JTI Invalidation",
+    "expected_decision": "EXACTLY_ONE_PERMIT",
+    "expected_reason": "REJECT_CONCURRENT_DUPLICATE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N05-AuthorityExpansion",
+    "name": "Negative: Forged Authority Exceeding Issued Bounds",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing"
+    ],
+    "production_boundary": "DAS Authority Evaluation (:7000)",
+    "proven_requirements": "DAS rejects delegation attempts where requested scopes exceed authorized upper bounds",
+    "uncovered_aspects": "Mutated delegation claim is signed with authorized wallet key to test semantic authority boundary",
+    "mutation": "Mutate claim disclosures or signature payload to claim unapproved ACC-999",
+    "expected_boundary": "DAS Authority Evaluation",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_UNAUTHORIZED_AUTHORITY_EXPANSION",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N05-DisjointAccounts",
+    "name": "Negative: Disjoint Account Sets Intersection",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Independent Oracle & DAS Account Meet Filter",
+    "proven_requirements": "DAS rejects disjoint account sets with REJECT_EMPTY_ACCOUNTS",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "mutation": "Present delegation where requested accounts have null intersection with issued Scope VC",
+    "expected_boundary": "DAS Authority Evaluation (Account Meet)",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_EMPTY_ACCOUNTS",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N05-InvertedValidity",
+    "name": "Negative: Inverted Validity Time Window (start_time > end_time)",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Independent Oracle & DAS Validity Interval Filter",
+    "proven_requirements": "DAS rejects inverted validity intervals with REJECT_INVALID_VALIDITY_INTERVAL",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "mutation": "Set validity interval with start timestamp strictly greater than end timestamp",
+    "expected_boundary": "DAS Authority Evaluation (Validity Interval)",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_INVALID_VALIDITY_INTERVAL",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N05-DisjointFields",
+    "name": "Negative: Disjoint Requested Data Fields Intersection",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Independent Oracle & DAS Data Predicate Meet",
+    "proven_requirements": "DAS rejects disjoint data field requests with REJECT_EMPTY_DATA_FIELDS",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "mutation": "Request data fields outside the permitted set of the Holder or Bank Policy",
+    "expected_boundary": "DAS Authority Evaluation (Data Predicate Field Meet)",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_EMPTY_DATA_FIELDS",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N05-ZeroHistory",
+    "name": "Negative: Non-Positive History Window",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Independent Oracle & DAS History Predicate Filter",
+    "proven_requirements": "DAS rejects history windows <= 0 days with REJECT_INVALID_HISTORY_WINDOW",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "mutation": "Specify history window days <= 0 in delegation request",
+    "expected_boundary": "DAS Authority Evaluation (Data Predicate History)",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_INVALID_HISTORY_WINDOW",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N05-ZeroPageSize",
+    "name": "Negative: Non-Positive Max Page Size",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Independent Oracle & DAS Page Size Predicate Filter",
+    "proven_requirements": "DAS rejects page size <= 0 with REJECT_INVALID_PAGE_SIZE",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "mutation": "Specify max page size <= 0 in delegation request",
+    "expected_boundary": "DAS Authority Evaluation (Data Predicate Page Size)",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_INVALID_PAGE_SIZE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-ExpiredState",
+    "name": "Negative: Expired Credential State",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing"
+    ],
+    "production_boundary": "DAS Status List & Expiration Checker (:7000)",
+    "proven_requirements": "DAS rejects presentations bearing expired Scope VCs",
+    "uncovered_aspects": "Expired timestamp is signed via test signer to isolate the expiration check from signature parsing",
+    "mutation": "Present Scope VC with exp timestamp in past",
+    "expected_boundary": "DAS Status List & Expiration Checker",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_REVOKED_OR_EXPIRED_CREDENTIAL",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-MissingRecord",
+    "name": "Negative: Missing Issuance-Binding Record",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing"
+    ],
+    "production_boundary": "DAS Issuance-Binding Association Lookup (:7000)",
+    "proven_requirements": "DAS rejects credentials referencing non-existent binding records",
+    "uncovered_aspects": "Unregistered reference is signed into credential via test signer",
+    "mutation": "Present credential with unregistered holder_cert_ref or absent store record",
+    "expected_boundary": "DAS Issuance-Binding Association Lookup",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_MISSING_ISSUANCE_RECORD",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-LookupUnavailable",
+    "name": "Negative: Mandatory Issuance-Binding Lookup Unavailable",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fault_injection"
+    ],
+    "production_boundary": "DAS Issuance-Binding Dependency Guard (:7000)",
+    "proven_requirements": "DAS fails closed and rejects token issuance when the authoritative binding record store is unavailable",
+    "uncovered_aspects": "Controlled test-control endpoint simulates store unavailability",
+    "mutation": "Make the authoritative issuance-binding dependency unavailable for a fresh F4 transaction",
+    "expected_boundary": "DAS Issuance-Binding Dependency",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_LOOKUP_UNAVAILABLE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-DisabledAssociation",
+    "name": "Negative: Disabled or Suspended Association",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Issuance-Binding Association Checker (:7000)",
+    "proven_requirements": "DAS rejects presentations when the authoritative binding status is SUSPENDED or REVOKED",
+    "uncovered_aspects": "Binding status is suspended via test control endpoint",
+    "mutation": "Present credential whose issuance record status is SUSPENDED or REVOKED",
+    "expected_boundary": "DAS Issuance-Binding Association Checker",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_DISABLED_ASSOCIATION",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-PostIssuanceInvalidation",
+    "name": "Negative: Wallet Certificate or Holder Key Invalidated Post-F1",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Lifecycle & Revocation Guard (:7000)",
+    "proven_requirements": "DAS rejects tokens when the binding record has been marked REVOKED post-F1",
+    "uncovered_aspects": "Record status is revoked via test control endpoint",
+    "mutation": "Revoke Wallet mTLS certificate or mark Holder key compromised after F1 issuance",
+    "expected_boundary": "DAS Lifecycle & Revocation Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_REVOKED_OR_EXPIRED_CREDENTIAL",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-WalletCertificateInvalidated",
+    "name": "Negative: Wallet Certificate Invalidated After F1",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Wallet Certificate Lifecycle Guard (:7000)",
+    "proven_requirements": "DAS rejects tokens when the associated Wallet certificate has been invalidated post-F1",
+    "uncovered_aspects": "Wallet certificate state is invalidated via test control endpoint",
+    "mutation": "Invalidate the authoritative Wallet certificate association after F1 and before F4",
+    "expected_boundary": "DAS Wallet Certificate Lifecycle Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_WALLET_CERTIFICATE_INVALIDATED",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-HolderKeyInvalidated",
+    "name": "Negative: Holder Key Invalidated After F1",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Holder Key Lifecycle Guard (:7000)",
+    "proven_requirements": "DAS rejects tokens when the associated Holder key has been invalidated post-F1",
+    "uncovered_aspects": "Holder key state is invalidated via test control endpoint",
+    "mutation": "Invalidate the authoritative Holder verification key after F1 and before F4",
+    "expected_boundary": "DAS Holder Key Lifecycle Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_HOLDER_KEY_INVALIDATED",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-StaleBindingSnapshot",
+    "name": "Negative: Stale Binding Snapshot Exceeding Age Limit",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Snapshot Freshness Guard (:7000)",
+    "proven_requirements": "DAS rejects presentations bearing binding snapshot timestamps older than 30 seconds",
+    "uncovered_aspects": null,
+    "mutation": "Submit evaluation with cached binding snapshot older than 30 seconds",
+    "expected_boundary": "DAS Snapshot Freshness Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_STALE_BINDING_SNAPSHOT",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-RollbackVersion",
+    "name": "Negative: Adverse Binding-Version Rollback Attempt",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "state_mutation"
+    ],
+    "production_boundary": "DAS Pre-Commit Version Guard (:7000)",
+    "proven_requirements": "DAS rejects token issuance attempts presenting a stale or rolled-back binding version number",
+    "uncovered_aspects": "Binding version state is advanced in store to create a stale version condition",
+    "mutation": "Attempt issuance commit using stale binding state version after concurrent revocation",
+    "expected_boundary": "DAS Pre-Commit Version Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_ROLLBACK_VERSION",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N06-AdverseVersionBeforeCommit",
+    "name": "Negative: Binding Version Changes Before Token Commit",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fault_injection"
+    ],
+    "production_boundary": "DAS Pre-Commit Version Guard (:7000)",
+    "proven_requirements": "DAS pre-commit version guard rejects token issuance when the authoritative binding state changes during evaluation",
+    "uncovered_aspects": "Deterministic pre-commit version fault-injection hook demonstrates guard behavior, not an exhaustive proof against all asynchronous race conditions",
+    "mutation": "Pause a fresh F4 transaction after binding read, advance the authoritative version, then resume token commit",
+    "expected_boundary": "DAS Pre-Commit Version Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_BINDING_CHANGED_BEFORE_COMMIT",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N07-RSUnauthorizedResource",
+    "name": "Negative: Resource Server Access Beyond Delegated Scope",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [],
+    "production_boundary": "Resource Server Scoped Route Guard (:4000)",
+    "proven_requirements": "Resource Server rejects queries requesting accounts or endpoints not authorized by the token typed authority",
+    "uncovered_aspects": null,
+    "mutation": "Call GET /api/v1/accounts/ACC-002 using token restricted to ACC-001",
+    "expected_boundary": "RS Scoped Route Guard",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_RESOURCE_ACCESS_OUT_OF_BOUNDS",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N08-TamperedPackage",
+    "name": "Negative: Altered Encrypted Package or Missing Required Disclosures",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "ciphertext_bitflip"
+    ],
+    "production_boundary": "DAS JWE Decryption & Integrity Verification (:7000)",
+    "proven_requirements": "DAS authenticated JWE decryption rejects packages with bit-flipped ciphertext or tampered authentication tags while preserving compact serialization structure",
+    "uncovered_aspects": null,
+    "mutation": "Flip ciphertext bytes in a valid 5-part compact JWE payload",
+    "expected_boundary": "DAS JWE Decryption & Disclosed Salt Verification",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_CORRUPTED_CIPHERTEXT_OR_DISCLOSURE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N08-MissingRequiredDisclosure",
+    "name": "Negative: Missing Policy-Required Root Disclosure",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Selective-Disclosure Policy (:7000)",
+    "proven_requirements": "DAS rejects presentations when required disclosure components (e.g. scopes) are omitted from the SD-JWT",
+    "uncovered_aspects": null,
+    "mutation": "Remove the required scopes disclosure while preserving the issuer-signed SD-JWT component",
+    "expected_boundary": "DAS Selective-Disclosure Policy",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_MISSING_REQUIRED_DISCLOSURE",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-N08-DisclosureSetMismatch",
+    "name": "Negative: Presented Disclosure Set Differs from Frozen Policy",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [
+      "artifact_mutation"
+    ],
+    "production_boundary": "DAS Selective-Disclosure Policy (:7000)",
+    "proven_requirements": "DAS rejects presentations containing unadvertised or extra non-policy disclosures",
+    "uncovered_aspects": null,
+    "mutation": "Present an extra forbidden Root VC disclosure while preserving a valid issuer signature",
+    "expected_boundary": "DAS Selective-Disclosure Policy",
+    "expected_decision": "DENY",
+    "expected_reason": "REJECT_DISCLOSURE_SET_MISMATCH",
+    "criticality": "critical"
+  }
+]

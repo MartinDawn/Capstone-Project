@@ -1,0 +1,97 @@
+{
+  "schema_version": "4.1.0",
+  "protocol_id": "BP-20260922-v6",
+  "execution_model": "independent_per_family",
+  "amendment": "A4: workload is fixed to Medium everywhere (decision DEC-023, 2026-09-22); Small and Large are retired as a comparison dimension. Supersedes A3 (E-LOAD reinstated, DEC-020/021/022) and A2 (E-LOAD retired, superseded). The performance-related evidence is sequential authorization cost, artifact size, application-level wire bytes, and offered-load throughput/latency/error-rate (E-LOAD).",
+  "experiments": [
+    {
+      "experiment_id": "EXP-CONF-01",
+      "family": "E-CONF",
+      "runner": "evaluation/bin/conformance/run_conformance.py",
+      "entry_point": "evaluation/bin/conformance/conformance_v3.py",
+      "evidence_root": "evaluation/evidence/conformance",
+      "protocol_id_of_evidence": "BP-20260915-v3",
+      "configurations": [
+        "B0-C0",
+        "B1-C0",
+        "B1-C2"
+      ]
+    },
+    {
+      "experiment_id": "EXP-COST-01",
+      "family": "COST-SEQUENTIAL",
+      "description": "Sequential single-active-transaction authorization latency and wire bytes; F1 reported separately",
+      "runner": "evaluation/bin/perf/run_cost.py",
+      "evidence_root": "evaluation/evidence/cost",
+      "configurations": [
+        "B0-C0",
+        "B1-C0",
+        "B1-C2"
+      ],
+      "workloads": [
+        "Medium"
+      ]
+    },
+    {
+      "experiment_id": "EXP-COST-02",
+      "family": "COST-ARTIFACTS",
+      "description": "Serialized artifact sizes and per-step application wire bytes",
+      "runner": "evaluation/bin/artifacts/measure_artifacts.py",
+      "evidence_root": "evaluation/evidence/artifacts",
+      "configurations": [
+        "B0-C0",
+        "B1-C0",
+        "B1-C2"
+      ],
+      "workloads": [
+        "Medium"
+      ]
+    },
+    {
+      "experiment_id": "EXP-COST-03",
+      "family": "COST-ANALYSIS",
+      "description": "Explicit-run descriptive statistics, paired comparisons, and generated tables",
+      "runner": "evaluation/analysis/analyze_cost.py",
+      "results_root": "evaluation/results/<analysis-id>"
+    },
+    {
+      "experiment_id": "EXP-PERF-01",
+      "family": "PERF-ARTIFACTS",
+      "status": "superseded_by_EXP-COST-02",
+      "runner": "evaluation/bin/perf/measure_artifacts.py (revision before BP-20260921-v4; moved to evaluation/bin/artifacts/)",
+      "evidence_root": "evaluation/evidence/perf"
+    },
+    {
+      "experiment_id": "EXP-LOAD-01",
+      "family": "PERF-LOAD",
+      "status": "reinstated_blocked_pending_final_approval",
+      "description": "Open-loop k6 offered-load throughput/latency/error-rate, reinstated by DEC-020/021/022. Never pooled with the E-LOAD evidence produced under the earlier BP-20260915-v3 protocol_id while retired (EXP-PERF-02, superseded).",
+      "runner": "evaluation/bin/perf/run_perf.py",
+      "probe_runner": "evaluation/bin/perf/probe_saturation.py",
+      "load_scripts": [
+        "evaluation/bin/perf/k6/auth_load.js",
+        "evaluation/bin/perf/k6/probe_load.js"
+      ],
+      "workloads": [
+        "Medium"
+      ],
+      "evidence_root": "evaluation/evidence/perf"
+    },
+    {
+      "experiment_id": "EXP-PERF-02",
+      "family": "PERF-LOAD",
+      "status": "superseded_by_EXP-LOAD-01",
+      "description": "Open-loop k6 load and the saturation probe under the retired BP-20260921-v4 status. Superseded 2026-09-22 by EXP-LOAD-01; this entry and its evidence stay as diagnostic history only.",
+      "runner": "evaluation/bin/perf/run_perf.py",
+      "load_script": "evaluation/bin/perf/k6/auth_load.js",
+      "also_retired": [
+        "evaluation/bin/perf/probe_saturation.py",
+        "evaluation/bin/perf/k6/probe_load.js"
+      ],
+      "evidence_roots": [
+        "evaluation/evidence/perf",
+        "evaluation/evidence/perf-probe"
+      ]
+    }
+  ]
+}

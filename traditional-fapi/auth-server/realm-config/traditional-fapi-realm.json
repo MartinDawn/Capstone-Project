@@ -1,0 +1,795 @@
+{
+  "realm": "traditional-fapi",
+  "displayName": "Traditional FAPI 2.0 Open Banking Realm",
+  "enabled": true,
+  "sslRequired": "all",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "defaultSignatureAlgorithm": "PS256",
+  "revokeRefreshToken": true,
+  "accessTokenLifespan": 600,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "offlineSessionIdleTimeout": 2592000,
+  "accessCodeLifespan": 300,
+  "accessCodeLifespanUserAction": 300,
+  "roles": {
+    "realm": [
+      {
+        "name": "user",
+        "description": "Standard bank customer role"
+      },
+      {
+        "name": "admin",
+        "description": "Administrator role"
+      }
+    ],
+    "client": {
+      "tpp-client": [
+        {
+          "name": "accounts:read",
+          "description": "Read account balances and details"
+        },
+        {
+          "name": "transfers:read",
+          "description": "Read transaction history"
+        },
+        {
+          "name": "transfers:write",
+          "description": "Initiate transfers"
+        }
+      ]
+    }
+  },
+  "clientScopes": [
+    {
+      "name": "openid",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "OpenID Identity Information"
+      }
+    },
+    {
+      "name": "profile",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "User profile data (Name, username)"
+      }
+    },
+    {
+      "name": "email",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Email address"
+      }
+    },
+    {
+      "name": "accounts:read",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read your bank accounts and balances"
+      }
+    },
+    {
+      "name": "transfers:read",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read your transaction history"
+      }
+    },
+    {
+      "name": "transfers:write",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Initiate fund transfers"
+      }
+    },
+    {
+      "name": "ReadAccountsDetail",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read account details and balances (Open Banking UK)"
+      }
+    },
+    {
+      "name": "ReadAccountsBasic",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read basic account details (Open Banking UK)"
+      }
+    },
+    {
+      "name": "ReadBalances",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read account balances (Open Banking UK)"
+      }
+    },
+    {
+      "name": "ReadTransactionsDetail",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read transaction history (Open Banking UK)"
+      }
+    },
+    {
+      "name": "ReadTransactionsBasic",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read basic transactions (Open Banking UK)"
+      }
+    },
+    {
+      "name": "CreateDomesticPayment",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Create domestic payment (Open Banking UK)"
+      }
+    },
+    {
+      "name": "ReadDirectDebits",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Read direct debits (Open Banking UK)"
+      }
+    },
+    {
+      "name": "rs-audience",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "name": "rs-client-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "resource-server-client",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        },
+        {
+          "name": "rs-url-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "https://localhost:4000",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "external-audience",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "name": "external-service-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "aud:external-service",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "holder-approved-acc-001",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Access holder-approved account ACC-001"
+      }
+    },
+    {
+      "name": "holder-approved-acc-002",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "consent.screen.text": "Access holder-approved account ACC-002"
+      }
+    }
+  ],
+  "defaultDefaultClientScopes": [
+    "openid",
+    "profile",
+    "email"
+  ],
+  "defaultOptionalClientScopes": [
+    "accounts:read",
+    "transfers:read",
+    "transfers:write",
+    "offline_access",
+    "ReadAccountsDetail",
+    "ReadAccountsBasic",
+    "ReadBalances",
+    "ReadTransactionsDetail",
+    "ReadTransactionsBasic",
+    "ReadDirectDebits",
+    "CreateDomesticPayment"
+  ],
+  "clients": [
+    {
+      "clientId": "tpp-client",
+      "name": "TPP Application",
+      "description": "Third-Party Provider application for FAPI 2.0 Open Banking",
+      "enabled": true,
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "tpp-client-secret-key-12345",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "consentRequired": true,
+      "fullScopeAllowed": true,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "https://localhost:3000/callback",
+        "https://localhost:3000/*",
+        "https://127.0.0.1:3000/callback",
+        "https://127.0.0.1:3000/*",
+        "https://tpp-fapi:3000/callback",
+        "https://tpp-fapi:3000/*",
+        "https://203.0.113.20:3000/callback",
+        "https://203.0.113.20:3000/*",
+        "http://localhost:3000/callback",
+        "http://localhost:3000/*",
+        "http://tpp-fapi:3000/callback",
+        "http://tpp-fapi:3000/*",
+        "http://203.0.113.20:3000/callback",
+        "http://203.0.113.20:3000/*",
+        "*"
+      ],
+      "webOrigins": [
+        "https://localhost:3000",
+        "https://127.0.0.1:3000",
+        "https://tpp-fapi:3000",
+        "https://203.0.113.20:3000",
+        "http://localhost:3000",
+        "+"
+      ],
+      "defaultClientScopes": [
+        "openid",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "accounts:read",
+        "transfers:read",
+        "transfers:write",
+        "offline_access",
+        "ReadAccountsDetail",
+        "ReadAccountsBasic",
+        "ReadBalances",
+        "ReadTransactionsDetail",
+        "ReadTransactionsBasic",
+        "ReadDirectDebits",
+        "CreateDomesticPayment",
+        "rs-audience",
+        "external-audience",
+        "holder-approved-acc-001",
+        "holder-approved-acc-002"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "require.pushed.authorization.requests": "false",
+        "tls.client.certificate.bound.access.tokens": "true",
+        "id.token.signed.response.alg": "PS256",
+        "access.token.signed.response.alg": "PS256",
+        "post.logout.redirect.uris": "https://localhost:3000/"
+      },
+      "protocolMappers": []
+    },
+    {
+      "clientId": "short-lived-client",
+      "name": "Conformance Short-Lived Token Client",
+      "enabled": true,
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "short-lived-client-secret",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "consentRequired": false,
+      "fullScopeAllowed": true,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "https://localhost:3000/*",
+        "https://127.0.0.1:3000/*",
+        "*"
+      ],
+      "webOrigins": [
+        "https://localhost:3000",
+        "+"
+      ],
+      "defaultClientScopes": [
+        "openid",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "accounts:read",
+        "ReadAccountsDetail",
+        "holder-approved-acc-001",
+        "holder-approved-acc-002"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "tls.client.certificate.bound.access.tokens": "true",
+        "access.token.signed.response.alg": "PS256",
+        "access.token.lifespan": "1"
+      },
+      "protocolMappers": []
+    },
+    {
+      "clientId": "resource-server-client",
+      "name": "Banking Resource Server Client",
+      "description": "Resource Server audience client",
+      "enabled": true,
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "rs-client-secret-key-12345",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "access.token.signed.response.alg": "PS256"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "testuser",
+      "enabled": true,
+      "email": "testuser@bank.com",
+      "firstName": "Alice",
+      "lastName": "Smith",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ],
+      "clientRoles": {
+        "tpp-client": [
+          "accounts:read",
+          "transfers:read"
+        ]
+      }
+    },
+    {
+      "username": "john_doe",
+      "enabled": true,
+      "email": "john.doe@bank.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ],
+      "clientRoles": {
+        "tpp-client": [
+          "accounts:read",
+          "transfers:read",
+          "transfers:write"
+        ]
+      }
+    },
+    {
+      "username": "admin",
+      "enabled": true,
+      "email": "admin@bank.com",
+      "firstName": "Bank",
+      "lastName": "Admin",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "admin",
+        "user"
+      ]
+    },
+    {
+      "username": "user1",
+      "enabled": true,
+      "email": "user1@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "1",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user1",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user2",
+      "enabled": true,
+      "email": "user2@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "2",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user2",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user3",
+      "enabled": true,
+      "email": "user3@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "3",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user3",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user4",
+      "enabled": true,
+      "email": "user4@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "4",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user4",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user5",
+      "enabled": true,
+      "email": "user5@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "5",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user5",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user6",
+      "enabled": true,
+      "email": "user6@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "6",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user6",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user7",
+      "enabled": true,
+      "email": "user7@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "7",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user7",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user8",
+      "enabled": true,
+      "email": "user8@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "8",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user8",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user9",
+      "enabled": true,
+      "email": "user9@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "9",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user9",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user10",
+      "enabled": true,
+      "email": "user10@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "10",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user10",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user11",
+      "enabled": true,
+      "email": "user11@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "11",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user11",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user12",
+      "enabled": true,
+      "email": "user12@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "12",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user12",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user13",
+      "enabled": true,
+      "email": "user13@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "13",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user13",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user14",
+      "enabled": true,
+      "email": "user14@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "14",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user14",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user15",
+      "enabled": true,
+      "email": "user15@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "15",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user15",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user16",
+      "enabled": true,
+      "email": "user16@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "16",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user16",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user17",
+      "enabled": true,
+      "email": "user17@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "17",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user17",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user18",
+      "enabled": true,
+      "email": "user18@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "18",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user18",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user19",
+      "enabled": true,
+      "email": "user19@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "19",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user19",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    },
+    {
+      "username": "user20",
+      "enabled": true,
+      "email": "user20@fapi-demo.local",
+      "firstName": "User",
+      "lastName": "20",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user20",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "user"
+      ]
+    }
+  ]
+}

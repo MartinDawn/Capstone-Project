@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "description": "One resource table for all three baselines. Same role, same limits, same runtime image where the roles are comparable. Limits are ceilings, not measured usage.",
+  "roles": {
+    "postgres": {
+      "cpus": 1.0,
+      "memory_mib": 256,
+      "pinned_image": true
+    },
+    "keycloak": {
+      "cpus": 1.5,
+      "memory_mib": 1536,
+      "pinned_image": true
+    },
+    "keycloak_login": {
+      "cpus": 1.0,
+      "memory_mib": 1024,
+      "pinned_image": true
+    },
+    "gateway": {
+      "cpus": 0.5,
+      "memory_mib": 256,
+      "pinned_image": true
+    },
+    "issuer": {
+      "cpus": 1.5,
+      "memory_mib": 1536,
+      "pinned_image": false
+    },
+    "resource_server": {
+      "cpus": 0.5,
+      "memory_mib": 256,
+      "pinned_image": false
+    },
+    "tpp": {
+      "cpus": 1.0,
+      "memory_mib": 1024,
+      "pinned_image": false
+    },
+    "wallet": {
+      "cpus": 1.0,
+      "memory_mib": 1024,
+      "pinned_image": false
+    }
+  },
+  "service_roles": {
+    "postgres": "postgres",
+    "postgres-fapi": "postgres",
+    "keycloak": "keycloak_login",
+    "keycloak-fapi": "keycloak",
+    "bank-gateway": "gateway",
+    "tls-server-proxy": "gateway",
+    "oqs-server-proxy": "gateway",
+    "tpp-gateway": "gateway",
+    "wallet-gateway": "gateway",
+    "bank-issuer": "issuer",
+    "resource-server": "resource_server",
+    "resource-server-fapi": "resource_server",
+    "tpp-java": "tpp",
+    "tpp-fapi": "tpp",
+    "wallet": "wallet"
+  },
+  "equal_across": {
+    "postgres": [
+      "B0-C0",
+      "B1-C0",
+      "B1-C2"
+    ],
+    "keycloak_login": [
+      "B1-C0",
+      "B1-C2"
+    ],
+    "gateway": [
+      "B0-C0",
+      "B1-C0"
+    ],
+    "issuer": [
+      "B1-C0",
+      "B1-C2"
+    ],
+    "tpp": [
+      "B1-C0",
+      "B1-C2"
+    ],
+    "wallet": [
+      "B1-C0",
+      "B1-C2"
+    ]
+  },
+  "by_design_differences": [
+    "B0 runs Keycloak 24.0.5; both B1 baselines run Keycloak 26.6.4 (the PQC baseline mounts a patched keycloak-services 26.6.4 jar).",
+    "B0's Keycloak (role `keycloak`) is on the repeated E-COST/E-LOAD measurement path (login and token issuance on every attempt) and keeps the heavier tier (1.5 cpu / 1536 MiB). B1's Keycloak (role `keycloak_login`) only handles the one-time F1 login, which is measured and reported separately and never pooled into repeated authorization; F2-F4 token issuance for B1 is handled by bank-issuer instead. B1's Keycloak therefore runs at the generic app tier (1.0 cpu / 1024 MiB) rather than the B0 tier, since giving it the same footprint as a component that is actually hammered on every measured attempt would not make the comparison fairer.",
+    "B1-C2 gateways are OQS nginx (hybrid post-quantum TLS); B0 and B1-C0 use nginx:alpine.",
+    "B0's TPP is a Node application; the B1 TPPs are Spring Boot."
+  ]
+}

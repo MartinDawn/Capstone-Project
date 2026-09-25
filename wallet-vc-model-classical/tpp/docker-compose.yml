@@ -1,0 +1,66 @@
+# ============================================================
+# Classical Cryptography - TPP Infrastructure
+# ============================================================
+# Services:
+#   - tpp-java: Spring Boot TPP Service (Request Delegation & Verify VC)
+#   - tpp-gateway: Unified Classical Nginx Gateway (:4443 Browser UI, :6443 API, :19443 Bank mTLS)
+# ============================================================
+
+services:
+
+  # ── TPP Backend Service ───────────────────────────────────────
+  tpp-java:
+    build:
+      context: ./tpp-java
+      dockerfile: Dockerfile
+    container_name: classical_tpp_java
+    environment:
+      - SERVER_PORT=6001
+      - CLIENT_ID=tpp-demo-client
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-default}
+      - BANK_ISSUER_URL=http://tpp-gateway:19443
+      - RESOURCE_SERVER_URL=http://tpp-gateway:19443
+      - DIRECT_BANK_ISSUER_URL=http://tpp-gateway:19443
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - tpp-gateway
+    cpus: 1.0
+    mem_limit: 1024m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    networks:
+      - tpp_network
+
+  # ── Unified TPP Gateway Proxy (Browser UI :4443, API :6443, Bank Outbound :19443) ──
+  tpp-gateway:
+    image: nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    container_name: classical_tpp_gateway
+    user: root
+    environment:
+      - BANK_HOST=${BANK_HOST:-host.docker.internal}
+    ports:
+      - "4443:4443"
+      - "6443:6443"
+    volumes:
+      - ./tls-proxy/tpp-gateway.conf.template:/etc/nginx/nginx.conf.template:ro
+      - ./tls-proxy/certs:/certs:ro
+    command: ["sh", "-c", "sed -e \"s/\\$${BANK_HOST}/$${BANK_HOST:-host.docker.internal}/g\" /etc/nginx/nginx.conf.template > /tmp/nginx.conf && nginx -c /tmp/nginx.conf -g 'daemon off;'"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - tpp_network
+
+networks:
+  tpp_network:
+    driver: bridge

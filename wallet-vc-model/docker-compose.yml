@@ -1,0 +1,15 @@
+# ============================================================
+# VDAM Post-Quantum Cryptography (PQC) Baseline (B1-C2)
+# Master Compose File (Docker Compose v2.20+ `include:`)
+# ============================================================
+# Usage:
+#   docker compose up -d --build
+#   docker compose down
+# ============================================================
+
+name: vdam-pqc-baseline
+
+include:
+  - pqc-bank/docker-compose.yml
+  - pqc-wallet/docker-compose.yml
+  - pqc-tpp/docker-compose.yml

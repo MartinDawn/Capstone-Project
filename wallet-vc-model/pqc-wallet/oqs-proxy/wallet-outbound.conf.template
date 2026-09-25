@@ -1,0 +1,33 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+    client_header_buffer_size 64k;
+    large_client_header_buffers 4 64k;
+    proxy_buffer_size 128k;
+    proxy_buffers 4 256k;
+    proxy_busy_buffers_size 256k;
+    server {
+        listen 18443;
+        server_name oqs-wallet-outbound;
+
+        location / {
+            proxy_pass https://${BANK_HOST}:8443;
+            
+            # mTLS Client Authentication to Server Proxy
+            proxy_ssl_name                oqs-server-proxy;
+            proxy_ssl_server_name         on;
+            proxy_ssl_certificate         /certs/wallet.crt;
+            proxy_ssl_certificate_key     /certs/wallet.key;
+            proxy_ssl_trusted_certificate /certs/ca.crt;
+            proxy_ssl_verify              on;
+            proxy_ssl_protocols           TLSv1.3;
+            proxy_ssl_conf_command Groups X25519MLKEM768:secp256r1:x25519;
+
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+}

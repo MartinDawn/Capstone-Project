@@ -1,0 +1,193 @@
+{
+  "schema_version": "2.1.0",
+  "protocol_id": "BP-20260922-v6",
+  "supersedes": "BP-20260922-v5",
+  "governing_plan": "docs/EVALUATION_PROTOCOL.md",
+  "state": "frozen",
+  "approved_by": "MartinDawn",
+  "approved_at": "2026-09-23T00:00:00Z",
+  "frozen_digest": "550848b471210220c2eaee3887cadeec5f35c818426f323cd92af2f5eb4bc64a",
+  "seed": 20260921,
+  "scope": {
+    "in_scope": [
+      "conformance of B0-C0, B1-C0, and B1-C2 (executed under the revision that produced the evidence)",
+      "sequential single-active-transaction authorization cost",
+      "serialized artifact sizes",
+      "application-level authorization wire bytes",
+      "offered-load throughput/latency/error-rate at multiple offered-rate levels (E-LOAD)",
+      "deterministic paired analysis and generated tables"
+    ],
+    "reinstated": {
+      "E-LOAD": "Reinstated into the evaluation scope by BP-20260922-v5 (decision DEC-020), reversing the retirement made by BP-20260921-v4. Blocked from producing final evidence until the live two-overlapping-transaction isolation proof exists for B1-C0/B1-C2 (BLK-004) and known reinstated-prototype defects (BLK-013) are closed. Runs produced before this revision under the retired status remain diagnostic evidence only and are never pooled with v5 evidence."
+    },
+    "not_measured": [
+      "maximum-throughput or saturation-point claim (E-LOAD reports observed metrics per offered-rate level, never an inferred capacity limit)",
+      "10-100 client concurrency beyond the four defined relative rate levels per workload",
+      "CPU, RAM, storage, packet-level bandwidth, or network capture (unless separately approved)"
+    ],
+    "claims_not_made": [
+      "production capacity, availability, or scalability",
+      "legal compliance, operating effectiveness, or deployment authorization"
+    ]
+  },
+  "experiments": {
+    "E-COST": {
+      "experiment_id": "EXP-COST-01",
+      "runner": "evaluation/bin/perf/run_cost.py",
+      "models": [
+        "B0-C0",
+        "B1-C0",
+        "B1-C2"
+      ],
+      "workloads": [
+        "Medium"
+      ],
+      "modes": [
+        "repeated_authorization"
+      ],
+      "concurrency": 1,
+      "measurement_boundary": "first authorization request through access-token issuance",
+      "b1_f1": "measured once per measured batch and reported separately; never added to repeated authorizations",
+      "profiles": {
+        "smoke": {
+          "batches": 1,
+          "attempts_per_batch": 2,
+          "warmup_attempts": 1
+        },
+        "pilot": {
+          "batches": 1,
+          "attempts_per_batch": 5,
+          "warmup_attempts": 2
+        },
+        "final": {
+          "batches": 5,
+          "attempts_per_batch": 10,
+          "warmup_attempts": 2
+        }
+      },
+      "cell_count": 3,
+      "final_measured_attempts_total": 150,
+      "warmup_observations_excluded_from_metrics": true,
+      "failed_attempts": "recorded, never replaced by a retry"
+    },
+    "E-ARTIFACT": {
+      "experiment_id": "EXP-COST-02",
+      "runner": "evaluation/bin/artifacts/measure_artifacts.py",
+      "evidence_root": "evaluation/evidence/artifacts",
+      "description": "Exact serialized size and SHA-256 of every observable authorization artifact, and application-level wire bytes per named step",
+      "unavailable_policy": "availability=UNAVAILABLE with a specific missing_reason; never estimated"
+    },
+    "E-LOAD": {
+      "experiment_id": "EXP-LOAD-01",
+      "status": "reinstated_blocked_pending_final_approval",
+      "runner": "evaluation/bin/perf/run_perf.py",
+      "probe_runner": "evaluation/bin/perf/probe_saturation.py",
+      "isolation_proof_runner": "evaluation/bin/perf/session_isolation_live.py",
+      "load_scripts": [
+        "evaluation/bin/perf/k6/auth_load.js",
+        "evaluation/bin/perf/k6/probe_load.js"
+      ],
+      "evidence_root": "evaluation/evidence/perf",
+      "models": [
+        "B0-C0",
+        "B1-C0",
+        "B1-C2"
+      ],
+      "workloads": [
+        "Medium"
+      ],
+      "scheduler": "open_loop_business_transaction",
+      "relative_rate_levels": [
+        0.25,
+        0.5,
+        1.0,
+        1.25
+      ],
+      "numerical_rates_tps": [
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ],
+      "restart_granularity": "the stack is stopped/started once per (model, batch); every rate level in the campaign's rate list runs consecutively in that one lifetime (decision DEC-021, 2026-09-22). Only batch-to-batch transitions restart the stack.",
+      "isolation_gate": "BLK-004: CLOSED 2026-09-22. Live isolation-verified proofs exist for B1-C0 and B1-C2 under the current source digest (evaluation/evidence/perf/isolation-proof-b1c0-*, isolation-proof-b1c2-*), produced automatically by run_perf.py/probe_saturation.py's ensure_isolation_proof(). A future source change invalidates the proof and requires regeneration.",
+      "profiles": {
+        "smoke": {
+          "batches_per_cell": 1,
+          "warmup_seconds": 5,
+          "warmup_drain_seconds": 5,
+          "measurement_seconds": 10,
+          "drain_seconds": 5,
+          "cooldown_seconds": 5
+        },
+        "pilot": {
+          "batches_per_cell": 1,
+          "warmup_seconds": 10,
+          "warmup_drain_seconds": 10,
+          "measurement_seconds": 30,
+          "drain_seconds": 10,
+          "cooldown_seconds": 30
+        },
+        "final": {
+          "batches_per_cell": 2,
+          "warmup_seconds": 20,
+          "warmup_drain_seconds": 10,
+          "measurement_seconds": 60,
+          "drain_seconds": 20,
+          "cooldown_seconds": 20
+        }
+      },
+      "cell_count": 12,
+      "generator_limited_policy": "a window with not_started > 0 is disposed GENERATOR_LIMITED and never pooled with COMPLETED windows as server-capacity evidence",
+      "known_defects": "BLK-013: 3 defects found and fixed 2026-09-22 (probe_saturation.py referenced removed run_perf.py module constants and did not forward rates/workload to PerfRunner). Verified by live execution. No further defect reproduced; a different defect the author has in mind should be filed as a new blocker."
+    }
+  },
+  "timeouts_seconds": {
+    "connection": 3,
+    "phase": 10,
+    "absolute_transaction": 30
+  },
+  "analysis": {
+    "entry_point": "evaluation/analysis/analyze_cost.py",
+    "confidence_level": 0.95,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260921,
+    "resampling_unit": "paired_block",
+    "comparisons": [
+      {
+        "id": "architecture_cost",
+        "minuend": "B1-C0",
+        "subtrahend": "B0-C0"
+      },
+      {
+        "id": "hybrid_migration_cost",
+        "minuend": "B1-C2",
+        "subtrahend": "B1-C0"
+      },
+      {
+        "id": "total_observed_change",
+        "minuend": "B1-C2",
+        "subtrahend": "B0-C0"
+      }
+    ],
+    "explicit_run_selection_required": true,
+    "smoke_and_pilot_excluded_from_final_aggregate": true,
+    "descriptive_tail_thresholds": {
+      "min_successful_samples": 100,
+      "min_paired_blocks": 10
+    },
+    "min_paired_blocks_for_stable_interval": 5
+  },
+  "evidence_contract": {
+    "root": "evaluation/evidence/cost/<run-id>",
+    "same_schema_for_smoke_pilot_and_final": true,
+    "experiment_purpose_values": [
+      "smoke",
+      "pilot",
+      "final"
+    ],
+    "immutable_run_manifest_required": true,
+    "historical_evidence_rewritten": false
+  },
+  "final_run_guard": "A final run fails closed unless the protocol manifest and the configuration are frozen, approval.frozen_digest equals the digest computed from the current protocol, configuration, pairing plan, and fixtures, the source identity is exact, and conformance passed for the exact evaluated source."
+}

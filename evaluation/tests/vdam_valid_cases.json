@@ -1,0 +1,228 @@
+[
+  {
+    "case_id": "VD-F01",
+    "name": "Minimal Single Holder/Account/Permission (F1-F6 Complete Flow)",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Bank Issuer OID4VCI (:7000), DAS Token Endpoint (:7000) & Resource Server (:4000)",
+    "proven_requirements": "Complete end-to-end VDAM protocol execution including fresh Scope VC issuance at F1 with durable issuance-binding commit, F2 delegation request, F3 holder approval with SD-JWT+KB, F4-F5 DAS verification, and F6 Resource Server AIS delivery",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Single account ACC-001, single permission accounts:read",
+    "action": "Execute complete protocol flow F1 (Issue Scope VC) through F6 (RS Resource Delivery)",
+    "expected_boundary": "Resource Server (:4000)",
+    "expected_decision": "PERMIT",
+    "expected_authority": {
+      "services": [
+        "accounts"
+      ],
+      "accounts": [
+        "ACC-001"
+      ],
+      "permissions": [
+        "ReadAccountsDetail"
+      ],
+      "scopes": [
+        "accounts:read"
+      ]
+    },
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F02",
+    "name": "Multi-Account and Multi-Permission Compatible Intersection",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000) & RS Projection Engine (:4000)",
+    "proven_requirements": "DAS computes multi-dimensional typed authority intersection and Resource Server projects corresponding multi-account composite AIS payload",
+    "uncovered_aspects": "Input authority fixtures are signed using authorized conformance test signers rather than interactive multi-account UI selection The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Medium workload with 5 accounts and 4 specification-valid permissions approved across all 5 authority inputs",
+    "action": "Compute multi-dimensional typed authority and fetch composite AIS payload",
+    "expected_boundary": "DAS Authority Engine & RS Projection",
+    "expected_decision": "PERMIT",
+    "expected_authority": {
+      "accounts_count": 5,
+      "permissions_count": 4
+    },
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F03",
+    "name": "Holder Restrictive Input for S and A Dimensions",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000)",
+    "proven_requirements": "DAS restricts granted authority to Holder-approved subset for service and account dimensions against independent oracle",
+    "uncovered_aspects": "Holder restriction vector is pre-constructed via test signer rather than interactive wallet prompt The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Bank and TPP permit 5 accounts, Holder restricts presentation to ACC-001 only",
+    "action": "Submit VP with Holder restricted claims",
+    "expected_boundary": "DAS Decision Boundary",
+    "expected_decision": "PERMIT_RESTRICTED",
+    "expected_authority": {
+      "accounts": [
+        "ACC-001"
+      ]
+    },
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F04",
+    "name": "Policy Restrictive Input for S, V, D Dimensions",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "state_mutation",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000)",
+    "proven_requirements": "DAS enforces Bank Security Policy as the restrictive bound on validity window, services, and data fields",
+    "uncovered_aspects": "Bank policy state is updated via conformance policy control endpoint The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Bank Security Policy mandates maximum 7-day validity and masks high-risk fields",
+    "action": "Evaluate delegation request where Holder/TPP request 30 days",
+    "expected_boundary": "Bank Policy Enforcement Layer",
+    "expected_decision": "PERMIT_RESTRICTED",
+    "expected_authority": {
+      "validity_days": 7
+    },
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F05",
+    "name": "All-Dimension Boundary Meet Exhaustive Verification (20 Boundary Matrix)",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000) & Independent Oracle",
+    "proven_requirements": "Exhaustive evaluation across all 20 combinations of entities (SC, H, R, T, P) and dimensions (S, A, V, D) matches independent oracle meet results exactly",
+    "uncovered_aspects": "Boundary matrix inputs are supplied as signed synthetic fixtures to systematically cover all 20 dimensions The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Referenced from evaluation/fixtures/data/boundary_20_vd_f05.json",
+    "action": "Iterate across all 20 combinations where each entity (SC, H, R, T, P) solely restricts each dimension (S, A, V, D)",
+    "expected_boundary": "Independent Oracle Equality Assertion",
+    "expected_decision": "PERMIT_RESTRICTED",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-F06",
+    "name": "Empty Meet or Disjoint Authority Boundary Handling",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000)",
+    "proven_requirements": "DAS rejects authorization requests that produce empty account sets, inverted validity intervals, disjoint fields, zero history, or zero page size with deterministic rejection reasons",
+    "uncovered_aspects": "Disjoint boundary states are injected via signed test fixtures The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Disjoint account sets or start_time > end_time",
+    "action": "Submit delegation with zero intersecting authority",
+    "expected_boundary": "DAS Evaluation Filter",
+    "expected_decision": "DENY",
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F07",
+    "name": "Role-Specific Audience Separation (Aud_R, Aud_G, Aud_KB)",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000) & Resource Server (:4000)",
+    "proven_requirements": "Distinct audience identifiers are verified across Resource Server (Aud_R), Grant Authority (Aud_G), and Verifier (Aud_KB)",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Distinct URI identifiers configured for Resource Server, Grant Authority, and Verifier",
+    "action": "Inspect signed artifacts to verify Aud_R != Aud_G != Aud_KB",
+    "expected_boundary": "Token and VP Verifier layers",
+    "expected_decision": "PERMIT",
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F08",
+    "name": "Signed DAS Challenge Nonce and Hash Binding in SD-JWT+KB",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "DAS Token Endpoint (:7000)",
+    "proven_requirements": "Holder Key Binding JWT binds the exact SD-JWT presentation digest (sd_hash) and fresh DAS challenge nonce",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Fresh cryptographic challenge issued by DAS during F3",
+    "action": "Verify Holder Key Binding JWT embeds sd_hash and challenge nonce",
+    "expected_boundary": "DAS Token Issuance",
+    "expected_decision": "PERMIT",
+    "criticality": "critical"
+  },
+  {
+    "case_id": "VD-F09",
+    "name": "Token Authority and Resource Server Projection Consistency",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Resource Server Data Projection Engine (:4000)",
+    "proven_requirements": "Resource Server response strictly filters data to authorized accounts, history window, and data fields defined in token typed authority",
+    "uncovered_aspects": "The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Token authorized for ACC-001 with account_id and balance fields",
+    "action": "Query RS and verify response omits all non-authorized fields and accounts",
+    "expected_boundary": "RS Data Projection Engine",
+    "expected_decision": "PERMIT",
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F10",
+    "name": "Initial (F1-F6) vs Repeated (F2-F6) Path Partitioning",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "credential_provisioning",
+      "fixture_signing",
+      "issuance_record_rebind"
+    ],
+    "production_boundary": "Wallet (:5000), DAS Token Endpoint (:7000) & Resource Server (:4000)",
+    "proven_requirements": "Repeated delegation flow reuses pre-existing Scope VC while generating fresh challenge, VP assertion, delegation VC, and access token on each invocation",
+    "uncovered_aspects": "Initial Scope VC establishment is performed via test-assisted provisioning shortcut (/api/provision-scope-vc) rather than interactive end-user OID4VCI flow; initial F1 is outside the formal verification evidence of this case The F2-F6 leg is driven through the authorized conformance signers and re-commits the issuance record to the re-signed Scope VC, so the F1 component-digest binding is not exercised by this case.",
+    "preconditions": "Valid Scope VC established in Holder Wallet via provisioning",
+    "action": "Execute repeated delegation without re-issuing Scope VC (skip F1)",
+    "expected_boundary": "Holder Wallet Execution Pipeline",
+    "expected_decision": "PERMIT",
+    "criticality": "high"
+  },
+  {
+    "case_id": "VD-F11",
+    "name": "Selective Disclosure & TPP Data Shielding Verification",
+    "configuration": "B1-C0, B1-C2",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "credential_provisioning",
+      "state_inspection"
+    ],
+    "production_boundary": "TPP Ingestion (:3000) and RS Response (:4000) Boundaries",
+    "proven_requirements": "No prohibited claims were observed in the inspected status and resource response boundaries; selective disclosures correctly restrict TPP access to authorized claims",
+    "uncovered_aspects": "Scope VC is provisioned via test-assisted shortcut (/api/provision-scope-vc); claim shielding verification is strictly limited to observable status and API response boundaries, without whole-process heap memory introspection or proxy network log analysis",
+    "preconditions": "Scope VC contains mandatory and selectively disclosable claims defined by the frozen fixture",
+    "action": "Inspect TPP status and resource response boundaries to ensure non-disclosed claims remain shielded",
+    "expected_boundary": "TPP Ingestion and Audit Boundaries",
+    "expected_decision": "PERMIT",
+    "criticality": "high"
+  }
+]

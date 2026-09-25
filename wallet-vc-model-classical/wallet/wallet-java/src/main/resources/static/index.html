@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Wallet — Classical ECDSA P-256 VC System</title>
+  <meta name="description"
+    content="Digital Wallet for OID4VCI Verifiable Credentials with Classical ECDSA P-256 Cryptography" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2235;
+      --border: #1e2d45;
+      --accent: #3b82f6;
+      --accent2: #6366f1;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --purple: #8b5cf6;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --card-gradient: linear-gradient(135deg, #1a2235 0%, #0f1829 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(90deg, #0f1829 0%, #1a1040 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-badge {
+      font-size: 0.7rem;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      flex: 1;
+      min-width: 120px;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text2);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+    }
+
+    .tab:hover:not(.active) {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-gradient);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* VC Card */
+    .vc-card {
+      background: linear-gradient(135deg, #1e3a5f 0%, #1a1040 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .vc-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+    }
+
+    .vc-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    }
+
+    .vc-type {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+
+    .vc-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .vc-claims {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .vc-claim {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .vc-claim-label {
+      font-size: 0.7rem;
+      color: var(--text2);
+      margin-bottom: 0.2rem;
+    }
+
+    .vc-claim-value {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .vc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 0.75rem;
+    }
+
+    .vc-badge.hybrid {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    /* Delegate Request Card */
+    .delegate-req-card {
+      background: linear-gradient(135deg, #1a1f35 0%, #0f1829 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+    }
+
+    .delegate-req-card:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);
+    }
+
+    .delegate-req-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .delegate-req-tpp {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .delegate-req-time {
+      font-size: 0.72rem;
+      color: var(--text2);
+    }
+
+    .delegate-req-scopes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .scope-pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+    }
+
+    .scope-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      margin-bottom: 0.4rem;
+      transition: all 0.15s;
+    }
+
+    .scope-checkbox:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .scope-checkbox input[type=checkbox] {
+      accent-color: var(--accent);
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Scope selector */
+    .scope-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .scope-chip {
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text2);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .scope-chip.selected {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.5);
+      color: #93c5fd;
+    }
+
+    .scope-chip:hover:not(.selected) {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    /* Form elements */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text2);
+      margin-bottom: 0.4rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.875rem;
+      padding: 0.6rem 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+    }
+
+    .btn-success:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+    }
+
+    .btn-warning {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* Status badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .badge-yellow {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+    }
+
+    .badge-red {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #c4b5fd;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+    }
+
+    .status-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Protocol log */
+    .log-entry {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .log-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .log-step {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .log-dir {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    .log-dir.outgoing {
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+    }
+
+    .log-dir.incoming {
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+    }
+
+    .log-dir.internal {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+
+    .log-desc {
+      font-size: 0.82rem;
+      color: var(--text2);
+    }
+
+    .log-data {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 0.4rem;
+      max-height: 100px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      padding: 0.4rem;
+      display: none;
+    }
+
+    .log-data.expanded {
+      display: block;
+    }
+
+    .log-toggle {
+      font-size: 0.7rem;
+      color: var(--accent);
+      cursor: pointer;
+      margin-top: 0.3rem;
+    }
+
+    /* Alert */
+    .alert {
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .alert-info {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+
+    .alert-error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+    }
+
+    /* Stepper */
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+
+    .step.done .step-circle {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .step.active .step-circle {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .step-label {
+      font-size: 0.7rem;
+      color: var(--text2);
+      margin-top: 0.4rem;
+      text-align: center;
+    }
+
+    /* Pulse dot for pending */
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--yellow);
+      display: inline-block;
+      margin-right: 0.4rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.85);
+      }
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8em;
+    }
+
+    .flex {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .mt {
+      margin-top: 1rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text2);
+    }
+
+    .empty-state svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1rem;
+      opacity: 0.4;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.25rem 0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .slide-in {
+      animation: slideIn 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo" style="display:flex;align-items:center;gap:0.5rem;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <span>Digital Wallet</span>
+    </div>
+    <div class="header-badge">OID4VCI + Classical ECDSA P-256</div>
+    <div style="margin-left:auto;display:flex;gap:0.75rem;align-items:center">
+      <span class="badge badge-blue" id="vcCountBadge">0 VCs</span>
+      <span id="pendingBadge" class="badge badge-yellow" style="display:none">Pending</span>
+      <span id="walletKeyBadge" class="badge badge-yellow">Key: loading...</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Wallet Status</div>
+          <div class="status-row">
+            <span>Scope / Authz VC</span>
+            <span id="sidebarAuthz" class="badge badge-red">Missing</span>
+          </div>
+          <div class="status-row">
+            <span>Delegate VC</span>
+            <span id="sidebarDelegate" class="badge badge-red">Missing</span>
+          </div>
+          <div class="status-row">
+            <span>Pending Requests</span>
+            <span id="sidebarPending" class="badge badge-yellow">0</span>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">Cryptographic Key Info</div>
+          <div style="font-size:0.78rem;color:var(--text2);line-height:1.6">
+            <div>Algorithm: <code>ES256 (ECDSA P-256)</code></div>
+            <div>Model: <code>VDAM Classical</code></div>
+            <div style="margin-top:0.5rem">Kid: <code id="kidInfo">...</code></div>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">OID4VCI Flow</div>
+          <div style="font-size:0.78rem;color:var(--text2);line-height:1.9">
+            <div>1. Fetch Credential Offer from Bank</div>
+            <div>2. PAR + PKCE → Keycloak</div>
+            <div>3. Exchange Code → Token</div>
+            <div>4. Holder Proof (ECDSA P-256)</div>
+            <div>5. POST /credential → VC</div>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">Delegate Flow</div>
+          <div style="font-size:0.78rem;color:var(--text2);line-height:1.9">
+            <div>1. TPP sends delegation request</div>
+            <div>2. Wallet receives and displays</div>
+            <div>3. User reviews & approves</div>
+            <div>4. Wallet signs Delegate VC (P-256)</div>
+            <div>5. TPP polls and receives VCs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div>
+        <div id="globalPendingNotice" class="alert alert-warning"
+          style="display:none;margin-bottom:1.5rem;animation:fadeIn 0.3s ease;"></div>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('receive',this)">Receive VC from Bank</button>
+          <button class="tab" onclick="switchTab('vcs',this)">My VCs</button>
+          <button class="tab" onclick="switchTab('delegate',this)">Delegation Requests</button>
+          <button class="tab" onclick="switchTab('log',this)">Protocol Log</button>
+        </div>
+
+        <!-- Tab: Receive VC -->
+        <div id="tab-receive" class="tab-content active">
+          <div class="stepper" id="stepper">
+            <div class="step active" id="step1">
+              <div class="step-circle">1</div>
+              <div class="step-label">Offer</div>
+            </div>
+            <div class="step" id="step2">
+              <div class="step-circle">2</div>
+              <div class="step-label">Auth</div>
+            </div>
+            <div class="step" id="step3">
+              <div class="step-circle">3</div>
+              <div class="step-label">Token</div>
+            </div>
+            <div class="step" id="step4">
+              <div class="step-circle">4</div>
+              <div class="step-label">Proof</div>
+            </div>
+            <div class="step" id="step5">
+              <div class="step-circle">5</div>
+              <div class="step-label">VC</div>
+            </div>
+          </div>
+
+          <div class="card" id="offerCard">
+            <div class="card-title">Credential Offer from Bank</div>
+            <div class="alert alert-info">
+              Select the VC type, click <strong>"Fetch Offer from Bank"</strong> to auto-fetch, or paste the Credential
+              Offer URI.
+            </div>
+
+            <div class="form-group">
+              <label>Credential Type</label>
+              <select id="credType">
+                <option value="authorization" selected>Authorization Credential (Scope VC)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Credential Offer URI (optional — paste if available)</label>
+              <input type="text" id="offerUri" placeholder="openid-credential-offer://?credential_offer=..." />
+            </div>
+
+            <div class="flex">
+              <button class="btn btn-primary" onclick="receiveOffer()">Receive Credential Offer</button>
+              <button class="btn btn-outline" onclick="fetchOfferFromBank()">Fetch Offer from Bank</button>
+            </div>
+          </div>
+
+          <div id="authCard" class="card" style="display:none">
+            <div class="card-title">Authorization (PAR + PKCE)</div>
+            <div id="authInfo" class="alert alert-info"></div>
+            <div class="flex mt">
+              <button class="btn btn-primary" id="authBtn" onclick="startAuth()">Start Auth (Keycloak)</button>
+            </div>
+            <div id="authRedirect" style="display:none;margin-top:1rem">
+              <div class="alert alert-info">
+                Redirecting to Keycloak for authentication...
+                <a id="authLink" href="#" style="color:#93c5fd;display:block;margin-top:0.5rem;word-break:break-all"
+                  target="_blank">Open Keycloak</a>
+              </div>
+            </div>
+          </div>
+
+          <div id="credCard" class="card" style="display:none">
+            <div class="card-title">Credential Received</div>
+            <div id="credResult" class="alert alert-success"></div>
+          </div>
+        </div>
+
+        <!-- Tab: My VCs -->
+        <div id="tab-vcs" class="tab-content">
+          <div class="flex" style="margin-bottom:1rem">
+            <h2 style="font-size:1.1rem;font-weight:600">VCs Stored in Wallet</h2>
+            <button class="btn btn-outline btn-sm" onclick="loadVcs()">Refresh</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteVc('')">Clear All VCs</button>
+          </div>
+          <div id="vcsList">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M2 10h20" />
+              </svg>
+              <div>No VCs in wallet</div>
+              <div style="font-size:0.8rem;margin-top:0.5rem">Receive VC from Bank first</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Delegation Requests (TPP-initiated delegate flow) -->
+        <div id="tab-delegate" class="tab-content">
+          <div class="card">
+            <div class="card-title">Pending Delegation Requests from TPP</div>
+            <div class="alert alert-info">
+              When a TPP wants delegation to access your data, it will send a request here.
+              You need to <strong>review and approve</strong> before the TPP can receive a Delegate VC.
+            </div>
+            <div class="flex" style="margin-bottom:1rem">
+              <button class="btn btn-outline btn-sm" onclick="loadDelegateRequests()">Refresh</button>
+            </div>
+            <div id="delegateRequestsList">
+              <div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4l3 3" />
+                </svg>
+                <div>No delegation requests</div>
+                <div style="font-size:0.8rem;margin-top:0.5rem">TPP needs to send a request from its interface</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Approve modal / inline form -->
+          <div id="approvePanel" class="card" style="display:none">
+            <div class="card-title">Approve Delegation Request</div>
+            <div id="approvePanelContent"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Protocol Log -->
+        <div id="tab-log" class="tab-content">
+          <div class="flex" style="margin-bottom:1rem">
+            <h2 style="font-size:1.1rem;font-weight:600">Protocol Log</h2>
+            <button class="btn btn-outline btn-sm" onclick="loadLog()">Refresh</button>
+            <button class="btn btn-danger btn-sm" onclick="clearLog()">Clear</button>
+          </div>
+          <div id="logEntries">
+            <div class="empty-state">
+              <div>No protocol logs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSession = null;
+    let config = {};
+    let approvingRequest = null;
+
+    // ── Init ──────────────────────────────────────────────────
+    async function init() {
+      try {
+        const r = await fetch('/api/config');
+        config = await r.json();
+
+        const keyR = await fetch('/api/wallet-key');
+        const keyData = await keyR.json();
+        document.getElementById('kidInfo').textContent = (keyData.kid || '').substring(0, 20) + '...';
+        document.getElementById('walletKeyBadge').textContent = 'Kid: ' + (keyData.kid || '').substring(0, 12) + '...';
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('tab')) {
+          const targetTab = params.get('tab');
+          const tabBtn = document.querySelector(`.tab[onclick*="${targetTab}"]`);
+          if (tabBtn) switchTab(targetTab, tabBtn);
+        }
+        if (params.get('success')) {
+          document.getElementById('credCard').style.display = '';
+          document.getElementById('credResult').innerHTML = 'Credential received and saved to wallet.';
+          setStep(5);
+          loadVcs();
+          updateSidebar();
+          window.history.replaceState({}, '', '/');
+        } else if (params.get('error')) {
+          showAlert('offerCard', 'error', `Error: ${params.get('error')} — ${params.get('msg') || ''}`);
+          window.history.replaceState({}, '', '/');
+        } else if (params.get('tpp_request_id')) {
+          const tppRequestId = params.get('tpp_request_id');
+          const tppUrl = params.get('tpp_url') || '';
+          const tppRedirectUri = params.get('tpp_redirect_uri') || '';
+          try {
+            const reqR = await fetch('/api/delegate-requests');
+            const reqsData = await reqR.json();
+            const reqs = Array.isArray(reqsData.requests) ? reqsData.requests : Object.values(reqsData.requests || {});
+            let targetReq = reqs.find(r => r.requestId === tppRequestId);
+
+            if (!targetReq) {
+              const fetchR = await fetch(`/api/fetch-tpp-request?tppUrl=${encodeURIComponent(tppUrl)}&requestId=${encodeURIComponent(tppRequestId)}`);
+              const fetchRes = await fetchR.json();
+              if (fetchRes.success && fetchRes.request) {
+                targetReq = fetchRes.request;
+              }
+            }
+
+            if (targetReq) {
+              if (tppRedirectUri) targetReq.tpp_redirect_uri = tppRedirectUri;
+              switchTab('delegate', document.querySelector('.tab[onclick*="delegate"]'));
+              setTimeout(() => {
+                openApprovePanel(tppRequestId);
+                showAlert('delegateRequestsList', 'info', `Received delegation request from TPP <strong>${targetReq.tppClientId || ''}</strong>. Review and approve below.`);
+              }, 300);
+            }
+          } catch (err) {
+            console.error('Auto-import TPP request error:', err);
+          }
+        }
+
+        loadVcs();
+        updateSidebar();
+        loadDelegateRequests();
+        setInterval(updateSidebar, 5000);
+        setInterval(loadDelegateRequests, 8000);
+      } catch (e) {
+        console.error('Init error:', e);
+      }
+    }
+
+    // ── Tabs ──────────────────────────────────────────────────
+    function switchTab(t, btn) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + t).classList.add('active');
+      if (btn) btn.classList.add('active');
+      if (t === 'vcs') loadVcs();
+      if (t === 'log') loadLog();
+      if (t === 'delegate') loadDelegateRequests();
+    }
+
+    // ── Stepper ───────────────────────────────────────────────
+    function setStep(n) {
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('step' + i);
+        el.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
+      }
+    }
+
+    // ── Credential Offer ──────────────────────────────────────
+    async function fetchOfferFromBank() {
+      try {
+        const type = document.getElementById('credType').value;
+        showAlert('offerCard', 'info', 'Fetching Credential Offer from Bank via TLS...');
+        const r = await fetch(`/api/fetch-offer?type=${type}`);
+        const data = await r.json();
+        if (!r.ok) {
+          showAlert('offerCard', 'error', 'Failed to fetch offer: ' + (data.message || data.error || 'Server error'));
+          return;
+        }
+        document.getElementById('offerUri').value = data.offerUri || '';
+        showAlert('offerCard', 'info', 'Fetched Offer from Bank: ' + data.credentialConfigId);
+        loadLog();
+
+        // Automatically proceed to receiveOffer to activate Step 2
+        await receiveOffer();
+      } catch (e) {
+        console.error('fetchOfferFromBank error:', e);
+        showAlert('offerCard', 'error', 'Error fetching offer: ' + e.message);
+      }
+    }
+
+    async function receiveOffer() {
+      try {
+        const offerUri = document.getElementById('offerUri').value.trim();
+        const credConfigId = 'AuthorizationCredential';
+
+        const body = { offerUri, credentialConfigId: credConfigId };
+        const r = await fetch('/api/receive-offer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await r.json();
+
+        if (!r.ok) { showAlert('offerCard', 'error', '❌ ' + (data.error || 'Failed to process offer')); return; }
+
+        currentSession = data.sessionId;
+        setStep(2);
+        const authCard = document.getElementById('authCard');
+        authCard.style.display = '';
+        const issuer = data.offer?.credential_issuer || '';
+        document.getElementById('authInfo').innerHTML =
+          `✅ Offer received & session created!<br>Credential: <code>${data.credConfig}</code><br>Issuer: <code>${issuer}</code><br>Session ID: <code>${data.sessionId}</code>`;
+        authCard.scrollIntoView({ behavior: 'smooth' });
+        loadLog();
+      } catch (e) {
+        console.error('receiveOffer error:', e);
+        showAlert('offerCard', 'error', '❌ Error: ' + e.message);
+      }
+    }
+
+    // ── Start Auth ────────────────────────────────────────────
+    async function startAuth() {
+      if (!currentSession) { alert('Credential Offer not received yet'); return; }
+      const r = await fetch('/api/start-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: currentSession }),
+      });
+      const data = await r.json();
+      if (!r.ok) { showAlert('authCard', 'error', data.error); return; }
+
+      setStep(3);
+      document.getElementById('authBtn').disabled = true;
+      document.getElementById('authRedirect').style.display = '';
+      const link = document.getElementById('authLink');
+      link.href = data.authUrl;
+      link.textContent = data.authUrl;
+      window.location.href = data.authUrl;
+    }
+
+    // ── Load VCs ──────────────────────────────────────────────
+    async function loadVcs() {
+      const r = await fetch('/api/vcs');
+      const data = await r.json();
+      const container = document.getElementById('vcsList');
+      document.getElementById('vcCountBadge').textContent = data.count + ' VCs';
+
+      if (data.count === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
+            </svg>
+            <div style="font-weight:600;font-size:1rem;color:var(--text);margin-bottom:0.4rem">No Verifiable Credentials in Wallet</div>
+            <div style="font-size:0.85rem;color:var(--text2);margin-bottom:1.25rem">Your Authorization VC has been deleted or has not yet been issued.</div>
+            <button class="btn btn-primary" onclick="switchTab('receive', document.querySelector('.tab[onclick*=\\'receive\\']'))">
+              Re-request Authorization VC from Bank →
+            </button>
+          </div>`;
+        updateSidebar();
+        return;
+      }
+
+      const vcsArr = Array.isArray(data.vcs) ? data.vcs : Object.values(data.vcs || {});
+      const hasAuthz = vcsArr.some(v => v.type?.includes('AuthorizationCredential') && !v.type?.includes('Delegate'));
+
+      let bannerHtml = '';
+      if (!hasAuthz) {
+        bannerHtml = `
+          <div class="alert alert-warning" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
+            <span><strong>Notice:</strong> Authorization VC is missing or was deleted. You can re-request a fresh one from the Bank.</span>
+            <button class="btn btn-warning btn-sm" onclick="switchTab('receive', document.querySelector('.tab[onclick*=\\'receive\\']'))">
+              Re-request Authorization VC →
+            </button>
+          </div>
+        `;
+      }
+
+      container.innerHTML = bannerHtml + vcsArr.map(vc => {
+        const claims = vc.disclosedClaims || {};
+        const isIdentity = vc.type?.includes('Identity') && !vc.type?.includes('Delegate');
+        const isAuthz = vc.type?.includes('Authorization') && !vc.type?.includes('Delegate');
+        const isDelegate = vc.type?.includes('Delegate');
+        const color = isIdentity ? '#1e3a5f' : isAuthz ? '#1a2f1f' : '#2d1f3a';
+        const accentRgb = isIdentity ? '59,130,246' : isAuthz ? '16,185,129' : '139,92,246';
+        const accent = `rgba(${accentRgb},1)`;
+
+        return `<div class="vc-card fade-in" style="background:linear-gradient(135deg,${color} 0%,#0f1829 100%);border-color:rgba(${accentRgb},0.3)">
+      <div class="vc-type" style="color:${accent}">${vc.vct || vc.type}</div>
+      <div class="vc-name">${vc.type}</div>
+      <div class="vc-claims">
+        ${Object.entries(claims).slice(0, 4).map(([k, v]) => `<div class="vc-claim"><div class="vc-claim-label">${k}</div><div class="vc-claim-value">${Array.isArray(v) ? v.join(', ') : typeof v === 'object' ? JSON.stringify(v).substring(0, 30) + '..' : String(v)}</div></div>`).join('')}
+      </div>
+      <div class="flex" style="margin-top:0.75rem;justify-content:space-between;align-items:center">
+        <span class="vc-badge hybrid">Classical ECDSA P-256</span>
+        <div class="flex" style="gap:0.5rem;align-items:center;">
+          <span style="font-size:0.72rem;color:var(--text2)">${new Date(vc.receivedAt || Date.now()).toLocaleString('en-US')}</span>
+          <button class="btn btn-danger btn-sm" style="padding:3px 10px;font-size:0.75rem" onclick="deleteVc('${vc.jti}')">Delete VC</button>
+        </div>
+      </div>
+      <div style="font-size:0.7rem;color:var(--text2);margin-top:0.5rem;font-family:'JetBrains Mono',monospace">${(vc.jti || '').substring(0, 40)}...</div>
+    </div>`;
+      }).join('');
+
+      updateSidebar();
+    }
+
+    async function deleteVc(jti) {
+      const msg = jti ? 'Are you sure you want to delete this Verifiable Credential from your wallet?' : 'Are you sure you want to delete ALL Verifiable Credentials from your wallet?';
+      if (!confirm(msg)) return;
+      try {
+        const res = await fetch('/api/delete-vc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ jti: jti || '' })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          loadVcs();
+          updateSidebar();
+          loadLog();
+        } else {
+          alert('Delete failed: ' + (data.error || 'Unknown error'));
+        }
+      } catch (e) {
+        console.error('deleteVc error:', e);
+        alert('Error deleting VC: ' + e.message);
+      }
+    }
+
+    function updateSidebar() {
+      fetch('/api/vcs').then(r => r.json()).then(data => {
+        const vcsArr = Array.isArray(data.vcs) ? data.vcs : Object.values(data.vcs || {});
+        const authz = vcsArr.find(v => v.type?.includes('AuthorizationCredential') && !v.type?.includes('Delegate'));
+        const delegate = vcsArr.find(v => v.type?.includes('Delegate'));
+
+        const setStatus = (id, ok, label) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.className = ok ? 'badge badge-green' : 'badge badge-red';
+          el.textContent = ok ? '✓ ' + (label || 'Yes') : 'Missing';
+        };
+        setStatus('sidebarAuthz', !!authz);
+        setStatus('sidebarDelegate', !!delegate);
+      }).catch(() => { });
+    }
+
+    // ── Delegate Requests ─────────────────────────────────────
+    async function loadDelegateRequests() {
+      try {
+        const r = await fetch('/api/delegate-requests');
+        const data = await r.json();
+        const container = document.getElementById('delegateRequestsList');
+
+        const reqs = Array.isArray(data.requests) ? data.requests : Object.values(data.requests || {});
+        const pendingReqs = reqs.filter(req => req.status === 'PENDING');
+
+        // Update pending badge
+        const pendingBadge = document.getElementById('pendingBadge');
+        const sidebarPending = document.getElementById('sidebarPending');
+        pendingBadge.style.display = pendingReqs.length > 0 ? '' : 'none';
+        sidebarPending.textContent = pendingReqs.length;
+        sidebarPending.className = pendingReqs.length > 0 ? 'badge badge-yellow' : 'badge badge-blue';
+
+        // Update global top notification banner
+        const pendingNotice = document.getElementById('globalPendingNotice');
+        if (pendingNotice) {
+          if (pendingReqs.length > 0) {
+            pendingNotice.style.display = 'block';
+            const pReq = pendingReqs[0];
+            pendingNotice.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <span class="pulse-dot"></span>
+              <strong>Pending TPP Delegation Request:</strong>
+              <span>TPP <code>${pReq.tppClientId}</code> is requesting Open Banking consent delegation.</span>
+            </div>
+            <button class="btn btn-warning btn-sm" onclick="switchTab('delegate', document.querySelector('.tab[onclick*=\\'delegate\\']')); openApprovePanel('${pReq.requestId}');">
+              Review & Approve Now ↗
+            </button>
+          </div>
+        `;
+          } else {
+            pendingNotice.style.display = 'none';
+          }
+        }
+
+        if (reqs.length === 0) {
+          container.innerHTML = `<div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <div>No delegation requests</div>
+        <div style="font-size:0.8rem;margin-top:0.5rem">TPP needs to send a request from its interface</div>
+      </div>`;
+          return;
+        }
+
+        container.innerHTML = reqs.map(req => renderDelegateRequest(req)).join('');
+      } catch (e) {
+        console.error('Load delegate requests error:', e);
+      }
+    }
+
+    function renderDelegateRequest(req) {
+      const scopes = Array.isArray(req.requestedScopes) ? req.requestedScopes : [];
+      const identityClaims = Array.isArray(req.requestedIdentityClaims) ? req.requestedIdentityClaims : [];
+      const statusMap = {
+        PENDING: { cls: 'badge-yellow', label: 'Pending' },
+        APPROVED: { cls: 'badge-green', label: 'Approved' },
+        REJECTED: { cls: 'badge-red', label: 'Rejected' },
+      };
+      const s = statusMap[req.status] || statusMap.PENDING;
+      const isPending = req.status === 'PENDING';
+
+      return `<div class="delegate-req-card slide-in">
+    <div class="delegate-req-header">
+      <div class="flex" style="gap:0.5rem;align-items:center">
+        ${isPending ? '<span class="pulse-dot"></span>' : ''}
+        <span class="delegate-req-tpp">${req.tppClientId}</span>
+      </div>
+      <div class="flex" style="gap:0.5rem">
+        <span class="badge ${s.cls}">${s.label}</span>
+        <span class="delegate-req-time">${req.createdAt || ''}</span>
+      </div>
+    </div>
+
+    ${scopes.length > 0 ? `
+      <div style="font-size:0.8rem;color:var(--text2);margin-top:0.5rem;margin-bottom:0.25rem">Requested API Permissions:</div>
+      <div class="delegate-req-scopes">
+        ${scopes.map(sc => `<span class="scope-pill">${sc}</span>`).join('')}
+      </div>
+    ` : ''}
+
+    ${isPending ? `
+      <hr class="divider" />
+      <div class="flex">
+        <button class="btn btn-success btn-sm" onclick="openApprovePanel('${req.requestId}')">Review & Approve</button>
+        <button class="btn btn-danger btn-sm" onclick="rejectDelegate('${req.requestId}')">Reject</button>
+      </div>
+    ` : req.status === 'APPROVED' ? `
+      <div style="font-size:0.78rem;color:#34d399;margin-top:0.5rem">
+        ${req.approvedScopes && req.approvedScopes.length > 0 ? `Granted permissions: <code>${req.approvedScopes.join(', ')}</code>` : ''}
+      </div>
+    ` : ''}
+  </div>`;
+    }
+
+    async function openApprovePanel(requestId) {
+      const vcsR = await fetch('/api/vcs');
+      const vcsData = await vcsR.json();
+      const vcsArr = Array.isArray(vcsData.vcs) ? vcsData.vcs : Object.values(vcsData.vcs || {});
+      let authzVcs = vcsArr.filter(v => v.type?.includes('AuthorizationCredential') && !v.type?.includes('Delegate'));
+      if (authzVcs.length === 0) {
+        authzVcs = [{
+          jti: 'auto-root',
+          type: 'AuthorizationCredential (Auto-Provisioned Root)',
+          disclosedClaims: {
+            scopes: ['ReadAccountsDetail', 'ReadBalances', 'ReadTransactionsDetail', 'CreateDomesticPayment', 'ReadAccountsBasic', 'ReadTransactionsBasic', 'accounts:read', 'transfers:read', 'transfers:write']
+          }
+        }];
+      }
+
+      const reqR = await fetch('/api/delegate-requests');
+      const reqsData = await reqR.json();
+      const reqs = Array.isArray(reqsData.requests) ? reqsData.requests : Object.values(reqsData.requests || {});
+      const req = reqs.find(r => r.requestId === requestId);
+      if (!req) return;
+
+      approvingRequest = req;
+      const panel = document.getElementById('approvePanel');
+      const content = document.getElementById('approvePanelContent');
+      panel.style.display = '';
+
+      const scopes = Array.isArray(req.requestedScopes) ? req.requestedScopes : [];
+
+      content.innerHTML = `
+    <div class="alert alert-warning" style="margin-bottom:1rem">
+      TPP <strong>${req.tppClientId}</strong> is requesting Open Banking credential delegation.
+      Please review the requested consent permissions carefully.
+    </div>
+
+    ${scopes.length > 0 ? `
+      <div style="background:var(--surface2);border:1px solid var(--border);padding:1rem;border-radius:10px;margin-bottom:1rem">
+        <div style="font-weight:600;color:var(--text);margin-bottom:0.5rem">API Authorization Permissions (Open Banking UK)</div>
+        <div class="form-group">
+          <label>Select Authorization VC (Scope VC)</label>
+          <select id="approveAuthzVcSelect" onchange="updateApproveScopes(this)">
+            ${authzVcs.map(vc => {
+        const discScopes = vc.disclosedClaims?.scopes || [];
+        return `<option value="${vc.jti}" data-scopes='${JSON.stringify(discScopes)}'>${vc.type} — [${discScopes.join(', ')}]</option>`;
+      }).join('')}
+          </select>
+        </div>
+        <div id="approveScopeSection">
+          <label>Permissions to delegate to TPP:</label>
+          <div id="approveScopeList" style="margin-top:0.5rem"></div>
+        </div>
+      </div>
+    ` : ''}
+
+    <div class="flex mt">
+      <button class="btn btn-success" onclick="confirmApprove()">Confirm Approval</button>
+      <button class="btn btn-outline" onclick="document.getElementById('approvePanel').style.display='none'">Cancel</button>
+    </div>
+  `;
+
+      // Auto-select first authz VC if available
+      const sel = document.getElementById('approveAuthzVcSelect');
+      if (sel && authzVcs.length > 0) {
+        sel.value = authzVcs[0].jti;
+        updateApproveScopes(sel);
+      }
+
+      panel.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateApproveScopes(sel) {
+      const opt = (sel && sel.selectedIndex >= 0) ? sel.options[sel.selectedIndex] : null;
+      let authzScopes = (opt && opt.dataset.scopes) ? JSON.parse(opt.dataset.scopes) : [];
+      const reqScopes = approvingRequest?.requestedScopes || [];
+
+      const section = document.getElementById('approveScopeSection');
+      const list = document.getElementById('approveScopeList');
+      if (!section || !list) return;
+
+      if (authzScopes.length === 0) {
+        authzScopes = reqScopes.length > 0 ? reqScopes : ['ReadAccountsDetail', 'ReadBalances', 'ReadTransactionsDetail', 'CreateDomesticPayment'];
+      }
+      section.style.display = '';
+
+      const scopeLabels = {
+        'ReadAccountsDetail': 'Read Account Information & Details (AISP)',
+        'ReadBalances': 'Read Real-time Balances (AISP)',
+        'ReadTransactionsDetail': 'Read Transaction History & Analytics (AISP)',
+        'CreateDomesticPayment': 'Initiate Domestic Payment Transfers (PISP)',
+        'ReadAccountsBasic': 'Read Basic Account Info (AISP)',
+        'ReadTransactionsBasic': 'Read Basic Transactions (AISP)',
+        'accounts:read': 'Accounts Access (Legacy Alias)',
+        'transfers:read': 'Transactions Access (Legacy Alias)',
+        'transfers:write': 'Payment Transfers (Legacy Alias)',
+      };
+
+      list.innerHTML = authzScopes.map(sc => `
+    <label class="scope-checkbox" style="display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.8rem;margin-bottom:0.5rem;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);">
+      <input type="checkbox" id="scope_${sc}" value="${sc}" ${reqScopes.includes(sc) ? 'checked' : ''} style="width:16px;height:16px;accent-color:var(--accent);" />
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <span style="font-size:0.85rem;font-weight:600;color:var(--text);font-family:'JetBrains Mono',monospace;">${sc}</span>
+        <span style="font-size:0.75rem;color:var(--text2);">${scopeLabels[sc] || 'Open Banking UK Permission'}</span>
+      </div>
+      ${reqScopes.includes(sc) ? '<span class="badge badge-yellow" style="font-size:0.65rem;padding:2px 8px;margin-left:auto;">Requested</span>' : ''}
+    </label>
+  `).join('');
+    }
+
+    async function confirmApprove() {
+      if (!approvingRequest) return;
+
+      const authzVcEl = document.getElementById('approveAuthzVcSelect');
+      const authzVcJti = authzVcEl ? authzVcEl.value : '';
+
+      const checkedScopes = Array.from(document.querySelectorAll('#approveScopeList input[type=checkbox]:checked'))
+        .map(el => el.value);
+
+      const hasScopes = (approvingRequest.requestedScopes || []).length > 0;
+
+      if (hasScopes && checkedScopes.length === 0) {
+        alert('Select at least one permission to grant');
+        return;
+      }
+
+      const r = await fetch('/api/approve-delegate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          requestId: approvingRequest.requestId,
+          authzVcJti: authzVcJti,
+          approvedScopes: checkedScopes
+        }),
+      });
+      const data = await r.json();
+
+      if (!r.ok) {
+        showAlert('approvePanel', 'error', 'Error: ' + (data.error || 'Unknown error'));
+        return;
+      }
+
+      document.getElementById('approvePanel').style.display = 'none';
+      const redirectUri = data.tppRedirectUri || (new URLSearchParams(window.location.search)).get('tpp_redirect_uri') || (approvingRequest ? approvingRequest.tpp_redirect_uri : null);
+      approvingRequest = null;
+      loadDelegateRequests();
+      loadVcs();
+
+      if (redirectUri) {
+        showAlert('delegateRequestsList', 'success', 'Delegation approved! Redirecting back to TPP...');
+        setTimeout(() => {
+          window.location.href = redirectUri;
+        }, 800);
+        return;
+      }
+
+      const submitMsg = data.tppSubmitted
+        ? `Delegation request approved. Verifiable Presentation successfully submitted to TPP via OID4VP.`
+        : `Delegation request approved. Verifiable Presentation generated with Classical ECDSA P-256.`;
+      showAlert('delegateRequestsList', 'success', submitMsg);
+    }
+
+    async function rejectDelegate(requestId) {
+      if (!confirm('Reject delegation request from this TPP?')) return;
+
+      const r = await fetch('/api/approve-delegate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ requestId, rejected: true }),
+      });
+      const data = await r.json();
+      loadDelegateRequests();
+    }
+
+    // ── Protocol Log ──────────────────────────────────────────
+    async function loadLog() {
+      const r = await fetch('/api/protocol-log');
+      const data = await r.json();
+      const container = document.getElementById('logEntries');
+      if (!data.entries || data.total === 0) {
+        container.innerHTML = '<div class="empty-state"><div>No protocol logs</div></div>';
+        return;
+      }
+      container.innerHTML = data.entries.slice(0, 50).map((e, i) => `
+    <div class="log-entry fade-in">
+      <div class="log-header">
+        <span class="log-step">${e.step}</span>
+        <span class="log-dir ${e.direction}">${e.direction}</span>
+        <span style="font-size:0.7rem;color:var(--text2);margin-left:auto">${new Date(e.timestamp).toLocaleTimeString('en-US')}</span>
+      </div>
+      <div class="log-desc">${e.description}</div>
+      ${e.data && Object.keys(e.data).length > 0 ? `<div class="log-toggle" onclick="toggleLogData(${i})">▶ View details</div>
+      <div class="log-data" id="logData${i}">${JSON.stringify(e.data, null, 2)}</div>` : ''}
+    </div>
+  `).join('');
+    }
+
+    function toggleLogData(i) { document.getElementById('logData' + i).classList.toggle('expanded'); }
+
+    async function clearLog() {
+      await fetch('/api/protocol-log', { method: 'DELETE' });
+      loadLog();
+    }
+
+    // ── Helper ────────────────────────────────────────────────
+    function showAlert(cardId, type, msg) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      const existing = card.querySelector('.dynamic-alert');
+      if (existing) existing.remove();
+      const el = document.createElement('div');
+      el.className = `alert alert-${type} dynamic-alert fade-in`;
+      el.innerHTML = msg;
+      card.appendChild(el);
+    }
+
+    // ── Start ─────────────────────────────────────────────────
+    init();
+  </script>
+</body>
+
+</html>

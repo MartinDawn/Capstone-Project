@@ -1,0 +1,86 @@
+{
+  "schema_version": "2.0.0",
+  "updated_at": "2026-09-15T00:00:00Z",
+  "status": "source_verified_proposed",
+  "policy": "Algorithms are recorded by cryptographic role. Application JWS keys and TLS certificate keys must not be conflated.",
+  "configurations": {
+    "B0-C0": {
+      "name": "Traditional FAPI 2.0 with RAR",
+      "repository": "traditional-fapi",
+      "architecture": "Centralized authorization server with TPP Application and Resource Server",
+      "application_signatures": {
+        "authorization_server_tokens": "PS256",
+        "source": "traditional-fapi/auth-server/realm-config/traditional-fapi-realm.json"
+      },
+      "transport": {
+        "profile": "TLS as configured by the deployment",
+        "verification_status": "must_be_captured_from_final_vm"
+      }
+    },
+    "B1-C0": {
+      "name": "VDAM Classical Baseline",
+      "repository": "wallet-vc-model-classical",
+      "architecture": "Wallet, TPP Application, Bank Issuer/DAS, and Resource Server",
+      "application_signatures": {
+        "curve": "P-256",
+        "jws_algorithm": "ES256",
+        "roles": [
+          "F1 Holder-key proof",
+          "Scope VC",
+          "DAS challenge",
+          "Delegation VC",
+          "KB-JWT",
+          "Authorization VP",
+          "DAS-issued AIS access token",
+          "Status object when signed by the application key"
+        ],
+        "sources": [
+          "wallet-vc-model-classical/bank/bank-issuer/src/main/java/com/bk/research/classical/bank/CryptoService.java",
+          "wallet-vc-model-classical/wallet/wallet-java/src/main/java/com/bk/research/classical/wallet/CryptoService.java",
+          "wallet-vc-model-classical/tpp/tpp-java/src/main/java/com/bk/research/classical/tpp/CryptoService.java"
+        ]
+      },
+      "das_only_encryption": {
+        "algorithm": "ECDH-ES with A256GCM",
+        "recipient_curve": "P-256",
+        "source": "wallet-vc-model-classical/wallet/wallet-java/src/main/java/com/bk/research/classical/wallet/WalletController.java"
+      },
+      "transport": {
+        "certificate_key": "ECDSA P-384",
+        "certificate_signature": "SHA384withECDSA",
+        "tls_group_policy": "secp384r1 with configured secp256r1 compatibility entry",
+        "sources": [
+          "wallet-vc-model-classical/generate-all-certs.ps1",
+          "wallet-vc-model-classical/bank/tls-proxy/server-proxy.conf",
+          "wallet-vc-model-classical/wallet/tls-proxy/wallet-inbound.conf"
+        ],
+        "note": "This transport certificate profile is distinct from the required P-256/ES256 application-signature profile."
+      },
+      "sender_constraint": "cnf.x5t#S256"
+    },
+    "B1-C2": {
+      "name": "VDAM Hybrid Classical and Post-Quantum Baseline",
+      "repository": "wallet-vc-model",
+      "architecture": "Wallet, TPP Application, Bank Issuer/DAS, Resource Server, and OQS TLS proxies",
+      "application_signatures": {
+        "composite_algorithm": "MLDSA65-ECDSA-P384-SHA512",
+        "classical_component": "ECDSA P-384 / ES384",
+        "post_quantum_component": "ML-DSA-65",
+        "acceptance_rule": "Both required components must verify; classical-only fallback is prohibited.",
+        "sources": [
+          "wallet-vc-model/pqc-bank/bank-issuer/src/main/java/com/bk/research/pqc/bank/CryptoService.java",
+          "wallet-vc-model/pqc-wallet/wallet-java/src/main/java/com/bk/research/pqc/wallet/CryptoService.java",
+          "wallet-vc-model/pqc-tpp/tpp-java/src/main/java/com/bk/research/pqc/tpp/CryptoService.java"
+        ]
+      },
+      "transport": {
+        "key_establishment": "X25519MLKEM768",
+        "certificate_key": "p384_mldsa65",
+        "source": "wallet-vc-model/pqc-bank/oqs-proxy/server-proxy.conf"
+      },
+      "sender_constraint": "cnf.x5t#S384"
+    }
+  },
+  "common_data_source": "Berka-derived deterministic evaluation fixtures",
+  "final_vm_observation_required": true
+}

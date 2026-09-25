@@ -1,0 +1,15 @@
+# Conformance only. Publishes the B0 application ports that the suite calls directly.
+# The perf runs never use this file: they see the gateways only (8443, 4443, 6443).
+#   docker compose -f traditional-fapi/docker-compose.yml -f evaluation/configs/conformance-ports/b0.yml up -d --no-build
+services:
+  keycloak-fapi:
+    ports:
+      - "8080:8080"
+  resource-server-fapi:
+    ports:
+      - "4000:4000"
+  tpp-fapi:
+    ports:
+      - "3000:3000"
+    environment:
+      CONFORMANCE_TEST_MODE: "true"

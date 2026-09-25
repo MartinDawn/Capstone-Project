@@ -1,0 +1,114 @@
+{
+  "schema_version": "2.0.0",
+  "updated_at": "2026-09-15T00:00:00Z",
+  "status": "proposed_source_mapped",
+  "seed": 20260915,
+  "normative_references": [
+    "https://openbankinguk.github.io/read-write-api-site3/v4.0.1/profiles/account-and-transaction-api-profile.html",
+    "https://openbankinguk.github.io/read-write-api-site3/v4.0/resources-and-data-models/aisp/direct-debits.html"
+  ],
+  "mapping_policy": "Every configured permission, service, field, account, time range, page size, endpoint, and expected result must be explicit. Detail/Basic duplication is permitted by the UK profile but is used only where the workload cardinality requires it.",
+  "permission_mapping": {
+    "ReadAccountsDetail": {
+      "authorization_family": "accounts:read",
+      "protected_operations": ["list_accounts", "get_account"],
+      "implemented_by_all_models": true
+    },
+    "ReadBalances": {
+      "authorization_family": "accounts:read",
+      "protected_operations": ["get_balances"],
+      "implemented_by_all_models": true
+    },
+    "ReadTransactionsBasic": {
+      "authorization_family": "transactions:read",
+      "protected_operations": ["get_transactions"],
+      "implemented_by_all_models": true
+    },
+    "ReadTransactionsDetail": {
+      "authorization_family": "transactions:read",
+      "protected_operations": ["get_transactions"],
+      "implemented_by_all_models": true
+    },
+    "ReadTransactionsCredits": {
+      "authorization_family": "transactions:read",
+      "protected_operations": ["get_transactions"],
+      "transaction_direction": "credit",
+      "implemented_by_all_models": true
+    },
+    "ReadTransactionsDebits": {
+      "authorization_family": "transactions:read",
+      "protected_operations": ["get_transactions"],
+      "transaction_direction": "debit",
+      "implemented_by_all_models": true
+    },
+    "ReadDirectDebits": {
+      "authorization_family": "accounts",
+      "specification_status": "valid_open_banking_uk_account_access_permission",
+      "specified_operations": ["get_account_direct_debits", "list_direct_debits"],
+      "implemented_by_all_models": false,
+      "core_workload_included": false,
+      "note": "The permission is valid in the specification and remains in the three source profiles. It is excluded from the core workload because the current Resource Servers do not implement its endpoints."
+    }
+  },
+  "operation_mapping": {
+    "list_accounts": {
+      "method": "GET",
+      "path": "/open-banking/v3.1/aisp/accounts",
+      "required_permission": "ReadAccountsDetail"
+    },
+    "get_account": {
+      "method": "GET",
+      "path_template": "/open-banking/v3.1/aisp/accounts/{account_id}",
+      "required_permission": "ReadAccountsDetail"
+    },
+    "get_balances": {
+      "method": "GET",
+      "path_template": "/open-banking/v3.1/aisp/accounts/{account_id}/balances",
+      "required_permission": "ReadBalances"
+    },
+    "get_transactions": {
+      "method": "GET",
+      "path_template": "/open-banking/v3.1/aisp/accounts/{account_id}/transactions",
+      "required_permissions": ["ReadTransactionsDetail", "ReadTransactionsCredits"],
+      "query_parameters": ["fromBookingDateTime", "toBookingDateTime", "page", "page-size"]
+    },
+    "get_account_direct_debits": {
+      "method": "GET",
+      "specified_path_template": "/accounts/{account_id}/direct-debits",
+      "required_permission": "ReadDirectDebits",
+      "implementation_status": "missing_in_all_three_current_resource_servers",
+      "core_workload_included": false
+    },
+    "list_direct_debits": {
+      "method": "GET",
+      "specified_path": "/direct-debits",
+      "required_permission": "ReadDirectDebits",
+      "implementation_status": "missing_in_all_three_current_resource_servers",
+      "core_workload_included": false
+    }
+  },
+  "workloads": {
+    "medium": {
+      "fixture": "evaluation/fixtures/data/workload_medium.json",
+      "fixture_sha256": "5ab7741a7c31144311a19828f2160b9cf8607fd8fe064be711948f89bb6aa863",
+      "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+      "permissions": ["ReadAccountsDetail", "ReadBalances", "ReadTransactionsCredits", "ReadTransactionsDetail"],
+      "services": ["accounts", "balances", "transactions"],
+      "projected_fields": ["account_id", "amount", "balance", "date", "operation", "type"],
+      "history_days": 90,
+      "page_size": 25,
+      "expected_operation_plan": ["list_accounts", "get_account", "get_balances", "get_transactions"],
+      "transaction_filter": "credit"
+    }
+  },
+  "retired_workloads": {
+    "note": "Small and Large were retired as a comparison dimension by decision DEC-023 (2026-09-22); Medium is now the one workload used across E-COST, E-ARTIFACT, and E-LOAD. Their fixture files remain on disk (evaluation/fixtures/data/workload_small.json, workload_large.json) but are unreferenced by the active protocol.",
+    "small_fixture_sha256": "c77e51ca540981c8bb4850acd39a38b309603eb7e45cec2623ed7ebbc19da04c",
+    "large_fixture_sha256": "1565c1bdb9890dc7e54f98637be927833de17c82bc930c1864ac4f9046f7d4be"
+  },
+  "freeze_requirements": [
+    "Record deterministic expected records and expected response fields for every protected operation.",
+    "Verify the same operation plan and business result against all three running models.",
+    "Recompute fixture digests after any fixture change."
+  ]
+}

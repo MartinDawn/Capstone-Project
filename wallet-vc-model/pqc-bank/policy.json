@@ -1,0 +1,18 @@
+{
+  "policies": [
+    {
+      "name": "fapi-2-policy",
+      "description": "FAPI 2.0 Security Profile enforcement policy",
+      "enabled": true,
+      "conditions": [
+        {
+          "condition": "any-client",
+          "configuration": {}
+        }
+      ],
+      "profiles": [
+        "fapi-2-security-profile"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+# ============================================================
+# Traditional FAPI 2.0 Baseline (B0-C0) - Bank Infrastructure
+# Deployed on Bank VM
+# ============================================================
+# Services:
+#   - postgres-fapi: Database for Keycloak
+#   - keycloak-fapi: FAPI 2.0 Auth Server (internal; behind bank-gateway)
+#   - resource-server-fapi: Banking API (internal; behind bank-gateway)
+# ============================================================
+
+services:
+  # -------------------------------------------------------------
+  # 1. PostgreSQL Database for Keycloak
+  # -------------------------------------------------------------
+  postgres-fapi:
+    image: postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246
+    container_name: postgres-fapi
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_password
+    volumes:
+      - postgres_fapi_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    cpus: 1.0
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 256M
+    networks:
+      - fapi-network
+
+  # -------------------------------------------------------------
+  # 2. Keycloak Authorization Server (FAPI 2.0 — HTTPS)
+  # -------------------------------------------------------------
+  keycloak-fapi:
+    image: quay.io/keycloak/keycloak:24.0.5@sha256:f8ade94c1d0ad2f2fa7734a455fee5392764f402c43ca35e9af6bf63a2541dc9
+    container_name: keycloak-fapi
+    command: start-dev --import-realm
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres-fapi:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_HTTP_PORT: 8080
+      KC_HTTPS_PORT: 8443
+      KC_HTTPS_CERTIFICATE_FILE: /opt/keycloak/conf/certs/keycloak.crt
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /opt/keycloak/conf/certs/keycloak.key
+      KC_HOSTNAME_URL: https://${BANK_HOST:-${KEYCLOAK_HOST:-localhost}}:8443
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_STRICT_HTTPS: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_HTTPS_CLIENT_AUTH: "request"
+      KC_TRUSTSTORE_PATHS: /opt/keycloak/conf/certs/ca.crt
+      KC_PROXY_HEADERS: xforwarded
+      KC_SPI_X509CERT_LOOKUP_PROVIDER: nginx
+      KC_SPI_X509CERT_LOOKUP_NGINX_SSL_CLIENT_CERT: ssl-client-cert
+      KC_SPI_X509CERT_LOOKUP_NGINX_SSL_CERT_CHAIN_PREFIX: USE_HEADER
+      KC_SPI_X509CERT_LOOKUP_NGINX_CERTIFICATE_KEY_SIZE: 384
+    volumes:
+      - ./auth-server/realm-config:/opt/keycloak/data/import:ro
+      - ./certs:/opt/keycloak/conf/certs:ro
+    depends_on:
+      postgres-fapi:
+        condition: service_healthy
+    cpus: 1.5
+    mem_limit: 1536m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 1536M
+    networks:
+      - fapi-network
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080 && echo -e 'GET /realms/master HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && cat <&3 | grep -q '200 OK'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  # -------------------------------------------------------------
+  # 3. Banking Resource Server (Berka Dataset — HTTPS)
+  # -------------------------------------------------------------
+  resource-server-fapi:
+    build:
+      context: ./resource-server
+      dockerfile: Dockerfile
+    container_name: resource-server-fapi
+    environment:
+      PORT: 4000
+      KEYCLOAK_URL: http://keycloak-fapi:8080
+      REALM: traditional-fapi
+      RS_AUDIENCE: resource-server-client
+      NODE_EXTRA_CA_CERTS: /app/certs/ca.crt
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+      TLS_KEY_PATH: /nonexistent
+      TLS_CERT_PATH: /nonexistent
+      TLS_CA_PATH: /app/certs/ca.crt
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST:-${BANK_HOST:-localhost}}
+    volumes:
+      - ./certs:/app/certs:ro
+      - ./resource-server/server.js:/app/server.js
+      - ./resource-server/berka.db:/app/berka.db
+    depends_on:
+      - keycloak-fapi
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - fapi-network
+
+  # -------------------------------------------------------------
+  # Bank Gateway (nginx :8443) - the only published Bank port.
+  # Routes to Keycloak (HTTP) and the Resource Server (HTTP) by path.
+  # -------------------------------------------------------------
+  bank-gateway:
+    image: nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    container_name: fapi_bank_gateway
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./tls-proxy/bank-gateway.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/certs:ro
+    depends_on:
+      keycloak-fapi:
+        condition: service_healthy
+      resource-server-fapi:
+        condition: service_started
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - fapi-network
+
+networks:
+  fapi-network:
+    driver: bridge
+
+volumes:
+  postgres_fapi_data:

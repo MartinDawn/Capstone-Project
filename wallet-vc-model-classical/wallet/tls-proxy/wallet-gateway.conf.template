@@ -1,0 +1,75 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+    client_header_buffer_size 64k;
+    large_client_header_buffers 4 64k;
+    proxy_buffer_size 128k;
+    proxy_buffers 4 256k;
+    proxy_busy_buffers_size 256k;
+
+    # ── 1. Browser UI Ingress (:3443) ────────────────────────────
+    server {
+        listen 3443 ssl;
+        server_name localhost;
+
+        ssl_certificate     /certs/browser.crt;
+        ssl_certificate_key /certs/browser.key;
+        ssl_protocols       TLSv1.2 TLSv1.3;
+
+        location / {
+            proxy_pass http://wallet:5000;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Port $server_port;
+            proxy_set_header X-Forwarded-Host $http_host;
+            add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
+        }
+    }
+
+    # ── 2. Outbound to Bank (:18443 -> Bank :8443 via ECDSA mTLS) ─
+    server {
+        listen 18443;
+        server_name tls-wallet-bank;
+
+        location / {
+            proxy_pass https://${BANK_HOST}:8443;
+            
+            # mTLS Client Authentication to Bank Server Proxy
+            proxy_ssl_name                tls-server-proxy;
+            proxy_ssl_server_name         on;
+            proxy_ssl_certificate         /certs/wallet.crt;
+            proxy_ssl_certificate_key     /certs/wallet.key;
+            proxy_ssl_trusted_certificate /certs/ca.crt;
+            proxy_ssl_verify              on;
+            proxy_ssl_protocols           TLSv1.3 TLSv1.2;
+
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+
+    # ── 3. Outbound to TPP (:16443 -> TPP :6443 via Classical TLS) ──
+    server {
+        listen 16443;
+        server_name tls-wallet-tpp;
+
+        location / {
+            proxy_pass https://${TPP_HOST}:6443;
+
+            proxy_ssl_name                "Classical TPP Client";
+            proxy_ssl_server_name         on;
+            proxy_ssl_trusted_certificate /certs/ca.crt;
+            proxy_ssl_verify              on;
+            proxy_ssl_protocols           TLSv1.3 TLSv1.2;
+
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+}

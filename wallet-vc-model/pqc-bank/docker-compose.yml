@@ -1,0 +1,175 @@
+# ============================================================
+# Post-Quantum Cryptography (PQC) - Bank Infrastructure
+# ============================================================
+# Services:
+#   - postgres: Database for Keycloak
+#   - keycloak: OIDC/FAPI 2.0 Auth Server with Custom PQC SPI
+#   - bank-issuer: OID4VCI Credential Issuer (Spring Boot)
+#   - resource-server: Banking API Resource Server (Node.js)
+#   - oqs-server-proxy: OpenQuantumSafe Nginx Reverse Proxy (PQC mTLS :8443)
+# ============================================================
+
+services:
+
+  # ── Keycloak Database ──────────────────────────────────────────
+  postgres:
+    image: postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246
+    container_name: pqc_postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bank_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    cpus: 1.0
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 256M
+
+  # ── Authorization Server (Keycloak + PQC SPI) ─────────────────
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.6.4@sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4
+    container_name: pqc_keycloak
+    user: root
+    environment:
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=password
+      - KC_HOSTNAME_URL=http://${BANK_HOST:-${BANK_HOST_OR_IP:-localhost}}:8080
+      - KC_HOSTNAME_STRICT=false
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_TRUSTSTORE_PATHS=/opt/keycloak/conf/certs/ca.crt
+      - KC_FEATURES=preview
+      - KC_LOG_LEVEL=INFO
+      - KC_HTTP_ENABLED=true
+      - KC_HTTPS_CLIENT_AUTH=request
+      - KC_PROXY_HEADERS=xforwarded
+      - KC_SPI_X509CERT_LOOKUP_PROVIDER=pqc-nginx
+      - KC_SPI_X509CERT_LOOKUP_PQC_NGINX_SSL_CLIENT_CERT=ssl-client-cert
+      - KC_SPI_TRUSTSTORE_FILE_FILE=/opt/keycloak/conf/certs/truststore.jks
+      - KC_SPI_TRUSTSTORE_FILE_PASSWORD=password
+      - DEFAULT_PQC_ALGORITHM=P384_MLDSA65
+      - QUARKUS_LOG_CATEGORY__ORG_KEYCLOAK__LEVEL=INFO
+      - QUARKUS_LOG_CATEGORY__ORG_KEYCLOAK_AUTHENTICATION_AUTHENTICATORS_CLIENT__LEVEL=INFO
+      - QUARKUS_LOG_CATEGORY__ORG_KEYCLOAK_PROTOCOL_OIDC_UTILS__LEVEL=INFO
+    volumes:
+      - ./auth_server/realm-config/fapi-demo-realm.json:/opt/keycloak/data/import/fapi-demo-realm.json:ro
+      - ./auth_server/providers:/opt/keycloak/providers
+      - ./auth_server/certs:/opt/keycloak/conf/certs
+      - ./auth_server/patches/org.keycloak.keycloak-services-26.6.4.jar:/opt/keycloak/lib/lib/main/org.keycloak.keycloak-services-26.6.4.jar:ro
+    command: start-dev --import-realm
+    depends_on:
+      postgres:
+        condition: service_healthy
+    cpus: 1.0
+    mem_limit: 1024m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    networks:
+      - bank_network
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080 && echo -e 'GET /realms/master HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && cat <&3 | grep -q '200 OK'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  # ── OQS Reverse Proxy (PQC mTLS Termination) ─────────────────
+  oqs-server-proxy:
+    image: openquantumsafe/nginx:latest@sha256:beb0d25462d6deb7de3d16a47724761951197a2e74f0ddb451a9e8de293ed493
+    container_name: pqc_oqs_server_proxy
+    command: ["nginx", "-c", "/etc/nginx/nginx.conf", "-g", "daemon off;"]
+    ports:
+      - "8443:8443"
+      - "9443:9443"
+    volumes:
+      - ./oqs-proxy/server-proxy.conf:/etc/nginx/nginx.conf:ro
+      - ./oqs-proxy/certs:/certs:ro
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - bank_network
+
+  # ── OID4VCI Bank Issuer ──────────────────────────────────────
+  bank-issuer:
+    build: ./bank-issuer
+    container_name: pqc_bank_issuer
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-default}
+      - PORT=7000
+      - ISSUER_URL=http://bank-issuer:7000
+      - KEYCLOAK_URL=http://keycloak:8080
+      - REALM=fapi-demo
+      - ISSUANCE_BINDING_STORE_PATH=/app/state/issuance-bindings.json
+      - SIGNING_KEY_STORE_PATH=/app/state/bank-hybrid-signing-key.json
+      - TYPED_AUTHORITY_EVALUATION_TIME=${TYPED_AUTHORITY_EVALUATION_TIME:-0}
+    volumes:
+      - issuance_binding_data:/app/state
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    cpus: 1.5
+    mem_limit: 1536m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 1536M
+    networks:
+      - bank_network
+
+  # ── Banking Resource Server ──────────────────────────────────
+  resource-server:
+    build: ./resource-server
+    container_name: pqc_resource_server
+    environment:
+      - NODE_OPTIONS=--max-http-header-size=65536
+      - KEYCLOAK_URL=http://keycloak:8080
+      - BANK_ISSUER_URL=http://bank-issuer:7000
+      - REALM=fapi-demo
+      - PORT=4000
+    depends_on:
+      keycloak:
+        condition: service_healthy
+      bank-issuer:
+        condition: service_started
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - bank_network
+
+volumes:
+  postgres_data:
+  issuance_binding_data:
+
+networks:
+  bank_network:
+    driver: bridge

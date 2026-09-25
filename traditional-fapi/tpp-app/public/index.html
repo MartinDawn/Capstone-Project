@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TPP Application — Traditional FAPI 2.0</title>
+  <meta name="description"
+    content="Third Party Provider portal powered by Centralized OAuth 2.0 / FAPI 2.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+      </div>
+      <div>
+        <div style="display:flex; align-items:center;">
+          <span class="brand-title">TPP Application</span>
+          <span class="badge-arch">Traditional FAPI 2.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <div class="status-indicator disconnected" id="connectionStatus">
+        <span class="status-dot"></span>
+        <span id="statusLabel">Disconnected</span>
+      </div>
+      <button class="btn btn-outline btn-sm hidden" id="disconnectBtn" onclick="resetSession()">Disconnect</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Architecture Banner -->
+    <section class="banner">
+      <div class="banner-tag">TRADITIONAL 3-PARTY OPEN BANKING MODEL</div>
+      <h1 class="banner-title">Third-Party Provider (TPP) Portal</h1>
+      <p class="banner-desc">
+        Demonstrating Open Banking client interactions powered by <strong>OAuth 2.0 / FAPI 2.0</strong>.
+        Select any Open Banking UK service below to trigger a Pushed Authorization Request (PAR) and redirect to the
+        Bank Authorization Server (Keycloak) for consent approval.
+      </p>
+      <div class="banner-chips">
+        <span class="chip">3-Party Architecture: TPP ↔ Keycloak (AS) ↔ Resource Server (RS)</span>
+        <span class="chip">FAPI 2.0 Security: PAR + PKCE S256 + PS256 JWT</span>
+        <span class="chip">Standard Authorization: OAuth 2.0 Scopes</span>
+        <span class="chip">Specification: Open Banking UK v3.1/v4.0 (AISP & PISP)</span>
+      </div>
+    </section>
+
+    <!-- Services Catalog (Landing State) -->
+    <section id="servicesCatalogSection">
+      <h2 class="section-title">Open Banking UK Services</h2>
+      <p class="section-subtitle">Select a service to initiate an authorization request with Keycloak</p>
+
+      <div class="services-grid">
+        <!-- Service 1: AISP Accounts & Balances -->
+        <div class="service-card">
+          <div>
+            <div class="service-header">
+              <div class="service-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+              </div>
+              <div>
+                <div class="service-tag" style="color: #818cf8;">Account Information (AISP)</div>
+                <div class="service-name">Accounts & Balances</div>
+              </div>
+            </div>
+            <p class="service-desc">Retrieve and aggregate user bank accounts with real-time balance inquiries using standard OAuth scopes.</p>
+            <div class="service-permissions">
+              <div style="margin-bottom: 4px; color: var(--text-muted);">Required Permissions (Open Banking UK):</div>
+              <span class="perm-badge">ReadAccountsDetail</span>
+              <span class="perm-badge">ReadBalances</span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-w-full" onclick="startServiceFlow('accounts')">
+            <span>Authorize & View Accounts →</span>
+          </button>
+        </div>
+
+        <!-- Service 2: AISP Analytics & History -->
+        <div class="service-card">
+          <div>
+            <div class="service-header">
+              <div class="service-icon" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+              </div>
+              <div>
+                <div class="service-tag" style="color: #22d3ee;">Transaction History (AISP)</div>
+                <div class="service-name">Spending Analytics</div>
+              </div>
+            </div>
+            <p class="service-desc">Analyze historical transaction ledger with account filtering and standard transaction consent scopes.</p>
+            <div class="service-permissions">
+              <div style="margin-bottom: 4px; color: var(--text-muted);">Required Permissions (Open Banking UK):</div>
+              <span class="perm-badge">ReadAccountsDetail</span>
+              <span class="perm-badge">ReadBalances</span>
+              <span class="perm-badge">ReadTransactionsDetail</span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-w-full" style="background: linear-gradient(135deg, #0284c7, #06b6d4);"
+            onclick="startServiceFlow('analytics')">
+            <span>Authorize & View Analytics →</span>
+          </button>
+        </div>
+
+        <!-- Service 3: PISP Domestic Payments -->
+        <div class="service-card">
+          <div>
+            <div class="service-header">
+              <div class="service-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </div>
+              <div>
+                <div class="service-tag" style="color: #34d399;">Payment Initiation (PISP)</div>
+                <div class="service-name">Domestic Transfer</div>
+              </div>
+            </div>
+            <p class="service-desc">Initiate authenticated single immediate transfers with standard payment scopes.</p>
+            <div class="service-permissions">
+              <div style="margin-bottom: 4px; color: var(--text-muted);">Required Permissions (Open Banking UK):</div>
+              <span class="perm-badge">CreateDomesticPayment</span>
+              <span class="perm-badge">ReadAccountsDetail</span>
+            </div>
+          </div>
+          <button class="btn btn-success btn-w-full" onclick="startServiceFlow('payments')">
+            <span>Authorize & Initiate Transfer →</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connected Banking Dashboard Section -->
+    <section id="dashboardSection" class="hidden">
+
+      <!-- Security & Overhead Inspector Panel -->
+      <div class="inspector-card">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:0.75rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <h3 style="font-size:1rem; font-weight:700;">Security & Overhead Inspector (Traditional FAPI 2.0)</h3>
+          </div>
+          <span class="badge-arch"
+            style="background:rgba(99,102,241,0.15); color:#a5b4fc; border-color:rgba(99,102,241,0.3);">FAPI 2.0 PAR + PKCE Verified</span>
+        </div>
+
+        <div class="inspector-grid">
+          <div class="inspector-metric">
+            <div class="metric-label">Cryptographic Scheme</div>
+            <div class="metric-value">PS256 / RSA</div>
+            <div class="metric-sub">Keycloak RSA-PSS (2048-bit)</div>
+          </div>
+          <div class="inspector-metric">
+            <div class="metric-label">Token Artifact Size</div>
+            <div class="metric-value" id="inspectTokenSize">~1,250 Bytes</div>
+            <div class="metric-sub">FAPI 2.0 Bearer JWT</div>
+          </div>
+          <div class="inspector-metric">
+            <div class="metric-label">Protocol & Grant</div>
+            <div class="metric-value" style="font-size:0.95rem;">Auth Code + PAR + PKCE</div>
+            <div class="metric-sub">Standard OAuth 2.0 Scopes</div>
+          </div>
+          <div class="inspector-metric">
+            <div class="metric-label">Verification Round-Trips</div>
+            <div class="metric-value">2 (Keycloak + RS)</div>
+            <div class="metric-sub">Token Exchange + Resource Call</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Service View Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <div>
+          <h2 class="section-title" id="activeServiceTitle">Banking Resources</h2>
+          <p class="section-subtitle" id="activeServiceDesc">Protected resources accessed via Open Banking UK standard
+            endpoints</p>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn btn-outline btn-sm" onclick="fetchAccounts()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+            </svg>
+            Refresh
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="toggleDebugLogs()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            Inspector Logs
+          </button>
+        </div>
+      </div>
+
+      <!-- Accounts Grid -->
+      <div class="account-cards-grid" id="accountsGrid"></div>
+
+      <!-- Transactions Box -->
+      <div id="transactionsContainer">
+        <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:0.75rem;">Account Transactions (Open Banking UK
+          AISP)</h3>
+        <div class="table-box">
+          <table>
+            <thead>
+              <tr>
+                <th>Transaction ID</th>
+                <th>Booking Date</th>
+                <th>Description</th>
+                <th>Indicator</th>
+                <th>Amount</th>
+                <th>Balance After</th>
+              </tr>
+            </thead>
+            <tbody id="transactionsTbody">
+              <tr>
+                <td colspan="6" style="text-align:center; color:var(--text-muted);">Select an account above to load
+                  transactions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Domestic Payment Initiation Card (When PISP active) -->
+      <div id="paymentSection" class="hidden"
+        style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-top:1.5rem;">
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:#34d399;">Domestic Payment Transfer
+          (Open Banking UK PISP)</h3>
+        <div
+          style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-size:0.75rem; color:var(--text2); margin-bottom:0.25rem;">Debtor
+              Account</label>
+            <select id="payDebtorAccount"
+              style="width:100%; background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:0.5rem; border-radius:6px;"></select>
+          </div>
+          <div>
+            <label style="display:block; font-size:0.75rem; color:var(--text2); margin-bottom:0.25rem;">Creditor
+              Account</label>
+            <input type="text" id="payCreditorAccount" value="987654321"
+              style="width:100%; background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:0.5rem; border-radius:6px;" />
+          </div>
+          <div>
+            <label style="display:block; font-size:0.75rem; color:var(--text2); margin-bottom:0.25rem;">Amount
+              (CZK)</label>
+            <input type="number" id="payAmount" value="500.00"
+              style="width:100%; background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:0.5rem; border-radius:6px;" />
+          </div>
+        </div>
+        <button class="btn btn-success" onclick="submitDomesticPayment()">Execute Domestic Payment</button>
+        <div id="paymentResult" style="margin-top:1rem;" class="hidden"></div>
+      </div>
+
+      <!-- Protocol Debug Logs (Collapsible) -->
+      <div id="debugLogsSection" class="hidden" style="margin-top:2rem;">
+        <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem;">Protocol Inspection Traces & Policy Enforcement</h3>
+        <div style="margin-bottom:1rem;">
+          <h4 style="font-size:0.85rem; color:var(--text2); margin-bottom:0.25rem;">Granted OAuth 2.0 Scopes</h4>
+          <div class="code-box" id="grantedScopes">Loading scopes...</div>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <h4 style="font-size:0.85rem; color:var(--text2); margin-bottom:0.25rem;">Decoded Access Token Claims (JWT)</h4>
+          <div class="code-box" id="tokenClaims">Loading claims...</div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Flow & Approval Modal -->
+  <div class="modal-overlay hidden" id="flowModal">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h2 style="font-size:1.25rem; font-weight:700;" id="flowModalTitle">Service Authorization Flow</h2>
+        <button onclick="closeModal()"
+          style="background:none; border:none; color:var(--text2); cursor:pointer; font-size:1.25rem;">✕</button>
+      </div>
+
+      <!-- 4-Step Stepper -->
+      <div class="stepper">
+        <div class="step-item active" id="step1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Consent Request</div>
+        </div>
+        <div class="step-item" id="step2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Bank Approval</div>
+        </div>
+        <div class="step-item" id="step3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Token Exchange</div>
+        </div>
+        <div class="step-item" id="step4">
+          <div class="step-circle">4</div>
+          <div class="step-label">Access Bank</div>
+        </div>
+      </div>
+
+      <!-- Step Content Area -->
+      <div id="flowStepContent">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

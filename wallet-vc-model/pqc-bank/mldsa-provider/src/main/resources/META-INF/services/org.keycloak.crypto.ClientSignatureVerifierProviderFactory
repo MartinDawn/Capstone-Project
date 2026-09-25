@@ -1,0 +1,4 @@
+com.bk.research.pqc.provider.ES384HybridClientSignatureVerifierProviderFactory
+com.bk.research.pqc.provider.ES256HybridClientSignatureVerifierProviderFactory
+com.bk.research.pqc.provider.PS256HybridClientSignatureVerifierProviderFactory
+com.bk.research.pqc.provider.EdDSAHybridClientSignatureVerifierProviderFactory

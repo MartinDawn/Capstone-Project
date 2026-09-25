@@ -1,0 +1,45 @@
+# Operating-system and editor state
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local configuration and secrets
+**/.env
+!.env.example
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/*.truststore
+
+# Language and build outputs
+**/node_modules/
+**/target/
+**/build/
+**/dist/
+**/__pycache__/
+**/.mypy_cache/
+**/.pytest_cache/
+**/*.class
+**/*.py[cod]
+
+# Runtime and diagnostic artifacts
+**/*.log
+**/*.pid
+**/*.tmp
+**/*.swp
+
+# Evaluation evidence (per-family run packages)
+evaluation/evidence/
+
+# Generated run state
+evaluation/state/*
+!evaluation/state/.gitkeep
+
+# Analysis outputs (published separately with the dataset)
+evaluation/results/
+
+# Large deployment bundle, not source; rebuild instead of committing the binary
+vdam-deploy.tar.gz

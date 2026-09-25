@@ -1,0 +1,39 @@
+{
+  "tpp_registry": {
+    "tpp-demo-client": {
+      "status": "ACTIVE",
+      "max_scopes": [
+        "accounts:read",
+        "transfers:read",
+        "transfers:write",
+        "profile:read",
+        "transactions:read",
+        "ReadAccountsBasic",
+        "ReadAccountsDetail",
+        "ReadBalances",
+        "ReadTransactionsBasic",
+        "ReadTransactionsDetail",
+        "ReadTransactionsCredits",
+        "ReadTransactionsDebits",
+        "CreateDomesticPayment"
+      ],
+      "registered_at": "2024-01-01"
+    }
+  },
+  "master_scope_catalog": [
+    "accounts:read",
+    "transfers:read",
+    "transfers:write",
+    "profile:read",
+    "transactions:read",
+    "ReadAccountsBasic",
+    "ReadAccountsDetail",
+    "ReadBalances",
+    "ReadTransactionsBasic",
+    "ReadTransactionsDetail",
+    "ReadTransactionsCredits",
+    "ReadTransactionsDebits",
+    "CreateDomesticPayment"
+  ],
+  "version": "2.0.0-classical"
+}

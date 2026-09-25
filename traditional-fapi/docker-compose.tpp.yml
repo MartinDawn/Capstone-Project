@@ -1,0 +1,72 @@
+# ============================================================
+# Traditional FAPI 2.0 Baseline (B0-C0) - TPP Application
+# Deployed on TPP VM
+# ============================================================
+# Services:
+#   - tpp-fapi: TPP Client Application (internal :3000)
+#   - tpp-gateway: nginx (:4443 browser UI, :6443 API) - the only published ports
+# ============================================================
+
+services:
+  tpp-fapi:
+    build:
+      context: ./tpp-app
+      dockerfile: Dockerfile
+    container_name: tpp-fapi
+    environment:
+      PORT: 3000
+      KEYCLOAK_PUBLIC_URL: https://${BANK_HOST:-localhost}:8443
+      KEYCLOAK_INTERNAL_URL: https://${BANK_HOST:-localhost}:8443
+      REALM: traditional-fapi
+      CLIENT_ID: tpp-client
+      CLIENT_SECRET: tpp-client-secret-key-12345
+      REDIRECT_URI: https://${TPP_HOST:-localhost}:4443/callback
+      RESOURCE_SERVER_URL: https://${BANK_HOST:-localhost}:8443
+      NODE_EXTRA_CA_CERTS: /app/certs/ca.crt
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+      TLS_KEY_PATH: /app/certs/tpp.key
+      TLS_CERT_PATH: /app/certs/tpp.crt
+      CONFORMANCE_TEST_MODE: ${CONFORMANCE_TEST_MODE:-true}
+    volumes:
+      - ./certs:/app/certs:ro
+      - ./tpp-app/public:/app/public
+      - ./tpp-app/server.js:/app/server.js
+    cpus: 1.0
+    mem_limit: 1024m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - fapi-tpp-network
+
+  # -------------------------------------------------------------
+  # TPP Gateway (nginx - Browser UI :4443, API :6443) - the only published TPP ports
+  # -------------------------------------------------------------
+  tpp-gateway:
+    image: nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    container_name: fapi_tpp_gateway
+    ports:
+      - "4443:4443"
+      - "6443:6443"
+    volumes:
+      - ./tls-proxy/tpp-gateway.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/certs:ro
+    depends_on:
+      - tpp-fapi
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - fapi-tpp-network
+
+networks:
+  fapi-tpp-network:
+    driver: bridge

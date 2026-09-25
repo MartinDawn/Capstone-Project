@@ -1,0 +1,85 @@
+{
+  "version": 3,
+  "master_scope_catalog": [
+    "accounts:read",
+    "transfers:read",
+    "transfers:write",
+    "profile:read",
+    "transactions:read",
+    "ReadAccountsBasic",
+    "ReadAccountsDetail",
+    "ReadBalances",
+    "ReadTransactionsBasic",
+    "ReadTransactionsDetail",
+    "ReadTransactionsCredits",
+    "ReadTransactionsDebits",
+    "CreateDomesticPayment",
+    "ReadDirectDebits"
+  ],
+  "account_type_entitlements": {
+    "REGULAR_USER": [
+      "accounts:read",
+      "transfers:read",
+      "transfers:write",
+      "profile:read",
+      "transactions:read",
+      "ReadAccountsBasic",
+      "ReadAccountsDetail",
+      "ReadBalances",
+      "ReadTransactionsBasic",
+      "ReadTransactionsDetail",
+      "ReadTransactionsCredits",
+      "ReadTransactionsDebits",
+      "CreateDomesticPayment",
+      "ReadDirectDebits"
+    ],
+    "VIP_USER": [
+      "accounts:read",
+      "transfers:read",
+      "transfers:write",
+      "profile:read",
+      "transactions:read",
+      "ReadAccountsBasic",
+      "ReadAccountsDetail",
+      "ReadBalances",
+      "ReadTransactionsBasic",
+      "ReadTransactionsDetail",
+      "ReadTransactionsCredits",
+      "ReadTransactionsDebits",
+      "CreateDomesticPayment",
+      "ReadDirectDebits"
+    ],
+    "VIEW_ONLY_USER": [
+      "accounts:read",
+      "transactions:read",
+      "profile:read",
+      "ReadAccountsBasic",
+      "ReadAccountsDetail",
+      "ReadBalances",
+      "ReadTransactionsBasic",
+      "ReadTransactionsDetail"
+    ]
+  },
+  "registered_tpps": {
+    "tpp-demo-client": {
+      "name": "Classical TPP Demo Client",
+      "status": "ACTIVE",
+      "max_scopes": [
+        "accounts:read",
+        "transfers:read",
+        "transfers:write",
+        "profile:read",
+        "transactions:read",
+        "ReadAccountsBasic",
+        "ReadAccountsDetail",
+        "ReadBalances",
+        "ReadTransactionsBasic",
+        "ReadTransactionsDetail",
+        "ReadTransactionsCredits",
+        "ReadTransactionsDebits",
+        "CreateDomesticPayment",
+        "ReadDirectDebits"
+      ]
+    }
+  }
+}

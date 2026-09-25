@@ -1,0 +1,14 @@
+{
+  "workload": "small",
+  "accounts_count": 1,
+  "permissions_count": 2,
+  "history_days_window": 7,
+  "max_page_size": 10,
+  "accounts": ["ACC-001"],
+  "services": ["accounts", "balances"],
+  "permissions": ["ReadAccountsDetail", "ReadBalances"],
+  "data_fields": ["account_id", "balance"],
+  "validity": {"start": 1788500000, "end": 1789104800},
+  "oracle_permitted": true,
+  "oracle_reason": "PERMIT"
+}

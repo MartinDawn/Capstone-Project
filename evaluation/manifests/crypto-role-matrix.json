@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cryptographic Role Coverage Matrix",
+  "version": "2.0.0",
+  "updated_at": "2026-09-15T00:00:00Z",
+  "normative_reference": "docs/EVALUATION_PROTOCOL.md and current implementation source",
+  "matrix_policy": "Each row declares cryptographic primitives, key formats, providers, and verification status across all three baselines. Hybrid roles strictly require Accept_hybrid = Verify_C(m, sigma_C, PK_C) AND Verify_Q(m, sigma_Q, PK_Q). Classical fallback in hybrid roles is prohibited.",
+  "status_enum": [
+    "classical",
+    "hybrid",
+    "unsupported",
+    "not-applicable"
+  ],
+  "roles": [
+    {
+      "role_id": "CR-01",
+      "role_name": "TLS key establishment",
+      "producer_consumer": "Every TLS peer pair (TPP <-> AS/DAS, Wallet <-> DAS, TPP <-> RS)",
+      "requirement_hybrid": "Negotiate approved hybrid group/parameters; fail closed on downgrade when policy requires hybrid.",
+      "baselines": {
+        "B0-C0": {
+          "status": "classical",
+          "algorithm": "ECDHE-P256 / TLS 1.3",
+          "provider": "OpenSSL / Node.js tls / Java 17 SunJSSE",
+          "key_ids": ["tls-server-cert", "tls-client-cert"],
+          "verifier_location": "Reverse Proxy (nginx) / TLS termination",
+          "evidence": "mTLS handshake enforced on port 8443 / 4000"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384 (NIST P-384 / secp384r1)",
+          "provider": "OpenSSL 3.0 / Nginx mTLS / Java SunJSSE",
+          "key_ids": ["classical-bank-tls", "classical-tpp-tls", "classical-wallet-tls"],
+          "verifier_location": "Nginx mTLS boundary / reverse proxy",
+          "evidence": "Nginx ssl-client-cert header forwarding with SHA-256 base64url thumbprint extraction"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "X25519MLKEM768 (ECDH X25519 + ML-KEM-768 via OpenQuantumSafe liboqs)",
+          "provider": "OQS-OpenSSL 3 / oqs-provider 0.6.0 / OpenResty",
+          "key_ids": ["pqc-bank-tls", "pqc-tpp-tls", "pqc-wallet-tls"],
+          "verifier_location": "oqs-tpp-outbound, oqs-wallet-outbound, oqs-bank-inbound",
+          "evidence": "PQC reverse proxy containers running OQS TLS 1.3 with X25519MLKEM768 group"
+        }
+      }
+    },
+    {
+      "role_id": "CR-02",
+      "role_name": "TLS/certificate authentication",
+      "producer_consumer": "Peer, CA / path validator",
+      "requirement_hybrid": "Leaf, intermediate, root certificates and handshake signature coverage declared; PQ KEM does not convert classical cert to PQ cert.",
+      "baselines": {
+        "B0-C0": {
+          "status": "classical",
+          "algorithm": "ECDSA-with-SHA256 (NIST P-256)",
+          "provider": "OpenSSL PKI CA",
+          "key_ids": ["ca.crt", "client.crt"],
+          "verifier_location": "Nginx client-ca-cert / Keycloak mTLS",
+          "evidence": "Valid client certificate validation on reverse proxy"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ECDSA-with-SHA384 (NIST P-384 / RFC 5280)",
+          "provider": "OpenSSL Classical CA",
+          "key_ids": ["classical-ca.crt", "tpp.crt", "wallet.crt", "bank.crt"],
+          "verifier_location": "Nginx client cert verification + backend cert thumbprint parsing",
+          "evidence": "DER SHA-256 base64url thumbprint verified against token cnf.x5t#S256"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Hybrid P-384 + ML-DSA-65 (Dual-signed certificates via OQS / OpenSSL)",
+          "provider": "OQS-Provider CA / OpenResty mTLS",
+          "key_ids": ["pqc-ca.crt", "pqc-tpp.crt", "pqc-wallet.crt"],
+          "verifier_location": "oqs-nginx mTLS boundary / Java client cert validation",
+          "evidence": "ssl-client-cert header decoded, DER extracted, SHA-256 thumbprint bound to hybrid tokens"
+        }
+      }
+    },
+    {
+      "role_id": "CR-03",
+      "role_name": "F1 Holder-key proof",
+      "producer_consumer": "Wallet -> DAS",
+      "requirement_hybrid": "Proof of Possession (PoP) for the entire Holder key set to be bound; classical-only half is prohibited.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None (B0 uses standard OAuth authorization code flow)",
+          "provider": "N/A",
+          "key_ids": [],
+          "verifier_location": "N/A",
+          "evidence": "B0 authorization flow does not issue decentralized credentials"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ECDSA P-256 (ES256) JWS Proof-of-Possession",
+          "provider": "Nimbus JOSE + Java Crypto",
+          "key_ids": ["wallet-classical-ec-key"],
+          "verifier_location": "Bank Issuer /credential endpoint",
+          "evidence": "CredentialRequest proof.jwt verified against holder JWK"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature: MLDSA65-ECDSA-P384-SHA512 (NIST FIPS 204 + Curve P-384)",
+          "provider": "Nimbus JOSE + OQS Signer / Sidecar",
+          "key_ids": ["wallet-hybrid-key", "p384_mldsa65"],
+          "verifier_location": "PQC Bank Issuer /credential endpoint",
+          "evidence": "Dual-signature PoP proof in CredentialRequest verified with Verify_C AND Verify_Q"
+        }
+      }
+    },
+    {
+      "role_id": "CR-04",
+      "role_name": "Scope VC issuer",
+      "producer_consumer": "DAS -> Wallet / DAS",
+      "requirement_hybrid": "Dual signatures with authoritative bank issuer key set; verified independently at F4.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None",
+          "provider": "N/A",
+          "key_ids": [],
+          "verifier_location": "N/A",
+          "evidence": "Traditional FAPI does not use Scope VCs"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ES256 (NIST P-256 SD-JWT, RFC 9901)",
+          "provider": "Nimbus JOSE JWT",
+          "key_ids": ["bank-classical-key"],
+          "verifier_location": "Wallet verification + TPP verifyAndStoreIncomingVcs + DAS /token F4-04",
+          "evidence": "verifyRootScopeVc in CredentialVerificationService & TPP TppController"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature: MLDSA65-ECDSA-P384-SHA512 (Bouncy Castle Composite JWS)",
+          "provider": "Nimbus JOSE + OQS Signer microservice",
+          "key_ids": ["bank-hybrid-key", "MLDSA65"],
+          "verifier_location": "Wallet + PQC TPP TppController + PQC Bank Issuer /token F4-04",
+          "evidence": "CryptoService.verifyHybridSignature enforcing Accept_hybrid = Verify_C AND Verify_Q"
+        }
+      }
+    },
+    {
+      "role_id": "CR-05",
+      "role_name": "DAS challenge",
+      "producer_consumer": "DAS -> Wallet / DAS",
+      "requirement_hybrid": "Dual signatures; profile, nonce, audiences, and request hash are all protected.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None (standard OAuth 2.0 PKCE / state in PAR)",
+          "provider": "Keycloak",
+          "key_ids": [],
+          "verifier_location": "Keycloak auth endpoint",
+          "evidence": "PAR request_uri and authorization code exchange"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ES256 (NIST P-256 JWT signed challenge)",
+          "provider": "Nimbus JOSE JWT",
+          "key_ids": ["bank-classical-key"],
+          "verifier_location": "Wallet verifyChallenge + DAS /token F4-03",
+          "evidence": "IssuerController /api/v1/challenge & challenge anti-replay validation"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature: MLDSA65-ECDSA-P384-SHA512",
+          "provider": "Nimbus JOSE + OQS Signer",
+          "key_ids": ["bank-hybrid-key", "MLDSA65"],
+          "verifier_location": "PQC Wallet + PQC Bank Issuer /token F4-03",
+          "evidence": "signHybrid in CryptoService & verifyHybridSignature at token endpoint"
+        }
+      }
+    },
+    {
+      "role_id": "CR-06",
+      "role_name": "Delegation VC",
+      "producer_consumer": "Holder -> DAS",
+      "requirement_hybrid": "Dual signatures with PK_H attested and committed in F1; strictly prohibited from using TPP key.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None (Holder consent recorded internally in Keycloak database)",
+          "provider": "Keycloak User Session",
+          "key_ids": [],
+          "verifier_location": "Keycloak",
+          "evidence": "Keycloak internal consent grant table"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ES256 (NIST P-256 Holder key, vc+sd-jwt)",
+          "provider": "Nimbus JOSE JWT",
+          "key_ids": ["wallet-classical-key"],
+          "verifier_location": "TPP verifyAndStoreIncomingVcs + DAS verifyDelegationVc F4-06",
+          "evidence": "parent_vc_jti lineage check and Holder signature verification"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature: MLDSA65-ECDSA-P384-SHA512",
+          "provider": "Nimbus JOSE + Bouncy Castle composite-signature provider",
+          "key_ids": ["wallet-hybrid-key", "MLDSA65"],
+          "verifier_location": "PQC TPP verifyAndStoreIncomingVcs + PQC DAS verifyDelegationVc F4-06",
+          "evidence": "Accept_hybrid AND-rule verification under Holder public key set"
+        }
+      }
+    },
+    {
+      "role_id": "CR-07",
+      "role_name": "KB-JWT",
+      "producer_consumer": "Holder -> DAS",
+      "requirement_hybrid": "Dual components conforming to frozen profile; preserves nonce, audience, and exact sd_hash.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None",
+          "provider": "N/A",
+          "key_ids": [],
+          "verifier_location": "N/A",
+          "evidence": "Traditional FAPI does not use Key Binding JWTs"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ES256 Key Binding JWT (RFC 9901 typ=kb+jwt)",
+          "provider": "Nimbus JOSE JWT",
+          "key_ids": ["wallet-classical-key"],
+          "verifier_location": "DAS IssuerController /token F4-06",
+          "evidence": "sd_hash computed from exact SDP_SC bytes; nonce and aud_kb verified"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature: MLDSA65-ECDSA-P384-SHA512",
+          "provider": "Nimbus JOSE + OQS Signer",
+          "key_ids": ["wallet-hybrid-key", "MLDSA65"],
+          "verifier_location": "PQC DAS IssuerController /token F4-06",
+          "evidence": "RFC 9901 KB-JWT with dual-signed claims and sd_hash check"
+        }
+      }
+    },
+    {
+      "role_id": "CR-08",
+      "role_name": "Authorization VP",
+      "producer_consumer": "TPP -> DAS",
+      "requirement_hybrid": "Dual components of registered TPP presentation role; strictly separated from mTLS client authentication.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None (OAuth authorization_code grant with PKCE + mTLS)",
+          "provider": "Keycloak",
+          "key_ids": [],
+          "verifier_location": "Keycloak token endpoint",
+          "evidence": "RFC 6749 / RFC 8705 token request"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ES256 (NIST P-256 signed VP assertion)",
+          "provider": "Nimbus JOSE JWT",
+          "key_ids": ["tpp-classical-key"],
+          "verifier_location": "DAS IssuerController /token F4-02",
+          "evidence": "VP assertion signed by TPP and verified under Delegation VC cnf.jwk"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature: MLDSA65-ECDSA-P384-SHA512",
+          "provider": "Nimbus JOSE + OQS Signer",
+          "key_ids": ["tpp-hybrid-key", "MLDSA65"],
+          "verifier_location": "PQC DAS IssuerController /token F4-02",
+          "evidence": "CryptoService.verifyHybridSignature for VP assertion signature"
+        }
+      }
+    },
+    {
+      "role_id": "CR-09",
+      "role_name": "DAS-only encryption",
+      "producer_consumer": "Wallet -> DAS",
+      "requirement_hybrid": "Approved KEM/KDF/AEAD/combiner, authenticated recipient and signed context; plaintext fallback strictly prohibited.",
+      "baselines": {
+        "B0-C0": {
+          "status": "not-applicable",
+          "algorithm": "None",
+          "provider": "N/A",
+          "key_ids": [],
+          "verifier_location": "N/A",
+          "evidence": "Traditional FAPI does not use decentralized Holder encrypted packages"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "JWE ECDH-ES + A256GCM with NIST P-256 recipient key",
+          "provider": "Nimbus JOSE JWE",
+          "key_ids": ["bank-classical-key"],
+          "verifier_location": "DAS IssuerController /token F4-07",
+          "evidence": "Wallet encrypts sensitive KYC/routing claims; DAS decrypts and verifies context"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "ML-KEM-768 + AES-256-GCM (NIST FIPS 203 + RFC 5116 AEAD)",
+          "provider": "OpenQuantumSafe / Java AES-GCM",
+          "key_ids": ["bank-kem-key"],
+          "verifier_location": "PQC DAS IssuerController /token F4-07",
+          "evidence": "Wallet encapsulates shared secret via ML-KEM-768, encrypts with AES-256-GCM; DAS decapsulates and verifies"
+        }
+      }
+    },
+    {
+      "role_id": "CR-10",
+      "role_name": "F1 and AIS access tokens",
+      "producer_consumer": "AS/DAS -> DAS/RS",
+      "requirement_hybrid": "Separately declared per issuer role; verifier must support all required components if role is hybrid.",
+      "baselines": {
+        "B0-C0": {
+          "status": "classical",
+          "algorithm": "PS256 (RSA-PSS 2048/3072) / ES256 with cnf.x5t#S256",
+          "provider": "Keycloak OpenID Connect",
+          "key_ids": ["keycloak-realm-key"],
+          "verifier_location": "Resource Server server.js (AT-01 to AT-09)",
+          "evidence": "mTLS sender constraint (AT-05) verified with client cert thumbprint"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "ES256 JWT with cnf.x5t#S256 certificate binding",
+          "provider": "DAS CryptoService / Keycloak",
+          "key_ids": ["bank-classical-key"],
+          "verifier_location": "Resource Server server.js (AT-01 to AT-09)",
+          "evidence": "Strict tau_T SHA-256 base64url thumbprint match; scopes and aud_r enforced"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite Dual-Signature MLDSA65-ECDSA-P384-SHA512 with cnf.x5t#S384 binding",
+          "provider": "PQC DAS CryptoService / Keycloak",
+          "key_ids": ["bank-hybrid-key", "MLDSA65"],
+          "verifier_location": "PQC Resource Server server.js (AT-01 to AT-09)",
+          "evidence": "Hybrid signature validation + mTLS DER SHA-384 base64url thumbprint binding"
+        }
+      }
+    },
+    {
+      "role_id": "CR-11",
+      "role_name": "Status/cutoff/trust/audit",
+      "producer_consumer": "Publisher -> consumers",
+      "requirement_hybrid": "Component coverage declared per signed object and transport; classical dependency remains classical.",
+      "baselines": {
+        "B0-C0": {
+          "status": "classical",
+          "algorithm": "Keycloak active session / token introspection (RFC 7662)",
+          "provider": "Keycloak",
+          "key_ids": ["keycloak-realm-key"],
+          "verifier_location": "Resource Server token introspection",
+          "evidence": "Introspection endpoint checks revocation and active state"
+        },
+        "B1-C0": {
+          "status": "classical",
+          "algorithm": "W3C Bitstring Status List v1.0 signed with ES256 when emitted by the current application key",
+          "provider": "Bank PolicyService / Status Publisher",
+          "key_ids": ["bank-classical-key"],
+          "verifier_location": "DAS F4-04 status validation + RS cutoff",
+          "evidence": "CredentialVerificationService status checks and anti-replay consumedJtis"
+        },
+        "B1-C2": {
+          "status": "hybrid",
+          "algorithm": "Composite-signed Bitstring Status List v1.0 (MLDSA65-ECDSA-P384-SHA512)",
+          "provider": "PQC Bank PolicyService / Status Publisher",
+          "key_ids": ["bank-hybrid-key"],
+          "verifier_location": "PQC DAS F4-04 status validation",
+          "evidence": "Composite dual-signature status list verification without fallback"
+        }
+      }
+    }
+  ]
+}

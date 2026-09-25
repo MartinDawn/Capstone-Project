@@ -1,0 +1,14 @@
+{
+  "workload": "medium",
+  "accounts_count": 5,
+  "permissions_count": 4,
+  "history_days_window": 90,
+  "max_page_size": 25,
+  "accounts": ["ACC-001", "ACC-002", "ACC-003", "ACC-004", "ACC-005"],
+  "services": ["accounts", "balances", "transactions"],
+  "permissions": ["ReadAccountsDetail", "ReadBalances", "ReadTransactionsCredits", "ReadTransactionsDetail"],
+  "data_fields": ["account_id", "amount", "balance", "date", "operation", "type"],
+  "validity": {"start": 1788500000, "end": 1796276000},
+  "oracle_permitted": true,
+  "oracle_reason": "PERMIT"
+}

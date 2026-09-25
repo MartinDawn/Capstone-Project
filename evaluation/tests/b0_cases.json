@@ -1,0 +1,231 @@
+[
+  {
+    "case_id": "B0-F01",
+    "name": "Valid PAR/code/PKCE/mTLS Authorization Flow",
+    "configuration": "B0-C0",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [],
+    "production_boundary": "Keycloak AS token endpoint (:8443)",
+    "proven_requirements": "Valid PAR/code/PKCE/mTLS token issuance with client, audience, lifetime, and certificate binding",
+    "uncovered_aspects": null,
+    "preconditions": "Registered FAPI client, active Keycloak realm, valid client assertion",
+    "action": "Execute Pushed Authorization Request (PAR) with RFC 9396 authorization_details, exchange authorization code with PKCE and mTLS client certificate",
+    "expected_boundary": "Keycloak AS token endpoint (:8443)",
+    "expected_decision": "PERMIT",
+    "expected_authority": {
+      "client_id": "tpp-client",
+      "token_type": "Bearer",
+      "certificate_bound": true,
+      "audiences": [
+        "https://localhost:4000",
+        "resource-server-client"
+      ],
+      "lifetime_seconds": 600,
+      "scopes": [
+        "ReadAccountsDetail",
+        "accounts:read",
+        "email",
+        "openid",
+        "profile"
+      ]
+    },
+    "required_evidence": [
+      "par_response_request_uri",
+      "token_response_jwt",
+      "tls_client_cert_hash_cnf"
+    ],
+    "criticality": "high"
+  },
+  {
+    "case_id": "B0-F02-AccountReduction",
+    "variant": "account_reduction",
+    "name": "Holder Reduced Account Consent",
+    "configuration": "B0-C0",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_consent",
+      "forwarded_client_certificate_header"
+    ],
+    "production_boundary": "Keycloak AS token endpoint (:8443) & Resource Server (:4000)",
+    "proven_requirements": "Token projection and Resource Server enforcement correctly restrict data access to approved accounts without exceeding granted authority",
+    "uncovered_aspects": "Consent reduction fixture is established via test-assisted endpoint (/api/conformance/holder-consent) rather than interactive end-user browser consent UI The resource server is called over plain HTTP on its application port with the bound client certificate forwarded in the ssl-client-cert header, the way the bank gateway forwards it. This case therefore does not exercise the TLS transport itself; B0-N01-WrongCert covers the certificate binding over real mTLS.",
+    "preconditions": "TPP requests both holder-approved accounts ACC-001 and ACC-002; the run includes an unreduced positive control",
+    "action": "Holder restricts consent to ACC-001 while the TPP requests ACC-001 and ACC-002",
+    "expected_boundary": "Keycloak AS consent processing",
+    "expected_decision": "PERMIT_RESTRICTED",
+    "expected_authority": {
+      "accounts": [
+        "ACC-001"
+      ]
+    },
+    "required_evidence": [
+      "user_consent_decision_record",
+      "issued_access_token_details"
+    ],
+    "criticality": "high"
+  },
+  {
+    "case_id": "B0-F02-PermissionReduction",
+    "variant": "permission_reduction",
+    "name": "Holder Reduced Permission Consent",
+    "configuration": "B0-C0",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "fixture_consent",
+      "forwarded_client_certificate_header"
+    ],
+    "production_boundary": "Keycloak AS token endpoint (:8443) & Resource Server (:4000)",
+    "proven_requirements": "Token projection and Resource Server enforcement correctly restrict permissions to approved scopes without exceeding granted authority",
+    "uncovered_aspects": "Consent reduction fixture is established via test-assisted endpoint (/api/conformance/holder-consent) rather than interactive end-user browser consent UI The resource server is called over plain HTTP on its application port with the bound client certificate forwarded in the ssl-client-cert header, the way the bank gateway forwards it. This case therefore does not exercise the TLS transport itself; B0-N01-WrongCert covers the certificate binding over real mTLS.",
+    "preconditions": "TPP requests accounts:read, ReadAccountsDetail, ReadBalances and ReadTransactionsDetail for the holder-approved account",
+    "action": "Holder approves only accounts:read and ReadAccountsDetail",
+    "expected_boundary": "Keycloak AS consent processing",
+    "expected_decision": "PERMIT_RESTRICTED",
+    "expected_authority": {
+      "scopes": [
+        "ReadAccountsDetail",
+        "accounts:read",
+        "email",
+        "holder-approved-acc-001",
+        "openid",
+        "profile"
+      ]
+    },
+    "required_evidence": [
+      "user_consent_decision_record",
+      "issued_access_token_details"
+    ],
+    "criticality": "high"
+  },
+  {
+    "case_id": "B0-F03",
+    "name": "Resource Retrieval with Valid Access Token",
+    "configuration": "B0-C0",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "forwarded_client_certificate_header"
+    ],
+    "production_boundary": "Resource Server (:4000)",
+    "proven_requirements": "Resource Server delivers exact account and transaction projections according to token authority",
+    "uncovered_aspects": "The resource server is called over plain HTTP on its application port with the bound client certificate forwarded in the ssl-client-cert header, the way the bank gateway forwards it. This case therefore does not exercise the TLS transport itself; B0-N01-WrongCert covers the certificate binding over real mTLS.",
+    "preconditions": "Valid Bearer token with account and transaction detail authority",
+    "action": "Retrieve the exact single-account projection for the holder-approved account and the first deterministic page of March 1997 transaction history",
+    "expected_boundary": "Resource Server RAR policy enforcement filter",
+    "expected_decision": "PERMIT",
+    "expected_authority": {
+      "http_status": 200,
+      "accounts": [
+        "ACC-001"
+      ],
+      "fields": [
+        "account_id",
+        "amount",
+        "balance",
+        "date",
+        "operation",
+        "type"
+      ],
+      "history": {
+        "account_id": "ACC-001",
+        "from": "1997-03-01T00:00:00Z",
+        "to": "1997-03-31T23:59:59Z",
+        "page": 1,
+        "page_size": 2,
+        "total_pages": 2,
+        "total_results": 4,
+        "transactions": [
+          {
+            "AccountId": "ACC-001",
+            "TransactionId": "178",
+            "Amount": "14.60",
+            "CreditDebitIndicator": "Debit",
+            "BookingDateTime": "1997-03-31T12:00:00Z"
+          },
+          {
+            "AccountId": "ACC-001",
+            "TransactionId": "222",
+            "Amount": "4600.00",
+            "CreditDebitIndicator": "Debit",
+            "BookingDateTime": "1997-03-13T12:00:00Z"
+          }
+        ]
+      }
+    },
+    "required_evidence": [
+      "rs_access_log",
+      "json_account_payload",
+      "json_transaction_page_payload"
+    ],
+    "criticality": "high"
+  },
+  {
+    "case_id": "B0-N01-WrongCert",
+    "name": "Negative: Rejection on Unbound Client Certificate",
+    "configuration": "B0-C0",
+    "execution_mode": "PRODUCTION_E2E",
+    "test_assistance": [],
+    "production_boundary": "Resource Server certificate thumbprint validation (:4000)",
+    "proven_requirements": "Resource Server rejects tokens presented with an unbound TLS client certificate",
+    "uncovered_aspects": null,
+    "preconditions": "Valid access token presented with mismatching client mTLS certificate",
+    "action": "Call GET /api/v1/accounts using secondary client certificate",
+    "expected_boundary": "Resource Server certificate thumbprint validation",
+    "expected_decision": "DENY",
+    "expected_authority": {
+      "http_status": 401,
+      "error": "invalid_token_binding"
+    },
+    "required_evidence": [
+      "rs_rejection_audit_log"
+    ],
+    "criticality": "critical"
+  },
+  {
+    "case_id": "B0-N01-WrongAudience",
+    "name": "Negative: Rejection on Wrong Token Audience",
+    "configuration": "B0-C0",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "forwarded_client_certificate_header"
+    ],
+    "production_boundary": "Resource Server JWT audience verification (:4000)",
+    "proven_requirements": "Resource Server rejects tokens targeted at a different resource audience",
+    "uncovered_aspects": "The resource server is called over plain HTTP on its application port with the bound client certificate forwarded in the ssl-client-cert header, the way the bank gateway forwards it. This case therefore does not exercise the TLS transport itself; B0-N01-WrongCert covers the certificate binding over real mTLS.",
+    "preconditions": "Token issued for audience 'aud:external-service'",
+    "action": "Call Resource Server (:4000) expecting audience 'aud:banking-rs'",
+    "expected_boundary": "Resource Server JWT audience verification",
+    "expected_decision": "DENY",
+    "expected_authority": {
+      "http_status": 403,
+      "error": "invalid_audience"
+    },
+    "required_evidence": [
+      "rs_rejection_audit_log"
+    ],
+    "criticality": "critical"
+  },
+  {
+    "case_id": "B0-N01-ExpiredToken",
+    "name": "Negative: Rejection on Expired Token",
+    "configuration": "B0-C0",
+    "execution_mode": "TEST_ASSISTED",
+    "test_assistance": [
+      "forwarded_client_certificate_header"
+    ],
+    "production_boundary": "Resource Server JWT expiration check (:4000)",
+    "proven_requirements": "Resource Server rejects expired Bearer tokens",
+    "uncovered_aspects": "The resource server is called over plain HTTP on its application port with the bound client certificate forwarded in the ssl-client-cert header, the way the bank gateway forwards it. This case therefore does not exercise the TLS transport itself; B0-N01-WrongCert covers the certificate binding over real mTLS.",
+    "preconditions": "Access token with exp timestamp in the past",
+    "action": "Call Resource Server (:4000) with expired Bearer token",
+    "expected_boundary": "Resource Server JWT expiration check",
+    "expected_decision": "DENY",
+    "expected_authority": {
+      "http_status": 401,
+      "error": "token_expired"
+    },
+    "required_evidence": [
+      "rs_rejection_audit_log"
+    ],
+    "criticality": "critical"
+  }
+]

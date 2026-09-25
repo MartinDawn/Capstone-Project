@@ -1,0 +1,204 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_purpose": "pilot",
+  "environment": "vm",
+  "models": [
+    "B0-C0",
+    "B1-C0",
+    "B1-C2"
+  ],
+  "command_environment": {
+    "BANK_HOST": "203.0.113.10",
+    "KEYCLOAK_HOST": "203.0.113.10",
+    "FRONTEND_BANK_HOST": "203.0.113.10",
+    "TPP_HOST": "203.0.113.20",
+    "WALLET_HOST": "localhost",
+    "VDAM_ISSUER_URL": "https://203.0.113.10:9443",
+    "VDAM_TPP_URL": "https://203.0.113.20:4443",
+    "VDAM_WALLET_URL": "https://localhost:3443",
+    "B0_TPP_URL": "https://203.0.113.20:4443"
+  },
+  "lifecycle": {
+    "stop_all_commands": [
+      [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "StrictHostKeyChecking=accept-new",
+        "-i",
+        "~/.ssh/vdam_vm_ed25519",
+        "root@203.0.113.20",
+        "cd /root/vdam && ./manage.sh stop all"
+      ],
+      [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "StrictHostKeyChecking=accept-new",
+        "-i",
+        "~/.ssh/vdam_vm_ed25519",
+        "root@203.0.113.10",
+        "cd /root/vdam && ./manage.sh stop all"
+      ],
+      [
+        "powershell",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "manage.ps1",
+        "stop",
+        "all"
+      ]
+    ],
+    "start_commands": {
+      "B0-C0": [
+        [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.10",
+          "cd /root/vdam && ./manage.sh bank start b0"
+        ],
+        [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.20",
+          "cd /root/vdam && ./manage.sh tpp start b0"
+        ]
+      ],
+      "B1-C0": [
+        [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.10",
+          "cd /root/vdam && ./manage.sh bank start b1-classical"
+        ],
+        [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.20",
+          "cd /root/vdam && ./manage.sh tpp start b1-classical"
+        ],
+        [
+          "powershell",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "manage.ps1",
+          "wallet",
+          "start",
+          "b1-classical"
+        ]
+      ],
+      "B1-C2": [
+        [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.10",
+          "cd /root/vdam && ./manage.sh bank start b1-pqc"
+        ],
+        [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.20",
+          "cd /root/vdam && ./manage.sh tpp start b1-pqc"
+        ],
+        [
+          "powershell",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "manage.ps1",
+          "wallet",
+          "start",
+          "b1-pqc"
+        ]
+      ]
+    },
+    "startup_wait_seconds": 30,
+    "readiness_timeout_seconds": 300,
+    "readiness_urls_by_model": {
+      "B0-C0": [
+        "https://203.0.113.10:8443/realms/traditional-fapi/.well-known/openid-configuration",
+        "https://203.0.113.20:4443/api/config"
+      ],
+      "B1-C0": [
+        "https://203.0.113.10:9443/.well-known/openid-credential-issuer",
+        "https://203.0.113.20:4443/api/config",
+        "https://localhost:3443/api/vcs"
+      ],
+      "B1-C2": [
+        "https://203.0.113.10:9443/.well-known/openid-credential-issuer",
+        "https://203.0.113.20:4443/api/config",
+        "https://localhost:3443/api/vcs"
+      ]
+    },
+    "fingerprint_hosts": [
+      {
+        "name": "bank",
+        "docker": [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.10",
+          "docker"
+        ]
+      },
+      {
+        "name": "tpp",
+        "docker": [
+          "ssh",
+          "-o",
+          "BatchMode=yes",
+          "-i",
+          "~/.ssh/vdam_vm_ed25519",
+          "root@203.0.113.20",
+          "docker"
+        ]
+      },
+      {
+        "name": "client",
+        "docker": [
+          "docker"
+        ]
+      }
+    ]
+  },
+  "approval": {
+    "state": "proposed",
+    "decision_id": null,
+    "frozen_digest": null
+  },
+  "cost": {
+    "workloads": [
+      "Medium"
+    ],
+    "models": [
+      "B0-C0",
+      "B1-C0",
+      "B1-C2"
+    ]
+  }
+}

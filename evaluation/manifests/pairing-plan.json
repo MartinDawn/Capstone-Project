@@ -1,0 +1,58 @@
+{
+  "schema_version": "2.1.0",
+  "protocol_id": "BP-20260922-v6",
+  "state": "proposed",
+  "seed": 20260921,
+  "models": [
+    "B0-C0",
+    "B1-C0",
+    "B1-C2"
+  ],
+  "workload_order": [
+    "Medium"
+  ],
+  "model_order_permutations": [
+    [
+      "B0-C0",
+      "B1-C0",
+      "B1-C2"
+    ],
+    [
+      "B0-C0",
+      "B1-C2",
+      "B1-C0"
+    ],
+    [
+      "B1-C0",
+      "B0-C0",
+      "B1-C2"
+    ],
+    [
+      "B1-C0",
+      "B1-C2",
+      "B0-C0"
+    ],
+    [
+      "B1-C2",
+      "B0-C0",
+      "B1-C0"
+    ],
+    [
+      "B1-C2",
+      "B1-C0",
+      "B0-C0"
+    ]
+  ],
+  "assignment": "The permutation of a paired block is model_order_permutations[(workload_index + batch - 1) mod 6], with workload_index taken from workload_order and batch counted from 1. The rule has no random component. The exact order is persisted in every run manifest.",
+  "pilot_blocks": 1,
+  "final_blocks": 5,
+  "load_level_order": {
+    "pilot": "ascending candidate search",
+    "final": "seeded shuffle per block with the same planned order for all comparators, reinstated by BP-20260922-v6"
+  },
+  "constraints": [
+    "Comparators never run simultaneously; every stack is stopped before and after each model window.",
+    "A paired-block ID is shared by the comparator runs of the same workload, mode, and block.",
+    "Exactly one business transaction is active at any time for E-COST; E-LOAD runs one k6 open-loop process per window with the offered rate defined by the cell's load_level, never overlapping a second model's window."
+  ]
+}

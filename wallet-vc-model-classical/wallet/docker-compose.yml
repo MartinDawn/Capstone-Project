@@ -1,0 +1,79 @@
+# ============================================================
+# Classical Cryptography - Wallet Infrastructure
+# ============================================================
+# Services:
+#   - wallet: Spring Boot Wallet Service (OID4VCI Client & Verifiable Presentation)
+#   - wallet-gateway: Unified Classical Nginx Gateway (:3443 UI, :18443 Bank mTLS, :16443 TPP TLS)
+# ============================================================
+
+services:
+
+  # ── Wallet Backend Service ────────────────────────────────────
+  wallet:
+    build:
+      context: ./wallet-java
+      dockerfile: Dockerfile
+    container_name: classical_wallet_java
+    environment:
+      - SERVER_PORT=5000
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-default}
+      - WALLET_PORT=5000
+      - CLIENT_ID=fapi-test-client
+      - REDIRECT_URI=https://${WALLET_HOST:-localhost}:3443/callback
+      - SERVER_FORWARD_HEADERS_STRATEGY=framework
+      - BANK_ISSUER_URL=http://wallet-gateway:18443
+      - KEYCLOAK_URL=http://wallet-gateway:18443
+      # Issuer identifier used as the PoP audience (the Bank matches it against its own ISSUER_URL);
+      # it is not a connection target.
+      - FRONTEND_BANK_ISSUER_URL=http://bank-issuer:7000
+      - FRONTEND_KEYCLOAK_URL=https://${FRONTEND_BANK_HOST:-localhost}:9443
+      - TPP_URL=http://wallet-gateway:16443
+      - SIGNING_KEY_STORE_PATH=/app/state/wallet-signing-jwk.json
+    volumes:
+      - wallet_identity_data:/app/state
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - wallet-gateway
+    cpus: 1.0
+    mem_limit: 1024m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    networks:
+      - wallet_network
+
+  # ── Unified Wallet Gateway Proxy (Browser UI & Outbound Gateways) ──
+  wallet-gateway:
+    image: nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    container_name: classical_wallet_gateway
+    user: root
+    environment:
+      - BANK_HOST=${BANK_HOST:-host.docker.internal}
+      - TPP_HOST=${TPP_HOST:-host.docker.internal}
+    ports:
+      - "3443:3443"
+    volumes:
+      - ./tls-proxy/wallet-gateway.conf.template:/etc/nginx/nginx.conf.template:ro
+      - ./tls-proxy/certs:/certs:ro
+    command: ["sh", "-c", "sed -e \"s/\\$${BANK_HOST}/$${BANK_HOST:-host.docker.internal}/g\" -e \"s/\\$${TPP_HOST}/$${TPP_HOST:-host.docker.internal}/g\" /etc/nginx/nginx.conf.template > /tmp/nginx.conf && nginx -c /tmp/nginx.conf -g 'daemon off;'"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - wallet_network
+
+networks:
+  wallet_network:
+    driver: bridge
+
+volumes:
+  wallet_identity_data:

@@ -1,0 +1,44 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "experiment_purpose": "final",
+  "environment": "vm",
+  "models": [
+    "B0-C0",
+    "B1-C0",
+    "B1-C2"
+  ],
+  "lifecycle": {
+    "stop_all_command": [
+      "./manage.sh",
+      "stop",
+      "all"
+    ],
+    "start_command": [
+      "./manage.sh",
+      "local",
+      "start",
+      "{baseline}"
+    ],
+    "startup_wait_seconds": 10,
+    "exclusive_baseline": true
+  },
+  "conformance": {
+    "required_before_benchmark": true,
+    "result_carry_forward": false,
+    "blocking_findings_by_model": {
+      "B0-C0": [],
+      "B1-C0": [
+        "BLK-003"
+      ],
+      "B1-C2": [
+        "BLK-003"
+      ]
+    }
+  },
+  "approval": {
+    "state": "proposed",
+    "decision_id": null,
+    "frozen_digest": null
+  }
+}

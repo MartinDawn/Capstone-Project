@@ -1,0 +1,16 @@
+{
+  "name": "fapi-resource-server",
+  "version": "1.0.0",
+  "description": "Mock Banking Resource Server - validates FAPI 2.0 access tokens",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --max-http-header-size=65536 server.js",
+    "dev": "node --max-http-header-size=65536 --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jose": "^5.2.0",
+    "dotenv": "^16.3.1",
+    "sqlite3": "^5.1.6"
+  }
+}

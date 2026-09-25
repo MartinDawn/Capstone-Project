@@ -1,0 +1,532 @@
+{
+  "schema_version": "3.3.0",
+  "protocol_id": "BP-20260922-v6",
+  "state": "proposed",
+  "total_cell_count": 15,
+  "experiment_counts": {
+    "E-COST": 3,
+    "E-LOAD": 12
+  },
+  "note": "Workload is fixed to Medium for every cell (decision DEC-023, 2026-09-22); Small and Large are retired as a comparison dimension. Smoke, pilot, and final use the same cell IDs and evidence schema; experiment_purpose and run ID distinguish executions.",
+  "cells": [
+    {
+      "cell_id": "COST-B0C0-MEDIUM-REPEATED",
+      "experiment": "E-COST",
+      "model": "B0-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "concurrency": 1,
+      "pilot": {
+        "batches": 1,
+        "attempts_per_batch": 5,
+        "warmup_attempts": 2
+      },
+      "final": {
+        "batches": 5,
+        "attempts_per_batch": 10,
+        "warmup_attempts": 2,
+        "attempts_per_cell": 50
+      },
+      "status": "PENDING_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/cost/<run-id>"
+    },
+    {
+      "cell_id": "COST-B1C0-MEDIUM-REPEATED",
+      "experiment": "E-COST",
+      "model": "B1-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "concurrency": 1,
+      "pilot": {
+        "batches": 1,
+        "attempts_per_batch": 5,
+        "warmup_attempts": 2
+      },
+      "final": {
+        "batches": 5,
+        "attempts_per_batch": 10,
+        "warmup_attempts": 2,
+        "attempts_per_cell": 50
+      },
+      "status": "PENDING_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/cost/<run-id>"
+    },
+    {
+      "cell_id": "COST-B1C2-MEDIUM-REPEATED",
+      "experiment": "E-COST",
+      "model": "B1-C2",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "concurrency": 1,
+      "pilot": {
+        "batches": 1,
+        "attempts_per_batch": 5,
+        "warmup_attempts": 2
+      },
+      "final": {
+        "batches": 5,
+        "attempts_per_batch": 10,
+        "warmup_attempts": 2,
+        "attempts_per_cell": 50
+      },
+      "status": "PENDING_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/cost/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B0C0-MEDIUM-R025",
+      "experiment": "E-LOAD",
+      "model": "B0-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 0.25,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B0C0-MEDIUM-R050",
+      "experiment": "E-LOAD",
+      "model": "B0-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 0.5,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B0C0-MEDIUM-R100",
+      "experiment": "E-LOAD",
+      "model": "B0-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 1.0,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B0C0-MEDIUM-R125",
+      "experiment": "E-LOAD",
+      "model": "B0-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 1.25,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C0-MEDIUM-R025",
+      "experiment": "E-LOAD",
+      "model": "B1-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 0.25,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C0-MEDIUM-R050",
+      "experiment": "E-LOAD",
+      "model": "B1-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 0.5,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C0-MEDIUM-R100",
+      "experiment": "E-LOAD",
+      "model": "B1-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 1.0,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C0-MEDIUM-R125",
+      "experiment": "E-LOAD",
+      "model": "B1-C0",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 1.25,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C2-MEDIUM-R025",
+      "experiment": "E-LOAD",
+      "model": "B1-C2",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 0.25,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C2-MEDIUM-R050",
+      "experiment": "E-LOAD",
+      "model": "B1-C2",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 0.5,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C2-MEDIUM-R100",
+      "experiment": "E-LOAD",
+      "model": "B1-C2",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 1.0,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    },
+    {
+      "cell_id": "ELOAD-B1C2-MEDIUM-R125",
+      "experiment": "E-LOAD",
+      "model": "B1-C2",
+      "workload": "Medium",
+      "mode": "repeated_authorization",
+      "scheduler": "open_loop_business_transaction",
+      "load_level": {
+        "relative_to_lambda_ref": 1.25,
+        "offered_rate_tps": null
+      },
+      "smoke": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 5,
+        "warmup_drain_seconds": 5,
+        "measurement_seconds": 10,
+        "drain_seconds": 5,
+        "cooldown_seconds": 5
+      },
+      "pilot": {
+        "batches_per_cell": 1,
+        "warmup_seconds": 10,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 30,
+        "drain_seconds": 10,
+        "cooldown_seconds": 30
+      },
+      "final": {
+        "batches_per_cell": 2,
+        "warmup_seconds": 20,
+        "warmup_drain_seconds": 10,
+        "measurement_seconds": 60,
+        "drain_seconds": 20,
+        "cooldown_seconds": 20
+      },
+      "status": "PENDING_RATE_CALIBRATION_AND_G4_FREEZE",
+      "evidence_root": "evaluation/evidence/perf/<run-id>"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "2.0.0",
+  "observed_at": "2026-09-15T00:00:00Z",
+  "status": "vm_inventory_received_role_mapping_pending",
+  "local_host": {
+    "os": "Microsoft Windows 11",
+    "architecture": "x64",
+    "powershell": "5.1.26100.9444",
+    "workspace_root": "D:/nam4/HK251/DACN/MainProject/main"
+  },
+  "local_tools": {
+    "java": {
+      "status": "available",
+      "version": "21",
+      "path": "C:/Program Files/Java/jdk-21/bin/java.exe"
+    },
+    "javac": {
+      "status": "available",
+      "version": "21",
+      "path": "C:/Program Files/Java/jdk-21/bin/javac.exe"
+    },
+    "maven": {
+      "status": "available",
+      "version": "3.9.15",
+      "path": "D:/nam4/HK251/DACN/apache-maven-3.9.15/bin/mvn.cmd"
+    },
+    "python": {
+      "status": "available",
+      "version": "3.12.0",
+      "path": "C:/Users/HELLO/AppData/Local/Programs/Python/Python312/python.exe"
+    },
+    "docker_cli": {
+      "status": "available",
+      "version": "28.0.4",
+      "daemon_status": "unavailable"
+    },
+    "node": {
+      "status": "not_on_path"
+    },
+    "openssl": {
+      "status": "not_on_path"
+    }
+  },
+  "repositories": {
+    "B0-C0": "traditional-fapi",
+    "B1-C0": "wallet-vc-model-classical",
+    "B1-C2": "wallet-vc-model"
+  },
+  "final_vm": {
+    "status": "inventory_received_runtime_observation_pending",
+    "inventory_source": "cloud provider console",
+    "hosts": [
+      {
+        "host_identifier": "VM1",
+        "public_ip": "203.0.113.20",
+        "private_ip": "172.16.216.17",
+        "instance_type": "ecs.e-c1m2.large",
+        "logical_cpu_count": 2,
+        "memory_bytes": 4294967296,
+        "operating_system": "Ubuntu 22.04 64-bit",
+        "hostname": "vm1",
+        "assigned_roles": ["TPP", "Wallet", "evaluation driver candidate"],
+        "observed_memory_bytes": 3664920576,
+        "container_runtime": "Docker 29.7.2"
+      },
+      {
+        "host_identifier": "VM2",
+        "public_ip": "203.0.113.10",
+        "private_ip": "172.17.91.30",
+        "instance_type": "ecs.e-c1m2.large",
+        "logical_cpu_count": 2,
+        "memory_bytes": 4294967296,
+        "operating_system": "Ubuntu 22.04 64-bit",
+        "hostname": "vm2",
+        "assigned_roles": ["Bank Issuer", "Authorization Server", "Resource Server", "database"],
+        "observed_memory_bytes": 3664932864,
+        "container_runtime": "Docker 29.7.2"
+      }
+    ],
+    "host_identifier": null,
+    "operating_system": "Ubuntu 22.04 64-bit",
+    "cpu_model": null,
+    "logical_cpu_count": 2,
+    "memory_bytes": 4294967296,
+    "container_runtime": "Docker 29.7.2",
+    "container_quotas": null,
+    "network_topology": "VM1 hosts TPP and Wallet; VM2 hosts Bank services. Only one baseline may run at a time, with stop-all on both hosts before and after every configuration run.",
+    "clock_synchronization": null
+  },
+  "secret_policy": "SSH credentials are intentionally excluded. Use an SSH agent or a separately managed secret reference; never write a password to commands or evidence.",
+  "policy": "Final run manifests must capture actual VM and container values. Local observations must not be copied into final VM provenance."
+}

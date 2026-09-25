@@ -1,0 +1,329 @@
+{
+  "schema_version": "2.0.0",
+  "updated_at": "2026-09-20T00:00:00Z",
+  "specification_reference": "docs/EVALUATION_PROTOCOL.md and current implementation source",
+  "contract_summary": "Proposed source-audited semantic contract for typed authority vectors, audience separation, protocol invariants, and cryptography by role. G1 freeze is pending workload mapping resolution.",
+  "typed_authority": {
+    "dimensions": {
+      "S": {
+        "description": "Canonical permission set (API services)",
+        "operator": "intersection",
+        "symbol": "S_e = S_SC ∩ S_H ∩ S_R ∩ S_T ∩ S_P",
+        "vocabulary": [
+          "accounts:read",
+          "balances:read",
+          "transactions:read",
+          "payments:write"
+        ],
+        "status": "confirmed",
+        "affected_cases": [
+          "VD-F01",
+          "VD-F02",
+          "VD-F03",
+          "VD-F04",
+          "VD-F05",
+          "VD-F06",
+          "VD-N05"
+        ]
+      },
+      "A": {
+        "description": "Authorized account numbers / object identifiers",
+        "operator": "intersection",
+        "symbol": "A_e = A_SC ∩ A_H ∩ A_R ∩ A_T ∩ A_P",
+        "syntax": "Synthetically partitioned Berka account IDs (e.g., ACC-1001, ACC-1002)",
+        "status": "confirmed",
+        "affected_cases": [
+          "VD-F01",
+          "VD-F02",
+          "VD-F03",
+          "VD-F05",
+          "VD-F06",
+          "VD-N05",
+          "VD-N07"
+        ]
+      },
+      "V": {
+        "description": "Authorization validity interval [V_start, V_end] in Unix epoch seconds",
+        "operator": "intersection",
+        "symbol": "V_e = [max(V_start_i), min(V_end_i)]",
+        "empty_rule": "If min(V_end) < max(V_start), result is empty interval (rejection)",
+        "status": "confirmed",
+        "affected_cases": [
+          "VD-F01",
+          "VD-F04",
+          "VD-F05",
+          "VD-F06",
+          "VD-N06"
+        ]
+      },
+      "D": {
+        "description": "Canonical AIS data selection predicate (transaction window, filters, fields, pagination)",
+        "operator": "meet_lattice",
+        "symbol": "D_e = D_SC ⊓ D_H ⊓ D_R ⊓ D_T ⊓ D_P",
+        "components": {
+          "history_window_days": "min(History_SC, History_H, History_R, History_T, History_P)",
+          "fields": "intersection(Fields_SC, Fields_H, Fields_R, Fields_T, Fields_P)",
+          "filters": "conjunction(Filters_SC, Filters_H, Filters_R, Filters_T, Filters_P)",
+          "max_page_size": "min(PageSize_SC, PageSize_H, PageSize_R, PageSize_T, PageSize_P)"
+        },
+        "projection_rules": {
+          "allowed_canonical_fields": [
+            "account_id",
+            "balance",
+            "date",
+            "amount",
+            "type",
+            "operation",
+            "status",
+            "currency"
+          ],
+          "forbidden_fields_policy": "Fail-closed. Any response containing unapproved fields (such as 'unapproved_field', 'ssn', or internal debug flags) must be rejected immediately with UNAUTHORIZED_FIELD_OVERDISCLOSURE.",
+          "field_masking": "If specific fields are requested in D_e, only the exact intersection of requested and permitted fields may be returned by the Resource Server."
+        },
+        "d_filters": {
+          "account_filter": {
+            "rule": "Strict subset constraint. Returned accounts must be a subset of authorized accounts A_e. Any foreign or unauthorized account (e.g. ACC-999) must cause immediate rejection with UNAUTHORIZED_ACCOUNT_IN_RESPONSE."
+          },
+          "time_range_filter": {
+            "rule": "Temporal bound enforcement. Transaction queries are constrained by [from_date, to_date] where max transaction window = history_window_days (default 90 days). Transactions outside [V_start, V_end] window must not be disclosed.",
+            "max_history_days": 730,
+            "default_history_days": 90
+          },
+          "pagination_filter": {
+            "max_page_size": 100,
+            "default_page_size": 25
+          }
+        },
+        "status": "confirmed",
+        "affected_cases": [
+          "VD-F02",
+          "VD-F04",
+          "VD-F05",
+          "VD-F09",
+          "VD-N05",
+          "VD-N07"
+        ]
+      }
+    },
+    "input_authorities": {
+      "SC": "Scope VC issued by Bank Issuer during F1 enrollment",
+      "H": "Holder approval granted via Wallet during F3 consent",
+      "R": "TPP request submitted in F2 / F4",
+      "T": "Registered TPP regulatory bounds maintained by Bank Directory",
+      "P": "Active Bank Policy enforced dynamically by DAS"
+    }
+  },
+  "audience_separation": {
+    "Aud_R": {
+      "name": "Resource Audience",
+      "target": "Resource Server AIS API",
+      "canonical_value": "https://rs.bank.local/ais",
+      "enforced_at": "F6 (RS token verification)",
+      "status": "confirmed",
+      "affected_cases": [
+        "VD-F07",
+        "VD-N07",
+        "B0-N01"
+      ]
+    },
+    "Aud_G": {
+      "name": "Grant Audience",
+      "target": "Delegation Authorization Server (DAS) Token Endpoint",
+      "canonical_value": "https://das.bank.local/oauth/token",
+      "enforced_at": "F4 / F5 (DAS presentation & grant verification)",
+      "status": "confirmed",
+      "affected_cases": [
+        "VD-F07",
+        "VD-N02"
+      ]
+    },
+    "Aud_KB": {
+      "name": "Key Binding Audience",
+      "target": "DAS Verifier Identifier in SD-JWT Key Binding Proof",
+      "canonical_value": "https://das.bank.local",
+      "enforced_at": "F4 / F5 (Holder key-binding verification)",
+      "status": "confirmed",
+      "affected_cases": [
+        "VD-F07",
+        "VD-F08",
+        "VD-N01"
+      ]
+    }
+  },
+  "context_and_freshness_invariants": {
+    "challenge_binding": {
+      "type": "Cryptographic signed challenge issued by DAS in F2",
+      "lifetime_seconds": 60,
+      "single_use": true,
+      "status": "source_verified",
+      "affected_cases": [
+        "VD-F08",
+        "VD-N01",
+        "VD-N04"
+      ]
+    },
+    "nonce_binding": {
+      "type": "Holder-bound cryptographic nonce in SD-JWT KB",
+      "rule": "Must match DAS challenge nonce strictly",
+      "status": "confirmed",
+      "affected_cases": [
+        "VD-F08",
+        "VD-N01"
+      ]
+    },
+    "replay_prevention": {
+      "rule": "Sequential or concurrent duplicate presentations of the same F4 assertion / challenge must be rejected (single-use consumption).",
+      "idempotency": "Subsequent identical queries within same transaction boundary return logged receipt, never re-issue fresh authority.",
+      "status": "confirmed",
+      "affected_cases": [
+        "VD-N04"
+      ]
+    },
+    "selective_disclosure": {
+      "format": "IETF SD-JWT (RFC 9901)",
+      "hashing_algorithm": "SHA-256 (sd_hash verification)",
+      "das_encryption": "ECDH-ES / Hybrid ML-KEM encrypted package for DAS-only claims",
+      "status": "confirmed",
+      "affected_cases": [
+        "VD-F08",
+        "VD-F11",
+        "VD-N01",
+        "VD-N08"
+      ]
+    }
+  },
+  "cryptographic_profiles": {
+    "B0-C0": {
+      "transport": "TLS 1.3 standard",
+      "client_auth": "mTLS / private_key_jwt (PS256)",
+      "token_sig": "PS256",
+      "status": "confirmed"
+    },
+    "B1-C0": {
+      "transport": "Current TLS certificate scripts use ECDSA P-384; transport is recorded separately from application JWS roles",
+      "vc_sig": "ES256 (NIST P-256 JWS)",
+      "vp_sig": "ES256 (Holder and TPP application keys)",
+      "token_sig": "ES256 (Certificate-Bound Access Token)",
+      "status": "source_verified"
+    },
+    "B1-C2": {
+      "transport": "X25519MLKEM768 (Hybrid Classical + ML-KEM-768 via OpenQuantumSafe)",
+      "vc_sig": "Dual-Signature: MLDSA65-ECDSA-P384-SHA512 (NIST FIPS 204 + Curve P-384)",
+      "vp_sig": "Dual-Signature: MLDSA65-ECDSA-P384-SHA512",
+      "token_sig": "Dual-Signature: MLDSA65-ECDSA-P384-SHA512 (cnf.x5t#S384)",
+      "dual_signature_rule": "Both classical and PQ signatures must be valid. Classical-only fallback is prohibited.",
+      "status": "confirmed",
+      "affected_cases": [
+        "HY-F01",
+        "HY-N01",
+        "HY-N02",
+        "HY-N03",
+        "HY-N04",
+        "HY-N05"
+      ]
+    }
+  },
+  "vocabulary_mapping": {
+    "description": "Bi-directional mapping between Open Banking standard AIS permissions, OAuth scopes, and service endpoints",
+    "permissions_to_scopes": {
+      "ReadAccountsDetail": "accounts:read",
+      "ReadAccountsBasic": "accounts:read",
+      "ReadBalances": "accounts:read",
+      "ReadTransactionsDetail": "transactions:read",
+      "ReadTransactionsBasic": "transactions:read",
+      "ReadTransactionsCredits": "transactions:read",
+      "ReadTransactionsDebits": "transactions:read",
+      "ReadDirectDebits": "accounts"
+    },
+    "scopes_to_services": {
+      "accounts:read": "accounts",
+      "balances:read": "balances",
+      "transactions:read": "transactions",
+      "accounts": "direct-debits"
+    },
+    "open_banking_uk_rules": {
+      "transaction_permission_pairing": "ReadTransactionsBasic or ReadTransactionsDetail requires at least one of ReadTransactionsCredits or ReadTransactionsDebits.",
+      "direct_debits": "ReadDirectDebits is valid and maps to the specified /accounts/{AccountId}/direct-debits and /direct-debits resources. These endpoints are not implemented by the current three Resource Servers and are excluded from the core workload."
+    },
+    "status": "source_verified_proposed"
+  },
+  "resource_projection": {
+    "description": "Canonical AIS account projection served by every resource server. Values come from the Berka dataset; they are never derived from the access token.",
+    "account_identity": "Canonical ACC-NNN maps one-to-one onto the Berka internal account id (ACC-001 <-> account_id 1).",
+    "record_source": "One record per authorized account, built from that account's most recent booked movement in trans, ordered by date then trans_id.",
+    "fields": {
+      "account_id": "Canonical ACC-NNN identifier of the account",
+      "amount": "amount of the most recent movement, 2 decimals",
+      "balance": "balance after the most recent movement, 2 decimals",
+      "date": "date of the most recent movement as 19YY-MM-DD",
+      "operation": "operation column of the most recent movement",
+      "type": "Credit when the movement type is PRIJEM, otherwise Debit"
+    },
+    "entitlement_rule": "Effective authority narrows what the holder owns and never widens it: the projection is the intersection of the granted accounts with the holder's disposition rows, ordered by account id and truncated to page_size.",
+    "out_of_bounds_rule": "An account that exists but is not reachable by the holder is refused with HTTP 403 and REJECT_RESOURCE_ACCESS_OUT_OF_BOUNDS. HTTP 404 means the account does not exist and is never evidence of an authorization decision.",
+    "status": "confirmed",
+    "affected_cases": [
+      "B0-F02-AccountReduction",
+      "B0-F03",
+      "VD-F01",
+      "VD-F02",
+      "VD-F03",
+      "VD-F04",
+      "VD-F05",
+      "VD-F06",
+      "VD-F09",
+      "VD-F10",
+      "VD-N07-RSUnauthorizedResource"
+    ]
+  },
+  "presentation_binding": {
+    "description": "F4 presentation binding: the Authorization VP commits to the exact evidence it presents and to the challenge it answers.",
+    "definition": "base64url(digest(authorization_vc + '~' + delegate_vc + '~' + r_das)), without padding",
+    "digest_by_profile": {
+      "B1-C0": "SHA-256",
+      "B1-C2": "SHA-384, matching the KB-JWT sd_hash digest of the hybrid profile"
+    },
+    "mandatory": true,
+    "rejection_codes": {
+      "missing": "REJECT_MISSING_PRESENTATION_BINDING",
+      "mismatch": "REJECT_PRESENTATION_BINDING_MISMATCH"
+    },
+    "producer": "TPP, when assembling the VP (PresentationBinding.compute)",
+    "verifier": "DAS, recomputed from the artifacts that actually arrived",
+    "status": "confirmed",
+    "affected_cases": [
+      "VD-F08",
+      "VD-N02-PresentationBinding",
+      "VD-N02-CrossContextParent"
+    ]
+  },
+  "issuance_record_binding": {
+    "description": "How a presented Scope VC is matched against the issuance record committed at F1.",
+    "identity_rule": "The credential jti and the SHA-256 digest of the issuer-signed component must both equal the values committed at F1; a difference is REJECT_MISMATCHED_ISSUANCE_RECORD.",
+    "status_rule": "A differing credential_status_ref is REJECT_BINDING_CREDENTIAL_STATUS_MISMATCH.",
+    "substituted_key_rule": "When the Delegation VC does not verify under the Holder key from the issuance record, a key advertised inside the presentation (wallet_ec_jwk, holder_key_hint) is tried only to classify the rejection as REJECT_SUBSTITUTED_HOLDER_KEY. The advertised key is never accepted as a verification key, and its mere presence is not a failure.",
+    "test_assistance": "The conformance signer re-commits the issuance record only when a request sets rebind_issuance_record. Cases that rely on it declare issuance_record_rebind in test_assistance.",
+    "status": "confirmed",
+    "affected_cases": [
+      "VD-F01",
+      "VD-N03-MismatchedIssuanceRecord",
+      "VD-N03-SubstitutedHolderKey",
+      "VD-N03-BindingCredentialStatusMismatch"
+    ]
+  },
+  "b0_per_account_consent": {
+    "description": "How the traditional FAPI baseline expresses per-account authority for the matched AIS task.",
+    "mechanism": "Optional client scopes holder-approved-acc-NNN, included in the token scope. Their union is the account constraint; without any of them the grant covers everything the holder is entitled to.",
+    "rar_note": "Keycloak 24.0.5 does not echo RFC 9396 authorization_details into the access token, so RAR cannot carry the account constraint in this baseline. The resource server still reads authorization_details and the accounts claim when present.",
+    "certificate_binding": "cnf.x5t#S256 is produced by Keycloak from the TLS client certificate presented at the token endpoint (KC_HTTPS_CLIENT_AUTH=request with the nginx x509 lookup). It is not a realm constant.",
+    "uncovered": "Keycloak's consent screen is all-or-nothing, so holder-driven partial consent within one authorization request is not expressible in this baseline. The reduction is expressed by the TPP requesting the approved subset after the holder decision recorded at /api/conformance/holder-consent.",
+    "status": "confirmed",
+    "affected_cases": [
+      "B0-F01",
+      "B0-F02-AccountReduction",
+      "B0-F02-PermissionReduction",
+      "B0-F03",
+      "B0-N01-WrongCert"
+    ]
+  }
+}

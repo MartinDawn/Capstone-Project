@@ -1,0 +1,168 @@
+# ============================================================
+# Classical Cryptography - Bank Infrastructure
+# ============================================================
+# Services:
+#   - postgres: Database for Keycloak
+#   - keycloak: OIDC/FAPI 2.0 Auth Server (standard, no PQC SPI)
+#   - bank-issuer: OID4VCI Credential Issuer (Spring Boot, ES384)
+#   - resource-server: Banking API Resource Server (Node.js)
+#   - tls-server-proxy: Standard Nginx Reverse Proxy (ECDSA mTLS :8443)
+# ============================================================
+
+services:
+
+  # ── Keycloak Database ──────────────────────────────────────────
+  postgres:
+    image: postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246
+    container_name: classical_postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bank_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    cpus: 1.0
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 256M
+
+  # ── Authorization Server (Keycloak — standard, no PQC SPI) ─────
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.6.4@sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4
+    container_name: classical_keycloak
+    user: root
+    environment:
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=password
+      - KC_HOSTNAME_URL=http://${BANK_HOST:-${BANK_HOST_OR_IP:-localhost}}:8080
+      - KC_HOSTNAME_STRICT=false
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_FEATURES=preview
+      - KC_LOG_LEVEL=INFO
+      - KC_HTTP_ENABLED=true
+      - KC_HTTPS_CLIENT_AUTH=request
+      - KC_PROXY_HEADERS=xforwarded
+      - KC_TRUSTSTORE_PATHS=/opt/keycloak/conf/certs/ca.crt
+      - KC_SPI_X509CERT_LOOKUP_PROVIDER=nginx
+      - KC_SPI_X509CERT_LOOKUP_NGINX_SSL_CLIENT_CERT=ssl-client-cert
+      - KC_SPI_X509CERT_LOOKUP_NGINX_SSL_CERT_CHAIN_PREFIX=USE_HEADER
+      - KC_SPI_X509CERT_LOOKUP_NGINX_CERTIFICATE_KEY_SIZE=384
+    volumes:
+      - ./auth_server/realm-config/fapi-demo-realm.json:/opt/keycloak/data/import/fapi-demo-realm.json:ro
+      - ./tls-proxy/certs:/opt/keycloak/conf/certs
+    command: start-dev --import-realm
+    depends_on:
+      postgres:
+        condition: service_healthy
+    cpus: 1.0
+    mem_limit: 1024m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    networks:
+      - bank_network
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/localhost/8080 && echo -e 'GET /realms/master HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && cat <&3 | grep -q '200 OK'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  # ── Standard TLS Reverse Proxy (ECDSA mTLS Termination) ────────
+  tls-server-proxy:
+    image: nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8
+    container_name: classical_tls_server_proxy
+    ports:
+      - "8443:8443"
+      - "9443:9443"
+    volumes:
+      - ./tls-proxy/server-proxy.conf:/etc/nginx/nginx.conf:ro
+      - ./tls-proxy/certs:/certs:ro
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - bank_network
+
+  # ── OID4VCI Bank Issuer ──────────────────────────────────────
+  bank-issuer:
+    build: ./bank-issuer
+    container_name: classical_bank_issuer
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-default}
+      - PORT=7000
+      - ISSUER_URL=http://bank-issuer:7000
+      - KEYCLOAK_URL=http://keycloak:8080
+      - REALM=fapi-demo
+      - ISSUANCE_BINDING_STORE_PATH=/app/state/issuance-bindings.json
+      - SIGNING_KEY_STORE_PATH=/app/state/bank-signing-jwk.json
+      - TYPED_AUTHORITY_EVALUATION_TIME=${TYPED_AUTHORITY_EVALUATION_TIME:-0}
+    volumes:
+      - issuance_binding_data:/app/state
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    cpus: 1.5
+    mem_limit: 1536m
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 1536M
+    networks:
+      - bank_network
+
+  # ── Banking Resource Server ──────────────────────────────────
+  resource-server:
+    build: ./resource-server
+    container_name: classical_resource_server
+    environment:
+      - NODE_OPTIONS=--max-http-header-size=65536
+      - KEYCLOAK_URL=http://keycloak:8080
+      - BANK_ISSUER_URL=http://bank-issuer:7000
+      - REALM=fapi-demo
+      - PORT=4000
+    depends_on:
+      keycloak:
+        condition: service_healthy
+      bank-issuer:
+        condition: service_started
+    cpus: 0.5
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    networks:
+      - bank_network
+
+volumes:
+  postgres_data:
+  issuance_binding_data:
+
+networks:
+  bank_network:
+    driver: bridge
