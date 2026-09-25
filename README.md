@@ -102,12 +102,6 @@ section 6 of the protocol). Smoke and pilot runs need no freeze.
 The measured environment was two 2-vCPU / 4 GiB Ubuntu 22.04 VMs running Docker; see
 `evaluation/manifests/environment.json` and `evaluation/manifests/resource-limits.json`.
 
-## Data
-
-The Resource Servers serve account and transaction records from `berka.db`, an SQLite conversion of
-the public PKDD'99 Czech financial dataset (Berka). Raw measurement evidence and analysis outputs are
-not stored in this repository.
-
 ## Third-party material
 
 - `wallet-vc-model/pqc-bank/mldsa-provider/` contains files derived from Keycloak (Apache License 2.0);
@@ -118,6 +112,8 @@ not stored in this repository.
   `bcprov-jdk18on` 1.84 (Bouncy Castle License, MIT-style).
 - `specs/openbanking-uk/` contains the Open Banking UK Read/Write API specifications, distributed
   under their own terms.
+- `berka.db` (under each Resource Server) is an SQLite conversion of the public PKDD'99 Czech
+  financial dataset (Berka), used as synthetic banking records.
 
 ## License
 
