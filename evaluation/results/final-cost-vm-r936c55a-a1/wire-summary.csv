@@ -1,0 +1,15 @@
+protocol_id,analysis_id,source,configuration,workload,phase,step,samples,median_bytes,mean_bytes,min_bytes,max_bytes
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B0-C0,Medium,authorization,browser_authorization,50,12214.0,12214.0,12214.0,12214.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B0-C0,Medium,authorization,par,50,958.0,958.0,958.0,958.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B0-C0,Medium,authorization,token_exchange,50,3460.0,3460.0,3460.0,3460.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B0-C0,Medium,authorization,total_authorization,50,16632.0,16632.0,16632.0,16632.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C0,Medium,authorization,approve_delegate,50,1685.0,1685.0,1685.0,1685.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C0,Medium,authorization,fetch_request,50,1907.0,1907.0,1907.0,1907.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C0,Medium,authorization,request_delegate,50,2103.0,2103.0,2103.0,2103.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C0,Medium,authorization,token_exchange,50,1788.0,1788.0,1788.0,1788.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C0,Medium,authorization,total_authorization,50,7483.0,7483.0,7483.0,7483.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C2,Medium,authorization,approve_delegate,50,2999.0,2999.0,2999.0,2999.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C2,Medium,authorization,fetch_request,50,9268.0,9267.64,9265.0,9269.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C2,Medium,authorization,request_delegate,50,9464.0,9463.64,9461.0,9465.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C2,Medium,authorization,token_exchange,50,6357.0,6356.54,6355.0,6358.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,cost_attempts,B1-C2,Medium,authorization,total_authorization,50,28088.0,28086.82,28082.0,28091.0

@@ -1,0 +1,3 @@
+protocol_id,analysis_id,configuration,workload,batches,succeeded,failed,median_latency_ms,mean_latency_ms,median_wire_bytes,median_root_vc_bytes
+BP-20260922-v6,final-cost-vm-r936c55a-a1,B1-C0,Medium,5,5,0,7951.704,8135.6838,68000.0,4035.0
+BP-20260922-v6,final-cost-vm-r936c55a-a1,B1-C2,Medium,5,5,0,7166.669,7618.1068,68037.0,8929.0

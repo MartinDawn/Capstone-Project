@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\centering
+\caption{Sequential authorization latency (ms), successful attempts}
+\label{tab:evaluation-latency}
+\begin{tabular}{lllrrrrr}
+\hline
+Workload & Configuration & Succeeded/attempted & Median & Mean & SD & p95 & p99 \\
+\hline
+Medium & B0-C0 & 50/50 & 1{,}810.4 & 1{,}878.3 & 261.3 & 2{,}556.1 & 2{,}817.5 \\
+Medium & B1-C0 & 50/50 & 2{,}658.2 & 2{,}709.9 & 160.8 & 3{,}113.1 & 3{,}215.3 \\
+Medium & B1-C2 & 50/50 & 3{,}045.0 & 3{,}081.0 & 192.7 & 3{,}315.2 & 3{,}809.6 \\
+\hline
+\end{tabular}
+\par\smallskip{\footnotesize p95 and p99 are descriptive when the sample or the number of independent blocks is small.}
+\end{table}

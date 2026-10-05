@@ -1,0 +1,7 @@
+protocol_id,analysis_id,comparison_id,minuend,subtrahend,workload,metric,unit,blocks_total,blocks_valid,excluded_blocks,replicates,seed,confidence_level,absolute_effect,absolute_ci_low,absolute_ci_high,relative_effect,relative_ci_low,relative_ci_high,stability,disposition
+BP-20260922-v6,final-cost-vm-r936c55a-a1,architecture_cost,B1-C0,B0-C0,Medium,latency_block_median,ms,5,5,,10000,20260921,0.95,828.7507,774.7986,868.3332,0.452881,0.405468,0.489262,adequate,COMPUTED
+BP-20260922-v6,final-cost-vm-r936c55a-a1,architecture_cost,B1-C0,B0-C0,Medium,wire_bytes_block_mean,bytes,5,5,,10000,20260921,0.95,-9149.0,-9149.0,-9149.0,-0.550084,-0.550084,-0.550084,adequate,COMPUTED
+BP-20260922-v6,final-cost-vm-r936c55a-a1,hybrid_migration_cost,B1-C2,B1-C0,Medium,latency_block_median,ms,5,5,,10000,20260921,0.95,388.3419,354.2271,424.8621,0.146064,0.132145,0.16042,adequate,COMPUTED
+BP-20260922-v6,final-cost-vm-r936c55a-a1,hybrid_migration_cost,B1-C2,B1-C0,Medium,wire_bytes_block_mean,bytes,5,5,,10000,20260921,0.95,20603.82,20603.4,20604.14,2.753417,2.753361,2.75346,adequate,COMPUTED
+BP-20260922-v6,final-cost-vm-r936c55a-a1,total_observed_change,B1-C2,B0-C0,Medium,latency_block_median,ms,5,5,,10000,20260921,0.95,1217.0926,1132.1994,1290.7899,0.665095,0.593995,0.727296,adequate,COMPUTED
+BP-20260922-v6,final-cost-vm-r936c55a-a1,total_observed_change,B1-C2,B0-C0,Medium,wire_bytes_block_mean,bytes,5,5,,10000,20260921,0.95,11454.82,11454.4,11455.14,0.688722,0.688696,0.688741,adequate,COMPUTED

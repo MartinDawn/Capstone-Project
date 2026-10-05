@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\caption{Application-level authorization wire bytes}
+\label{tab:evaluation-wire-bytes}
+\begin{tabular}{lllrr}
+\hline
+Workload & Configuration & Step & Median & Mean \\
+\hline
+Medium & B0-C0 & authorization/browser\_authorization & 12{,}214 & 12{,}214.0 \\
+Medium & B0-C0 & authorization/par & 958 & 958.0 \\
+Medium & B0-C0 & authorization/token\_exchange & 3{,}460 & 3{,}460.0 \\
+Medium & B0-C0 & authorization/total\_authorization & 16{,}632 & 16{,}632.0 \\
+Medium & B1-C0 & authorization/approve\_delegate & 1{,}685 & 1{,}685.0 \\
+Medium & B1-C0 & authorization/fetch\_request & 1{,}907 & 1{,}907.0 \\
+Medium & B1-C0 & authorization/request\_delegate & 2{,}103 & 2{,}103.0 \\
+Medium & B1-C0 & authorization/token\_exchange & 1{,}788 & 1{,}788.0 \\
+Medium & B1-C0 & authorization/total\_authorization & 7{,}483 & 7{,}483.0 \\
+Medium & B1-C2 & authorization/approve\_delegate & 2{,}999 & 2{,}999.0 \\
+Medium & B1-C2 & authorization/fetch\_request & 9{,}268 & 9{,}267.6 \\
+Medium & B1-C2 & authorization/request\_delegate & 9{,}464 & 9{,}463.6 \\
+Medium & B1-C2 & authorization/token\_exchange & 6{,}357 & 6{,}356.5 \\
+Medium & B1-C2 & authorization/total\_authorization & 28{,}088 & 28{,}086.8 \\
+\hline
+\end{tabular}
+\par\smallskip{\footnotesize Request plus response bytes per client-facing step; TLS record overhead and server-to-server traffic are excluded.}
+\end{table}

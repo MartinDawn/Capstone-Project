@@ -38,8 +38,6 @@ evaluation/evidence/
 evaluation/state/*
 !evaluation/state/.gitkeep
 
-# Analysis outputs (published separately with the dataset)
-evaluation/results/
 
 # Large deployment bundle, not source; rebuild instead of committing the binary
 vdam-deploy.tar.gz

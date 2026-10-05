@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "analysis_id": "final-cost-vm-r936c55a-a1",
+  "analysis_class": "final",
+  "created_at": "2026-09-23T12:25:15.063305+00:00",
+  "selection": {
+    "campaign_ids": [
+      "final-cost-vm-r936c55a"
+    ],
+    "run_ids": []
+  },
+  "inputs": [
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b0-b01",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B0-C0",
+      "workload": "Medium",
+      "manifest_sha256": "c765049b9f626710d754c5cc5c81a48bcc39f897bdeeeebf2cf7d31358271261"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b0-b02",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B0-C0",
+      "workload": "Medium",
+      "manifest_sha256": "fe9449333540323680df31177ac4bd7719789d5eb6bcfb61783636328b7bfe3c"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b0-b03",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B0-C0",
+      "workload": "Medium",
+      "manifest_sha256": "b649f97b6388a37b74670af178e889ce13ab6a92a117bd0ed4a265d86b7946a6"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b0-b04",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B0-C0",
+      "workload": "Medium",
+      "manifest_sha256": "9c96e64cd97374535618ea73c6cd72ad534a5024a15efbd2e6f9dd638dabcaf3"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b0-b05",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B0-C0",
+      "workload": "Medium",
+      "manifest_sha256": "96225821e6eb16a2f324dc93a7bc1619c4c65219ce4ca1cc0784aff4c2e6add5"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b1-b01",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C0",
+      "workload": "Medium",
+      "manifest_sha256": "dc0e164e839db0aec2a7bf34293cac92014135e8c3f52b5e204550424d829edc"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b1-b02",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C0",
+      "workload": "Medium",
+      "manifest_sha256": "065aee8bd8a47b54d60d97fd090c42b3d586d0e26100bc68d440367b510ef44c"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b1-b03",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C0",
+      "workload": "Medium",
+      "manifest_sha256": "b3252bc21633f6a44ad3ecf06e67bbc8999c97d5c0bcb8ba5d7383945fc0c953"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b1-b04",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C0",
+      "workload": "Medium",
+      "manifest_sha256": "733324d83a0bbc51818d7db45362a2f26340eb1c0c9b4b9c5e56985225f1ac34"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b1-b05",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C0",
+      "workload": "Medium",
+      "manifest_sha256": "e9254647df0472117c9f96f5964da41833b5cf44d2b94d3efbd4d0813a70d58a"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b2-b01",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C2",
+      "workload": "Medium",
+      "manifest_sha256": "61978abe9ae2cd24642e2af19030ffc6cec762c805b6c5ad590c8014faf6bd6b"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b2-b02",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C2",
+      "workload": "Medium",
+      "manifest_sha256": "1cd3bb3d83a723796775c483a517971b8b02a428dbc3910c818e627e38308c7c"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b2-b03",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C2",
+      "workload": "Medium",
+      "manifest_sha256": "36689de679bb3b908cb53a70b0bbe1c2b24d7d78d0e98dcc41486ea3604f3954"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b2-b04",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C2",
+      "workload": "Medium",
+      "manifest_sha256": "b386552f7995da622d14c175c2c3d4c5655e6b70ad2c222fdc9cb7814988eaf0"
+    },
+    {
+      "run_id": "final-cost-vm-r936c55a-medium-b2-b05",
+      "campaign_id": "final-cost-vm-r936c55a",
+      "experiment_id": "EXP-COST-01",
+      "purpose": "final",
+      "configuration": "B1-C2",
+      "workload": "Medium",
+      "manifest_sha256": "6d7249fbc97f5448f9321523c26077f11fc327531ea22fae523b021cc30c29ee"
+    }
+  ],
+  "digests": {
+    "source_digest": [
+      "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b"
+    ],
+    "configuration_digest": [
+      "e144efede093b6484b767f773e37c6913d039a4c0926f75982ab336582aca3c3"
+    ],
+    "protocol_digest": [
+      "1395e6c46d844446698b9b32902d6a7784fb13291633b0492ce60d43503d0f44"
+    ]
+  },
+  "bootstrap": {
+    "seed": 20260921,
+    "replicates": 10000,
+    "confidence_level": 0.95,
+    "resampling_unit": "paired_block"
+  },
+  "comparisons": [
+    {
+      "id": "architecture_cost",
+      "minuend": "B1-C0",
+      "subtrahend": "B0-C0"
+    },
+    {
+      "id": "hybrid_migration_cost",
+      "minuend": "B1-C2",
+      "subtrahend": "B1-C0"
+    },
+    {
+      "id": "total_observed_change",
+      "minuend": "B1-C2",
+      "subtrahend": "B0-C0"
+    }
+  ],
+  "thresholds": {
+    "min_tail_samples": 100,
+    "min_tail_blocks": 10,
+    "min_stable_blocks": 5
+  },
+  "warnings": [
+    "B0-C0 / Medium: p95 and p99 are descriptive (50 successful samples over 5 block(s))",
+    "B1-C0 / Medium: p95 and p99 are descriptive (50 successful samples over 5 block(s))",
+    "B1-C2 / Medium: p95 and p99 are descriptive (50 successful samples over 5 block(s))"
+  ],
+  "outputs": [
+    "artifact-summary.csv",
+    "f1-summary.csv",
+    "latency-summary.csv",
+    "limitations.md",
+    "paired-comparisons.csv",
+    "tables/evaluation-artifacts.tex",
+    "tables/evaluation-latency.tex",
+    "tables/evaluation-wire-bytes.tex",
+    "wire-summary.csv"
+  ]
+}
