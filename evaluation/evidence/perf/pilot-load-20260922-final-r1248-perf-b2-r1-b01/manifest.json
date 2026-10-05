@@ -1,0 +1,66 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-LOAD-01",
+  "experiment_purpose": "pilot",
+  "campaign_id": "pilot-load-20260922-final-r1248",
+  "run_id": "pilot-load-20260922-final-r1248-perf-b2-r1-b01",
+  "paired_block_id": "pilot-load-20260922-final-r1248-r1-pb01",
+  "batch": 1,
+  "configuration": "B1-C2",
+  "workload": "Medium",
+  "mode": "repeated",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "scheduler": "constant_arrival_rate_open_loop",
+  "offered_rate_tps": 1.0,
+  "window": {
+    "warmup_s": 10,
+    "warmup_drain_s": 10,
+    "measure_s": 30,
+    "drain_s": 10,
+    "cooldown_s": 30
+  },
+  "vu_pool": {
+    "pre_allocated": 50,
+    "max": 1000
+  },
+  "source_digest": "88d7d61a4150f497cc1bfcf853a0953b306728d2974c210d0a7a72353b8a10aa",
+  "source_identity": {
+    "git_commit": null,
+    "worktree_dirty": "unknown",
+    "source_digest": "88d7d61a4150f497cc1bfcf853a0953b306728d2974c210d0a7a72353b8a10aa",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": "git_head_unavailable"
+  },
+  "isolation_proof": "evaluation/evidence/perf/isolation-proof-b1c2-20260922T150253Z/isolation-proof.json",
+  "root_vc_digest": "b8e9da3a7c8937099dc002d2d83615a564126d5ef0fecfe801996f17f77fde5e",
+  "started_at": "2026-09-22T15:03:32.659249+00:00",
+  "ended_at": "2026-09-22T15:04:25.641675+00:00",
+  "k6_exit_status": 0,
+  "stop_reason": null,
+  "measurement_status": "VALID",
+  "run_outcome": "DEGRADED",
+  "reason": null,
+  "metrics": {
+    "scheduled": 30.0,
+    "started": 30.0,
+    "not_started": 0,
+    "success": 29,
+    "failed": 1,
+    "unfinished": 0.0,
+    "boundary_iterations": 0.0,
+    "failed_by_stage": {
+      "fetch_request": 1
+    },
+    "throughput_tps": 0.9667,
+    "error_rate_pct": 3.3333,
+    "p50_ms": 5051.233,
+    "p95_ms": 6633.492,
+    "p99_ms": 7432.308,
+    "min_ms": 3857.543,
+    "max_ms": 7727.338,
+    "counter_invariant_ok": true
+  }
+}

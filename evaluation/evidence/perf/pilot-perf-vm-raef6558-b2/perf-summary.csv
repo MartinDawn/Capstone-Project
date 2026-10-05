@@ -1,0 +1,5 @@
+protocol_id,campaign_id,configuration,workload,offered_rate_tps,batches_total,batches_valid,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_rate_pct,p50_ms,p95_ms,p99_ms,min_ms,max_ms
+BP-20260922-v6,pilot-perf-vm-raef6558-b2,B1-C2,Medium,1.0,1,1,30.0,31,30,1,0,0,1.0,3.2258,3037.2,4030.741,4376.271,2706.981,4390.51
+BP-20260922-v6,pilot-perf-vm-raef6558-b2,B1-C2,Medium,2.0,1,1,60.0,60.0,60,0,0.0,0,2.0,0.0,2878.127,3521.838,4255.263,2605.899,4544.507
+BP-20260922-v6,pilot-perf-vm-raef6558-b2,B1-C2,Medium,4.0,1,1,120.0,121,104,17,0,0,3.4667,14.0496,2649.591,3518.295,3811.314,2482.687,3925.406
+BP-20260922-v6,pilot-perf-vm-raef6558-b2,B1-C2,Medium,8.0,1,1,240.0,240.0,208,32,0.0,0,6.9333,13.3333,2551.276,3027.988,3755.279,2365.644,4397.891

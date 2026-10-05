@@ -1,0 +1,4 @@
+run_id,configuration,batch,offered_rate_tps,measurement_status,run_outcome,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_rate_pct,p50_ms,p95_ms,p99_ms
+pilot-perf-local-raef6558-perf-b0-r1-b01,B0-C0,1,1.0,VALID,COMPLETED,30.0,31,31,0,0,0,1.0333,0.0,326.15,371.198,405.226
+pilot-perf-local-raef6558-perf-b1-r1-b01,B1-C0,1,1.0,VALID,COMPLETED,30.0,30.0,30,0,0.0,0,1.0,0.0,107.093,121.523,122.116
+pilot-perf-local-raef6558-perf-b2-r1-b01,B1-C2,1,1.0,VALID,DEGRADED,30.0,30.0,20,10,0.0,0,0.6667,33.3333,130.606,142.866,146.362

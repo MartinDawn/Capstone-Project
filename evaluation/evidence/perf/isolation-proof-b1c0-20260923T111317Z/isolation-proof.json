@@ -1,0 +1,60 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "experiment_id": "EXP-PERF-02",
+  "configuration": "B1-C0",
+  "concurrency": 2,
+  "scope": "authorization_only",
+  "isolation_verified": true,
+  "started_at": "2026-09-23T11:13:17.150701+00:00",
+  "ended_at": "2026-09-23T11:13:20.930339+00:00",
+  "duration_ms": 3781.0,
+  "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+  "source_identity": {
+    "git_commit": "936c55a48685d781d49970498f31bebf4b63b2ae",
+    "worktree_dirty": "false",
+    "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": ""
+  },
+  "comparison_objects": [
+    {
+      "transaction_id": "tx-1",
+      "thread_id": "6592",
+      "session_instance_uuid": "b5445ef1-ac51-4b65-91da-507e7ceb92be",
+      "trace_id": "iso-tx-1",
+      "access_token_digest": "35ae8ed2f00817f9e28bf13429b4c7fb9be4cc2dbd8ac93760034d8b91de1b45",
+      "delegation_jti": "urn:uuid:f4078625-396e-4269-b502-13c6483e4204",
+      "challenge_id": "aad6639e-3ee2-4de4-a78b-76a4a9a759e9"
+    },
+    {
+      "transaction_id": "tx-2",
+      "thread_id": "10664",
+      "session_instance_uuid": "23b35251-bc36-4070-91b7-3635f7bc689c",
+      "trace_id": "iso-tx-2",
+      "access_token_digest": "eeacc43b9370da0e154a139afcf79d43db58e91c8ef674244fcb999a51d24b12",
+      "delegation_jti": "urn:uuid:ce55de70-a4a8-41f3-a804-c43056d3ace0",
+      "challenge_id": "a486dd12-5734-4c5b-a895-bf9a7cc7ad10"
+    }
+  ],
+  "sanitized_transactions": [
+    {
+      "transaction_id": "tx-1",
+      "status": "SUCCESS",
+      "error_sanitized": null
+    },
+    {
+      "transaction_id": "tx-2",
+      "status": "SUCCESS",
+      "error_sanitized": null
+    }
+  ],
+  "isolation_checks": {
+    "no_shared_mutable_cookies": true,
+    "distinct_worker_execution_threads": true,
+    "zero_observed_cross_talk": true,
+    "details": [
+      "FAILURE_INJECTION_TEST: failing transaction isolated; concurrent transaction completed intact"
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-LOAD-01",
+  "experiment_purpose": "final",
+  "campaign_id": "final-load-vm-r095ef2a",
+  "run_id": "final-load-vm-r095ef2a-perf-b0-r8-b02",
+  "paired_block_id": "final-load-vm-r095ef2a-r8-pb02",
+  "batch": 2,
+  "configuration": "B0-C0",
+  "workload": "Medium",
+  "mode": "repeated",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "scheduler": "constant_arrival_rate_open_loop",
+  "offered_rate_tps": 8.0,
+  "window": {
+    "warmup_s": 20,
+    "warmup_drain_s": 10,
+    "measure_s": 60,
+    "drain_s": 20,
+    "cooldown_s": 20
+  },
+  "vu_pool": {
+    "pre_allocated": 50,
+    "max": 1000
+  },
+  "source_digest": "fec89218fa9457b06455b750b084cd2ac8ea0fca5f2f6a64bcda8aa22395c48a",
+  "source_identity": {
+    "git_commit": "095ef2a47d5eefaaaeed1bf8639f1586b6e1a955",
+    "worktree_dirty": "false",
+    "source_digest": "fec89218fa9457b06455b750b084cd2ac8ea0fca5f2f6a64bcda8aa22395c48a",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": ""
+  },
+  "isolation_proof": null,
+  "root_vc_digest": null,
+  "started_at": "2026-09-23T11:44:18.117095+00:00",
+  "ended_at": "2026-09-23T11:46:08.196121+00:00",
+  "k6_exit_status": 0,
+  "stop_reason": null,
+  "measurement_status": "VALID",
+  "run_outcome": "GENERATOR_LIMITED",
+  "reason": null,
+  "metrics": {
+    "scheduled": 480.0,
+    "started": 395.0,
+    "not_started": 85,
+    "success": 0,
+    "failed": 390,
+    "unfinished": 5.0,
+    "boundary_iterations": 0,
+    "failed_by_stage": {
+      "login": 242,
+      "authorize": 33,
+      "initiate": 115
+    },
+    "throughput_tps": 0.0,
+    "error_rate_pct": 100.0,
+    "p50_ms": null,
+    "p95_ms": null,
+    "p99_ms": null,
+    "min_ms": null,
+    "max_ms": null,
+    "counter_invariant_ok": true
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-COST-02",
+  "experiment_purpose": "smoke",
+  "campaign_id": "smoke-artifacts-local-raef6558",
+  "run_id": "smoke-artifacts-local-raef6558-artifacts-medium-b1",
+  "configuration": "B1-C0",
+  "workload": "Medium",
+  "samples": 1,
+  "scope": "authorization_only",
+  "network_boundary": "application-level authorization wire bytes: request plus response bytes of each named client-facing step; server-to-server traffic, TLS record overhead, retransmission, and link-layer framing are excluded",
+  "f1_reported_separately": true,
+  "protocol_digest": "1395e6c46d844446698b9b32902d6a7784fb13291633b0492ce60d43503d0f44",
+  "configuration_digest": "79cc7d0529955e043ff8abdcb2459500d610a3f96981a5cca77c5de4b6343330",
+  "fixture_digest": "5ab7741a7c31144311a19828f2160b9cf8607fd8fe064be711948f89bb6aa863",
+  "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+    "dirty_patch_digest": "bdf7207e12cde3a32e1ab672f93b1aa5abf60dcc67de8965d4a4397ecfebd87d",
+    "dirty_patch_reason": ""
+  },
+  "sut_commits": {
+    "B0-C0": {
+      "directory": "traditional-fapi",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C0": {
+      "directory": "wallet-vc-model-classical",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C2": {
+      "directory": "wallet-vc-model",
+      "commit": null,
+      "scope": "evaluation_repository"
+    }
+  },
+  "environment": "local",
+  "created_at": "2026-09-23T05:30:58.759656+00:00",
+  "artifacts": [
+    {
+      "artifact_name": "scope_vc",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        4035
+      ]
+    },
+    {
+      "artifact_name": "delegation_vc",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        2275
+      ]
+    },
+    {
+      "artifact_name": "delegation_vc_key_binding_jwt",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        378
+      ]
+    },
+    {
+      "artifact_name": "root_vc_presentation",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        2413
+      ]
+    },
+    {
+      "artifact_name": "das_encrypted_package",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        651
+      ]
+    },
+    {
+      "artifact_name": "tpp_vp_assertion",
+      "availability": "UNAVAILABLE",
+      "missing_reason": "BUILT_BY_THE_TPP_AND_SENT_TO_THE_BANK_SERVER_TO_SERVER_NOT_RETURNED_TO_THE_CLIENT",
+      "sizes_bytes": []
+    },
+    {
+      "artifact_name": "pop_access_token",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        944
+      ]
+    }
+  ],
+  "wire_bytes": {
+    "authorization": {
+      "request_delegate": 2097,
+      "fetch_request": 1907,
+      "approve_delegate": 1685,
+      "token_exchange": 1782,
+      "total_authorization": 7471
+    },
+    "F1_issuance": {
+      "offer": 848,
+      "start_auth": 774,
+      "keycloak_login": 12137,
+      "callback": 54264,
+      "total_f1": 68023
+    }
+  },
+  "f1": {
+    "root_vc_bytes": 4035,
+    "wire_bytes": 68023,
+    "step_wire_bytes": {
+      "offer": 848,
+      "start_auth": 774,
+      "keycloak_login": 12137,
+      "callback": 54264
+    }
+  },
+  "raw_packet_capture_local": null,
+  "raw_packet_capture_boundary": null
+}

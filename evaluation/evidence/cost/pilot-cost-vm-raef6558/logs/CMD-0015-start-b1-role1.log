@@ -1,0 +1,28 @@
+[start] bank / b1-classical using: /root/vdam/wallet-vc-model-classical/bank/docker-compose.yml
+ Container classical_postgres Starting 
+ Container classical_postgres Started 
+ Container classical_postgres Waiting 
+ Container classical_postgres Healthy 
+ Container classical_keycloak Starting 
+ Container classical_keycloak Started 
+ Container classical_keycloak Waiting 
+ Container classical_keycloak Waiting 
+ Container classical_keycloak Healthy 
+ Container classical_bank_issuer Starting 
+ Container classical_keycloak Healthy 
+ Container classical_tls_server_proxy Starting 
+ Container classical_tls_server_proxy Started 
+ Container classical_bank_issuer Started 
+ Container classical_keycloak Waiting 
+ Container classical_keycloak Healthy 
+ Container classical_resource_server Starting 
+ Container classical_resource_server Started 
+
+=== Active VDAM Containers ===
+NAMES                        STATUS                    PORTS
+classical_bank_issuer        Up 1 second               7000/tcp
+classical_keycloak           Up 33 seconds (healthy)   8080/tcp, 8443/tcp, 9000/tcp
+classical_resource_server    Up Less than a second     4000/tcp
+classical_tls_server_proxy   Up 1 second               0.0.0.0:8443->8443/tcp, [::]:8443->8443/tcp, 80/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp
+classical_postgres           Up 39 seconds (healthy)   5432/tcp
+[start] bank / b1-classical done.

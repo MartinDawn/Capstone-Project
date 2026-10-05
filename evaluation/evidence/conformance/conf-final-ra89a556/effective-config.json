@@ -1,0 +1,110 @@
+{
+    "schema_version": "3.0.0",
+    "protocol_id": "BP-20260915-v3",
+    "experiment_purpose": "smoke",
+    "environment": "local",
+    "models": [
+        "B0-C0",
+        "B1-C0",
+        "B1-C2"
+    ],
+    "lifecycle": {
+        "stop_all_commands": [
+            [
+                "powershell",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "manage.ps1",
+                "stop",
+                "all"
+            ]
+        ],
+        "start_commands": {
+            "B0-C0": [
+                [
+                    "powershell",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    "manage.ps1",
+                    "conformance",
+                    "start",
+                    "b0"
+                ]
+            ],
+            "B1-C0": [
+                [
+                    "powershell",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    "manage.ps1",
+                    "conformance",
+                    "start",
+                    "b1-classical"
+                ]
+            ],
+            "B1-C2": [
+                [
+                    "powershell",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    "manage.ps1",
+                    "conformance",
+                    "start",
+                    "b1-pqc"
+                ]
+            ]
+        },
+        "startup_wait_seconds": 20,
+        "readiness_timeout_seconds": 120,
+        "readiness_urls_by_model": {
+            "B0-C0": [
+                "https://localhost:8443/realms/traditional-fapi/.well-known/openid-configuration"
+            ],
+            "B1-C0": [
+                "http://localhost:8080/realms/master",
+                "http://localhost:7000/health",
+                "http://localhost:4000/health",
+                "http://localhost:6001/api/status",
+                "http://localhost:5000/api/config",
+                "https://localhost:9443/.well-known/openid-credential-issuer",
+                "https://localhost:4443/api/config",
+                "https://localhost:3443/api/vcs"
+            ],
+            "B1-C2": [
+                "http://localhost:8080/realms/master",
+                "http://localhost:7000/health",
+                "http://localhost:4000/health",
+                "http://localhost:6001/api/status",
+                "http://localhost:5000/api/config",
+                "https://localhost:9443/.well-known/openid-credential-issuer",
+                "https://localhost:4443/api/config",
+                "https://localhost:3443/api/vcs"
+            ]
+        }
+    },
+    "conformance": {
+        "command": [
+            "python",
+            "evaluation/bin/conformance/conformance_v3.py",
+            "--configuration",
+            "{configuration}",
+            "--run-id",
+            "{run_id}",
+            "--include-quantum"
+        ],
+        "blocking_findings_by_model": {
+            "B0-C0": [],
+            "B1-C0": [],
+            "B1-C2": []
+        }
+    },
+    "approval": {
+        "state": "proposed",
+        "decision_id": null,
+        "frozen_digest": null
+    }
+}

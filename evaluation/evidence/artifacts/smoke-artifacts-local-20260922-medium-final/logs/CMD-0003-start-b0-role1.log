@@ -1,0 +1,34 @@
+[start] local / b0 using: D:\nam4\HK251\DACN\MainProject\main\traditional-fapi\docker-compose.yml
+ Container postgres-fapi  Created
+ Container keycloak-fapi  Created
+ Container resource-server-fapi  Created
+ Container fapi_bank_gateway  Created
+ Container tpp-fapi  Created
+ Container fapi_tpp_gateway  Created
+ Container postgres-fapi  Starting
+ Container postgres-fapi  Started
+ Container postgres-fapi  Waiting
+ Container postgres-fapi  Healthy
+ Container keycloak-fapi  Starting
+ Container keycloak-fapi  Started
+ Container resource-server-fapi  Starting
+ Container resource-server-fapi  Started
+ Container keycloak-fapi  Waiting
+ Container keycloak-fapi  Healthy
+ Container fapi_bank_gateway  Starting
+ Container fapi_bank_gateway  Started
+ Container tpp-fapi  Starting
+ Container tpp-fapi  Started
+ Container fapi_tpp_gateway  Starting
+ Container fapi_tpp_gateway  Started
+
+=== Active VDAM Containers ===
+
+NAMES                  STATUS                    PORTS
+tpp-fapi               Up Less than a second     3000/tcp
+resource-server-fapi   Up 31 seconds             4000/tcp
+keycloak-fapi          Up 31 seconds (healthy)   8080/tcp, 8443/tcp
+fapi_tpp_gateway       Up Less than a second     0.0.0.0:4443->4443/tcp, 80/tcp, 0.0.0.0:6443->6443/tcp
+fapi_bank_gateway      Up Less than a second     80/tcp, 0.0.0.0:8443->8443/tcp
+postgres-fapi          Up 37 seconds (healthy)   5432/tcp
+[start] local / b0 done.

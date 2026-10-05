@@ -1,0 +1,90 @@
+{
+  "model": "B0-C0",
+  "resource_table": "evaluation/manifests/resource-limits.json",
+  "hosts": {
+    "local": {
+      "containers": [
+        {
+          "name": "tpp-fapi",
+          "service": "tpp-fapi",
+          "image": "traditional-fapi-tpp-fapi",
+          "image_id": "sha256:2a893531209f7ab55873ec085250e993fd5d0d5b09a1088c3e2ff0592f35f021",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "resource-server-fapi",
+          "service": "resource-server-fapi",
+          "image": "traditional-fapi-resource-server-fapi",
+          "image_id": "sha256:1825b05b628044d333a14b0629d80f35ed4225f0f8e120b648ef0c0e825f59e5",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "keycloak-fapi",
+          "service": "keycloak-fapi",
+          "image": "quay.io/keycloak/keycloak:24.0.5@sha256:f8ade94c1d0ad2f2fa7734a455fee5392764f402c43ca35e9af6bf63a2541dc9",
+          "image_id": "sha256:dd64cdcd1abdfcfa26d2e5db3ec90757f8fc31de19caa0c4721e6f8dc0cfbba2",
+          "nano_cpus": 1500000000,
+          "memory_bytes": 1610612736,
+          "memory_swap_bytes": 3221225472,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "fapi_tpp_gateway",
+          "service": "tpp-gateway",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:55fcc661c2cd4666d0e916410c029ae22042638bcdc8ed98805bfd9d29e08e38",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "fapi_bank_gateway",
+          "service": "bank-gateway",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:55fcc661c2cd4666d0e916410c029ae22042638bcdc8ed98805bfd9d29e08e38",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "postgres-fapi",
+          "service": "postgres-fapi",
+          "image": "postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246",
+          "image_id": "sha256:afdbd967cf653afc901851ccf14bc5a2f310748303577963e99dd117c1554527",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "28.0.4",
+        "ncpu": 12,
+        "mem_total_bytes": 8205291520,
+        "cgroup_version": "1"
+      }
+    }
+  },
+  "problems": [],
+  "status": "MATCH"
+}

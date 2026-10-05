@@ -1,0 +1,16 @@
+[start] wallet / b1-pqc using: D:\nam4\HK251\DACN\MainProject\main\wallet-vc-model\pqc-wallet\docker-compose.yml
+ Container pqc_wallet_gateway  Creating
+ Container pqc_wallet_gateway  Created
+ Container pqc_wallet_java  Creating
+ Container pqc_wallet_java  Created
+ Container pqc_wallet_gateway  Starting
+ Container pqc_wallet_gateway  Started
+ Container pqc_wallet_java  Starting
+ Container pqc_wallet_java  Started
+
+=== Active VDAM Containers ===
+
+NAMES                STATUS                  PORTS
+pqc_wallet_java      Up Less than a second   5000/tcp
+pqc_wallet_gateway   Up Less than a second   0.0.0.0:3443->3443/tcp, 4433/tcp
+[start] wallet / b1-pqc done.

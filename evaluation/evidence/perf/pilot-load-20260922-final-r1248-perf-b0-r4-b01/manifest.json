@@ -1,0 +1,66 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-LOAD-01",
+  "experiment_purpose": "pilot",
+  "campaign_id": "pilot-load-20260922-final-r1248",
+  "run_id": "pilot-load-20260922-final-r1248-perf-b0-r4-b01",
+  "paired_block_id": "pilot-load-20260922-final-r1248-r4-pb01",
+  "batch": 1,
+  "configuration": "B0-C0",
+  "workload": "Medium",
+  "mode": "repeated",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "scheduler": "constant_arrival_rate_open_loop",
+  "offered_rate_tps": 4.0,
+  "window": {
+    "warmup_s": 10,
+    "warmup_drain_s": 10,
+    "measure_s": 30,
+    "drain_s": 10,
+    "cooldown_s": 30
+  },
+  "vu_pool": {
+    "pre_allocated": 50,
+    "max": 1000
+  },
+  "source_digest": "88d7d61a4150f497cc1bfcf853a0953b306728d2974c210d0a7a72353b8a10aa",
+  "source_identity": {
+    "git_commit": null,
+    "worktree_dirty": "unknown",
+    "source_digest": "88d7d61a4150f497cc1bfcf853a0953b306728d2974c210d0a7a72353b8a10aa",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": "git_head_unavailable"
+  },
+  "isolation_proof": null,
+  "root_vc_digest": null,
+  "started_at": "2026-09-22T14:48:06.039271+00:00",
+  "ended_at": "2026-09-22T14:49:06.122300+00:00",
+  "k6_exit_status": 0,
+  "stop_reason": null,
+  "measurement_status": "VALID",
+  "run_outcome": "DEGRADED",
+  "reason": null,
+  "metrics": {
+    "scheduled": 120.0,
+    "started": 120.0,
+    "not_started": 0,
+    "success": 23,
+    "failed": 91,
+    "unfinished": 6.0,
+    "boundary_iterations": 0,
+    "failed_by_stage": {
+      "login": 91
+    },
+    "throughput_tps": 0.7667,
+    "error_rate_pct": 80.8333,
+    "p50_ms": 6782.407,
+    "p95_ms": 9784.55,
+    "p99_ms": 10160.246,
+    "min_ms": 1183.337,
+    "max_ms": 10253.842,
+    "counter_invariant_ok": true
+  }
+}

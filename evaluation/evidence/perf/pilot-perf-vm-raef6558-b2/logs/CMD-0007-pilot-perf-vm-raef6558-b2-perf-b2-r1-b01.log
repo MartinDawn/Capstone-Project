@@ -1,0 +1,2 @@
+Executing under process supervision: C:\Program Files\k6\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-vm-raef6558-b2-perf-b2-r1-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js
+time="2026-09-23T13:36:56+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=eaaaf6a3-61b5-4f44-a0f4-c543bf8cb9b8\": request timeout"

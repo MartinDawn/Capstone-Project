@@ -1,0 +1,5 @@
+run_id,window_id,model,workload,sample,artifact_name,artifact_type,size_bytes,sha256_digest,availability,missing_reason,measurement_method,timestamp
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0,medium-b0,B0-C0,Medium,1,par_request_uri,text/uri-list,70,97038161a15fb7ac9a0b8e779d2672fc064bad052034a029cbd4d797edf43c0b,AVAILABLE,,utf8_serialized_bytes,2026-09-22T13:41:12.482372+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0,medium-b0,B0-C0,Medium,1,par_request_object,application/jwt,,,UNAVAILABLE,NOT_OBSERVABLE_AT_CLIENT_BOUNDARY_ONLY_THE_REQUEST_URI_IS_RETURNED,not_measured,2026-09-22T13:41:12.482372+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0,medium-b0,B0-C0,Medium,1,authorization_code,text/plain,110,014fc15afbcae2072ebdfe93d12031a1b28f54c518c92d61cf6927991eb1cca1,AVAILABLE,,utf8_serialized_bytes,2026-09-22T13:41:12.482372+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0,medium-b0,B0-C0,Medium,1,access_token,application/jwt,1265,e56c9fa7316b613cd60a09092ba04d721253fc2b0dff2ddb196826f9c0153ae3,AVAILABLE,,utf8_serialized_bytes,2026-09-22T13:41:12.482372+00:00

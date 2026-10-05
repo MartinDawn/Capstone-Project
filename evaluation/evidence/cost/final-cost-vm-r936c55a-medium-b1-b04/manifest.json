@@ -1,0 +1,91 @@
+{
+  "schema_version": "4.0.0",
+  "experiment_id": "EXP-COST-01",
+  "experiment_purpose": "final",
+  "protocol_id": "BP-20260922-v6",
+  "campaign_id": "final-cost-vm-r936c55a",
+  "run_id": "final-cost-vm-r936c55a-medium-b1-b04",
+  "paired_block_id": "final-cost-vm-r936c55a-medium-pb04",
+  "batch": 4,
+  "configuration": "B1-C0",
+  "workload": "Medium",
+  "mode": "repeated_authorization",
+  "scope": "authorization_only",
+  "measurement_boundary": "first authorization request through access-token issuance",
+  "concurrency": 1,
+  "driver": "python_sequential",
+  "latency_clock": "time.perf_counter_ns (monotonic); wall-clock timestamps are provenance only",
+  "model_order_in_block": [
+    "B1-C0",
+    "B1-C2",
+    "B0-C0"
+  ],
+  "position_in_block": 1,
+  "settings": {
+    "batches": 5,
+    "attempts_per_batch": 10,
+    "warmup_attempts": 2
+  },
+  "protocol_digest": "1395e6c46d844446698b9b32902d6a7784fb13291633b0492ce60d43503d0f44",
+  "configuration_digest": "e144efede093b6484b767f773e37c6913d039a4c0926f75982ab336582aca3c3",
+  "fixture_digest": "5ab7741a7c31144311a19828f2160b9cf8607fd8fe064be711948f89bb6aa863",
+  "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+  "source_identity": {
+    "git_commit": "936c55a48685d781d49970498f31bebf4b63b2ae",
+    "worktree_dirty": "false",
+    "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": ""
+  },
+  "sut_commits": {
+    "B0-C0": {
+      "directory": "traditional-fapi",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C0": {
+      "directory": "wallet-vc-model-classical",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C2": {
+      "directory": "wallet-vc-model",
+      "commit": null,
+      "scope": "evaluation_repository"
+    }
+  },
+  "environment": "vm",
+  "fingerprint": {
+    "file": "fingerprint.json",
+    "sha256": "7b54db28d7d433401841385f146046bc880d93acd2572d730933ecf0a54b7dc2"
+  },
+  "started_at": "2026-09-23T09:07:05.364913+00:00",
+  "ended_at": "2026-09-23T09:09:41.763086+00:00",
+  "status": "COMPLETED",
+  "reason": null,
+  "warmup_attempts_recorded": 2,
+  "metrics": {
+    "attempted": 10,
+    "succeeded": 10,
+    "failed": 0,
+    "failure_denominator": 10,
+    "failure_rate_pct": 0.0,
+    "median_ms": 2651.117,
+    "mean_ms": 2746.8642,
+    "stdev_ms": 204.933810623387,
+    "min_ms": 2579.816,
+    "max_ms": 3213.88,
+    "p95_ms": 3119.8115500000004,
+    "p99_ms": 3195.06631,
+    "median_wire_bytes": 7483.0,
+    "mean_wire_bytes": 7483.0,
+    "wire_samples": 10
+  },
+  "f1": {
+    "outcome": "SUCCESS",
+    "latency_ms": 6675.498,
+    "wire_bytes": 68000,
+    "root_vc_bytes": 4035,
+    "reported_separately": true
+  }
+}

@@ -1,0 +1,2 @@
+Executing under process supervision: C:\Program Files\k6\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-vm-raef6558-b0-perf-b0-r2-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js
+time="2026-09-23T13:23:43+07:00" level=warning msg="Request Failed" error="Post \"https://8.216.28.124:4443/api/auth/initiate\": request timeout"

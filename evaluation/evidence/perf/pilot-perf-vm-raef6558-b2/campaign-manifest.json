@@ -1,0 +1,195 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_family": "perf",
+  "campaign_id": "pilot-perf-vm-raef6558-b2",
+  "experiment_purpose": "pilot",
+  "configuration_path": "evaluation/configs/perf-vm.json",
+  "configuration_digest": "a12f121d83593d8e199866232fbd1d02bf3bec25432e066ae8f01cbac5815117",
+  "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+    "dirty_patch_digest": "bdf7207e12cde3a32e1ab672f93b1aa5abf60dcc67de8965d4a4397ecfebd87d",
+    "dirty_patch_reason": ""
+  },
+  "created_at": "2026-09-23T06:40:24.372962+00:00",
+  "notes": [
+    "offered_rate_levels_tps=[1.0, 2.0, 4.0, 8.0], batches=1, workload=Medium, scope=authorization_only, driver=k6"
+  ],
+  "commands": [
+    {
+      "command_id": "CMD-0001",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T06:34:18.026705+00:00",
+      "ended_at": "2026-09-23T06:34:21.099261+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0001-reset-stop-b2-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0002",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T06:34:21.099261+00:00",
+      "ended_at": "2026-09-23T06:34:24.082412+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0002-reset-stop-b2-b01-host2.log"
+    },
+    {
+      "command_id": "CMD-0003",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T06:34:24.082412+00:00",
+      "ended_at": "2026-09-23T06:34:25.883639+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0003-reset-stop-b2-b01-host3.log"
+    },
+    {
+      "command_id": "CMD-0004",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh bank start b1-pqc'",
+      "started_at": "2026-09-23T06:34:25.883639+00:00",
+      "ended_at": "2026-09-23T06:35:01.354650+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0004-start-b2-role1.log"
+    },
+    {
+      "command_id": "CMD-0005",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh tpp start b1-pqc'",
+      "started_at": "2026-09-23T06:35:01.355642+00:00",
+      "ended_at": "2026-09-23T06:35:04.632794+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0005-start-b2-role2.log"
+    },
+    {
+      "command_id": "CMD-0006",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 wallet start b1-pqc",
+      "started_at": "2026-09-23T06:35:04.633787+00:00",
+      "ended_at": "2026-09-23T06:35:05.476334+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0006-start-b2-role3.log"
+    },
+    {
+      "command_id": "CMD-0007",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-vm-raef6558-b2-perf-b2-r1-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:36:00.030006+00:00",
+      "ended_at": "2026-09-23T06:36:56.713905+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0007-pilot-perf-vm-raef6558-b2-perf-b2-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0008",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-vm-raef6558-b2-perf-b2-r2-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:36:56.732918+00:00",
+      "ended_at": "2026-09-23T06:37:49.197618+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0008-pilot-perf-vm-raef6558-b2-perf-b2-r2-b01.log"
+    },
+    {
+      "command_id": "CMD-0009",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-vm-raef6558-b2-perf-b2-r4-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:37:49.227033+00:00",
+      "ended_at": "2026-09-23T06:38:41.864634+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0009-pilot-perf-vm-raef6558-b2-perf-b2-r4-b01.log"
+    },
+    {
+      "command_id": "CMD-0010",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-vm-raef6558-b2-perf-b2-r8-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:38:41.903902+00:00",
+      "ended_at": "2026-09-23T06:39:41.413665+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0010-pilot-perf-vm-raef6558-b2-perf-b2-r8-b01.log"
+    },
+    {
+      "command_id": "CMD-0011",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T06:40:11.463762+00:00",
+      "ended_at": "2026-09-23T06:40:16.115250+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0011-post-stop-all-host1.log"
+    },
+    {
+      "command_id": "CMD-0012",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T06:40:16.115250+00:00",
+      "ended_at": "2026-09-23T06:40:21.279104+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0012-post-stop-all-host2.log"
+    },
+    {
+      "command_id": "CMD-0013",
+      "campaign_id": "pilot-perf-vm-raef6558-b2",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T06:40:21.279104+00:00",
+      "ended_at": "2026-09-23T06:40:23.983932+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-vm-raef6558-b2/logs/CMD-0013-post-stop-all-host3.log"
+    }
+  ],
+  "dispositions": [
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "pilot-perf-vm-raef6558-b2-perf-b2-r1-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "pilot-perf-vm-raef6558-b2-perf-b2-r2-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "COMPLETED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "pilot-perf-vm-raef6558-b2-perf-b2-r4-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "pilot-perf-vm-raef6558-b2-perf-b2-r8-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    }
+  ]
+}

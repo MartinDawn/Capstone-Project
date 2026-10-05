@@ -1,0 +1,40 @@
+[start] conformance / b0 using: D:\nam4\HK251\DACN\MainProject\main\traditional-fapi\docker-compose.yml, D:\nam4\HK251\DACN\MainProject\main\evaluation\configs\conformance-ports\b0.yml
+ Container postgres-fapi  Creating
+ Container postgres-fapi  Created
+ Container keycloak-fapi  Creating
+ Container keycloak-fapi  Created
+ Container resource-server-fapi  Creating
+ Container resource-server-fapi  Created
+ Container fapi_bank_gateway  Creating
+ Container fapi_bank_gateway  Created
+ Container tpp-fapi  Creating
+ Container tpp-fapi  Created
+ Container fapi_tpp_gateway  Creating
+ Container fapi_tpp_gateway  Created
+ Container postgres-fapi  Starting
+ Container postgres-fapi  Started
+ Container postgres-fapi  Waiting
+ Container postgres-fapi  Healthy
+ Container keycloak-fapi  Starting
+ Container keycloak-fapi  Started
+ Container resource-server-fapi  Starting
+ Container resource-server-fapi  Started
+ Container keycloak-fapi  Waiting
+ Container keycloak-fapi  Healthy
+ Container fapi_bank_gateway  Starting
+ Container fapi_bank_gateway  Started
+ Container tpp-fapi  Starting
+ Container tpp-fapi  Started
+ Container fapi_tpp_gateway  Starting
+ Container fapi_tpp_gateway  Started
+
+=== Active VDAM Containers ===
+
+NAMES                  STATUS                    PORTS
+fapi_tpp_gateway       Up Less than a second     0.0.0.0:4443->4443/tcp, 80/tcp, 0.0.0.0:6443->6443/tcp
+tpp-fapi               Up Less than a second     0.0.0.0:3000->3000/tcp
+fapi_bank_gateway      Up Less than a second     80/tcp, 0.0.0.0:8443->8443/tcp
+resource-server-fapi   Up 26 seconds             0.0.0.0:4000->4000/tcp
+keycloak-fapi          Up 26 seconds (healthy)   0.0.0.0:8080->8080/tcp, 8443/tcp
+postgres-fapi          Up 32 seconds (healthy)   5432/tcp
+[start] conformance / b0 done.

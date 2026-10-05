@@ -1,0 +1,11 @@
+[start] tpp / b0 using: /root/vdam/traditional-fapi/docker-compose.tpp.yml
+ Container tpp-fapi Starting 
+ Container tpp-fapi Started 
+ Container fapi_tpp_gateway Starting 
+ Container fapi_tpp_gateway Started 
+
+=== Active VDAM Containers ===
+NAMES              STATUS                  PORTS
+fapi_tpp_gateway   Up Less than a second   0.0.0.0:4443->4443/tcp, [::]:4443->4443/tcp, 80/tcp, 0.0.0.0:6443->6443/tcp, [::]:6443->6443/tcp
+tpp-fapi           Up Less than a second   3000/tcp
+[start] tpp / b0 done.

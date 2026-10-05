@@ -1,0 +1,11 @@
+run_id,model,workload,sample,layer,phase,step,wire_bytes,timestamp
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,authorization,request_delegate,2097,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,authorization,fetch_request,1907,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,authorization,approve_delegate,1685,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,authorization,token_exchange,1782,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,authorization,total_authorization,7471,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,F1_issuance,offer,848,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,F1_issuance,start_auth,774,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,F1_issuance,keycloak_login,12139,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,F1_issuance,callback,54264,2026-09-22T13:42:48.657964+00:00
+smoke-artifacts-local-20260922-medium-final-artifacts-medium-b1,B1-C0,Medium,1,ApplicationLevelAuthorizationWireBytes,F1_issuance,total_f1,68025,2026-09-22T13:42:48.657964+00:00

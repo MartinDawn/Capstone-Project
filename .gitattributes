@@ -18,3 +18,5 @@
 *.png -text
 *.jpg -text
 *.jpeg -text
+evaluation/evidence/** -text
+evaluation/results/** -text

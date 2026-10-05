@@ -1,0 +1,29 @@
+[start] bank / b0 using: /root/vdam/traditional-fapi/docker-compose.bank.yml
+ Container postgres-fapi Creating 
+ Container postgres-fapi Created 
+ Container keycloak-fapi Creating 
+ Container keycloak-fapi Created 
+ Container resource-server-fapi Creating 
+ Container resource-server-fapi Created 
+ Container fapi_bank_gateway Creating 
+ Container fapi_bank_gateway Created 
+ Container postgres-fapi Starting 
+ Container postgres-fapi Started 
+ Container postgres-fapi Waiting 
+ Container postgres-fapi Healthy 
+ Container keycloak-fapi Starting 
+ Container keycloak-fapi Started 
+ Container resource-server-fapi Starting 
+ Container resource-server-fapi Started 
+ Container keycloak-fapi Waiting 
+ Container keycloak-fapi Healthy 
+ Container fapi_bank_gateway Starting 
+ Container fapi_bank_gateway Started 
+
+=== Active VDAM Containers ===
+NAMES                  STATUS                    PORTS
+fapi_bank_gateway      Up Less than a second     80/tcp, 0.0.0.0:8443->8443/tcp, [::]:8443->8443/tcp
+resource-server-fapi   Up 47 seconds             4000/tcp
+keycloak-fapi          Up 47 seconds (healthy)   8080/tcp, 8443/tcp
+postgres-fapi          Up 53 seconds (healthy)   5432/tcp
+[start] bank / b0 done.

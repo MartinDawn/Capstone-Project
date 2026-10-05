@@ -1,0 +1,9 @@
+run_id,configuration,batch,offered_rate_tps,measurement_status,run_outcome,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_rate_pct,p50_ms,p95_ms,p99_ms
+final-load-vm-r095ef2a-perf-b2-r1-b01,B1-C2,1,1.0,VALID,COMPLETED,60.0,61,61,0,0,0,1.0167,0.0,4505.002,7550.555,11796.901
+final-load-vm-r095ef2a-perf-b2-r2-b01,B1-C2,1,2.0,VALID,COMPLETED,120.0,121,121,0,0,0,2.0167,0.0,4097.945,6839.989,8413.804
+final-load-vm-r095ef2a-perf-b2-r4-b01,B1-C2,1,4.0,VALID,DEGRADED,240.0,241,228,13,0,0,3.8,5.3942,4046.787,6686.301,7675.734
+final-load-vm-r095ef2a-perf-b2-r8-b01,B1-C2,1,8.0,VALID,DEGRADED,480.0,481,457,24,0,0,7.6167,4.9896,4156.793,7256.754,10708.709
+final-load-vm-r095ef2a-perf-b2-r1-b02,B1-C2,2,1.0,VALID,COMPLETED,60.0,60.0,60,0,0.0,0,1.0,0.0,4793.588,8409.648,9308.387
+final-load-vm-r095ef2a-perf-b2-r2-b02,B1-C2,2,2.0,VALID,DEGRADED,120.0,121,107,14,0,0,1.7833,11.5702,4261.92,7433.335,8968.174
+final-load-vm-r095ef2a-perf-b2-r4-b02,B1-C2,2,4.0,VALID,DEGRADED,240.0,241,240,1,0,0,4.0,0.4149,4695.368,8262.548,9412.757
+final-load-vm-r095ef2a-perf-b2-r8-b02,B1-C2,2,8.0,VALID,GENERATOR_LIMITED,480.0,476,447,29,0,5,7.45,6.0924,4550.994,7696.781,9330.93

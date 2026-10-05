@@ -1,0 +1,168 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "experiment_family": "conformance",
+  "campaign_id": "conf-final-r5097483",
+  "experiment_purpose": "smoke",
+  "configuration_path": "evaluation/configs/conformance-local.json",
+  "configuration_digest": "a2ea604ac401dbf2e3eeb747688ac07bf093405ac97290f3540048c84806fe10",
+  "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+  "source_identity": {
+    "git_commit": "5097483864d3833b9c907f483060fa0e66a1fe60",
+    "worktree_dirty": "true",
+    "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+    "dirty_patch_digest": "8dbbb9bf000a215d0e318ebde82d063d2dbc22261281f8c9a8ddbf127a13dd46",
+    "dirty_patch_reason": ""
+  },
+  "created_at": "2026-09-23T08:21:00.492434+00:00",
+  "notes": [
+    "B0-C0: environment fingerprint skipped (no lifecycle.fingerprint_hosts)",
+    "B1-C0: environment fingerprint skipped (no lifecycle.fingerprint_hosts)",
+    "B1-C2: environment fingerprint skipped (no lifecycle.fingerprint_hosts)"
+  ],
+  "commands": [
+    {
+      "command_id": "CMD-0001",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T08:16:22.493097+00:00",
+      "ended_at": "2026-09-23T08:16:24.382880+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0001-pre-stop-b0-host1.log"
+    },
+    {
+      "command_id": "CMD-0002",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 conformance start b0",
+      "started_at": "2026-09-23T08:16:24.382880+00:00",
+      "ended_at": "2026-09-23T08:16:57.116815+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0002-start-b0-role1.log"
+    },
+    {
+      "command_id": "CMD-0003",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "python evaluation/bin/conformance/conformance_v3.py --configuration B0-C0 --run-id conf-final-r5097483-conf-b0 --include-quantum",
+      "started_at": "2026-09-23T08:17:17.317261+00:00",
+      "ended_at": "2026-09-23T08:17:38.104682+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0003-conformance-b0.log"
+    },
+    {
+      "command_id": "CMD-0004",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T08:17:38.105203+00:00",
+      "ended_at": "2026-09-23T08:18:03.840770+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0004-post-stop-b0-host1.log"
+    },
+    {
+      "command_id": "CMD-0005",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T08:18:03.840770+00:00",
+      "ended_at": "2026-09-23T08:18:05.711871+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0005-pre-stop-b1-host1.log"
+    },
+    {
+      "command_id": "CMD-0006",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 conformance start b1-classical",
+      "started_at": "2026-09-23T08:18:05.711871+00:00",
+      "ended_at": "2026-09-23T08:18:28.608570+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0006-start-b1-role1.log"
+    },
+    {
+      "command_id": "CMD-0007",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "python evaluation/bin/conformance/conformance_v3.py --configuration B1-C0 --run-id conf-final-r5097483-conf-b1 --include-quantum",
+      "started_at": "2026-09-23T08:18:49.392955+00:00",
+      "ended_at": "2026-09-23T08:19:10.343623+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0007-conformance-b1.log"
+    },
+    {
+      "command_id": "CMD-0008",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T08:19:10.343623+00:00",
+      "ended_at": "2026-09-23T08:19:25.383745+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0008-post-stop-b1-host1.log"
+    },
+    {
+      "command_id": "CMD-0009",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T08:19:25.383745+00:00",
+      "ended_at": "2026-09-23T08:19:27.478745+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0009-pre-stop-b2-host1.log"
+    },
+    {
+      "command_id": "CMD-0010",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 conformance start b1-pqc",
+      "started_at": "2026-09-23T08:19:27.480253+00:00",
+      "ended_at": "2026-09-23T08:19:55.330737+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0010-start-b2-role1.log"
+    },
+    {
+      "command_id": "CMD-0011",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "python evaluation/bin/conformance/conformance_v3.py --configuration B1-C2 --run-id conf-final-r5097483-conf-b2 --include-quantum",
+      "started_at": "2026-09-23T08:20:16.020713+00:00",
+      "ended_at": "2026-09-23T08:20:53.426792+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0011-conformance-b2.log"
+    },
+    {
+      "command_id": "CMD-0012",
+      "campaign_id": "conf-final-r5097483",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T08:20:53.426792+00:00",
+      "ended_at": "2026-09-23T08:21:00.133415+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/conformance/conf-final-r5097483/logs/CMD-0012-post-stop-b2-host1.log"
+    }
+  ],
+  "dispositions": [
+    {
+      "stage": "conformance",
+      "configuration": "B0-C0",
+      "run_id": "conf-final-r5097483-conf-b0",
+      "status": "accepted",
+      "reason": null
+    },
+    {
+      "stage": "conformance",
+      "configuration": "B1-C0",
+      "run_id": "conf-final-r5097483-conf-b1",
+      "status": "accepted",
+      "reason": null
+    },
+    {
+      "stage": "conformance",
+      "configuration": "B1-C2",
+      "run_id": "conf-final-r5097483-conf-b2",
+      "status": "accepted",
+      "reason": null
+    }
+  ]
+}

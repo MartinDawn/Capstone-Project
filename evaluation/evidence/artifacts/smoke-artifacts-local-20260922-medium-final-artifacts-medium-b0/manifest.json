@@ -1,0 +1,100 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-COST-02",
+  "experiment_purpose": "smoke",
+  "campaign_id": "smoke-artifacts-local-20260922-medium-final",
+  "run_id": "smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0",
+  "configuration": "B0-C0",
+  "workload": "Medium",
+  "samples": 1,
+  "scope": "authorization_only",
+  "network_boundary": "application-level authorization wire bytes: request plus response bytes of each named client-facing step; server-to-server traffic, TLS record overhead, retransmission, and link-layer framing are excluded",
+  "f1_reported_separately": false,
+  "protocol_digest": "a4eed04bb920ff4a10509c7c5390f9d70e4bc094c1a329cb4d6820cdbed1a855",
+  "configuration_digest": "79cc7d0529955e043ff8abdcb2459500d610a3f96981a5cca77c5de4b6343330",
+  "fixture_digest": "5ab7741a7c31144311a19828f2160b9cf8607fd8fe064be711948f89bb6aa863",
+  "source_digest": "a9b2f82835cbb5fa288c01980ea6d0aff821be2741fe3ebef113ad50a6dca1c0",
+  "source_identity": {
+    "git_commit": null,
+    "worktree_dirty": "unknown",
+    "source_digest": "a9b2f82835cbb5fa288c01980ea6d0aff821be2741fe3ebef113ad50a6dca1c0",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": "git_head_unavailable"
+  },
+  "sut_commits": {
+    "B0-C0": {
+      "directory": "traditional-fapi",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C0": {
+      "directory": "wallet-vc-model-classical",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C2": {
+      "directory": "wallet-vc-model",
+      "commit": null,
+      "scope": "evaluation_repository"
+    }
+  },
+  "environment": "local",
+  "created_at": "2026-09-22T13:41:15.876366+00:00",
+  "artifacts": [
+    {
+      "artifact_name": "par_request_uri",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        70
+      ]
+    },
+    {
+      "artifact_name": "par_request_object",
+      "availability": "UNAVAILABLE",
+      "missing_reason": "NOT_OBSERVABLE_AT_CLIENT_BOUNDARY_ONLY_THE_REQUEST_URI_IS_RETURNED",
+      "sizes_bytes": []
+    },
+    {
+      "artifact_name": "authorization_code",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        110
+      ]
+    },
+    {
+      "artifact_name": "access_token",
+      "availability": "AVAILABLE",
+      "missing_reason": "",
+      "sizes_bytes": [
+        1265
+      ]
+    }
+  ],
+  "wire_bytes": {
+    "authorization": {
+      "par": 950,
+      "browser_authorization": 12153,
+      "token_exchange": 3361,
+      "total_authorization": 16464
+    }
+  },
+  "f1": null,
+  "raw_packet_capture_local": {
+    "tpp": {
+      "packets": 71,
+      "total_bytes": 26385,
+      "sha256": "fbd0a808206a26384d7206012ae88171b59c5d677dd2f59158f33b6cb30eefdc",
+      "pcap_path": "D:\\nam4\\HK251\\DACN\\MainProject\\main\\evaluation\\evidence\\artifacts\\smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0\\pcap\\b0-medium-tpp.pcap"
+    },
+    "bank": {
+      "packets": 104,
+      "total_bytes": 61423,
+      "sha256": "95601a39c65bb10fa302952d6f446ceba13c53a243c3b3b4bc6133e796960423",
+      "pcap_path": "D:\\nam4\\HK251\\DACN\\MainProject\\main\\evaluation\\evidence\\artifacts\\smoke-artifacts-local-20260922-medium-final-artifacts-medium-b0\\pcap\\b0-medium-bank.pcap"
+    }
+  },
+  "raw_packet_capture_boundary": "LOCAL Docker only, diagnostic (never pooled with application-level wire bytes or with VM evidence): real captured bytes (TCP/IP + TLS ciphertext) on the TPP gateway and Bank gateway containers' own interface for this window, via a network-namespace-sharing tcpdump sidecar. No TLS decryption; payload content is never read or stored. See docs/plan.txt section 4.3 and decision DEC-022."
+}

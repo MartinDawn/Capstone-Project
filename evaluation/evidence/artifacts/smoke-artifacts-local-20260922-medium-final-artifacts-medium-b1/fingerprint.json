@@ -1,0 +1,142 @@
+{
+  "model": "B1-C0",
+  "resource_table": "evaluation/manifests/resource-limits.json",
+  "hosts": {
+    "local": {
+      "containers": [
+        {
+          "name": "classical_bank_issuer",
+          "service": "bank-issuer",
+          "image": "vdam-classical-baseline-bank-issuer",
+          "image_id": "sha256:9ad184f604680ed73e3c154f1bae2c272dd7c14a5ccd96f77b7c83a3fc4d123a",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "classical_tpp_java",
+          "service": "tpp-java",
+          "image": "vdam-classical-baseline-tpp-java",
+          "image_id": "sha256:192daa88c7d606d55d1fb4eb55bf05c3e3122849de660e8c507d8536f70376eb",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "classical_wallet_java",
+          "service": "wallet",
+          "image": "vdam-classical-baseline-wallet",
+          "image_id": "sha256:4e3ec148f8e5fd1ac526ad059730e8bd5e81dd2de8e9aa1dc2303a8504e502ff",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "classical_wallet_gateway",
+          "service": "wallet-gateway",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:55fcc661c2cd4666d0e916410c029ae22042638bcdc8ed98805bfd9d29e08e38",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "classical_resource_server",
+          "service": "resource-server",
+          "image": "vdam-classical-baseline-resource-server",
+          "image_id": "sha256:f443c0a9ce4487fff34ad1e376e65c4453b001c169b48dcd7146e2c4b09cd848",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "NODE_OPTIONS=--max-http-header-size=65536"
+          ]
+        },
+        {
+          "name": "classical_tls_server_proxy",
+          "service": "tls-server-proxy",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:55fcc661c2cd4666d0e916410c029ae22042638bcdc8ed98805bfd9d29e08e38",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "classical_keycloak",
+          "service": "keycloak",
+          "image": "quay.io/keycloak/keycloak:26.6.4@sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4",
+          "image_id": "sha256:1361d6e492058a69d979ab735cfc19e73e5f1e0a707e8fa5cfb610c00bc3cff2",
+          "nano_cpus": 1500000000,
+          "memory_bytes": 1610612736,
+          "memory_swap_bytes": 3221225472,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "KC_LOG_LEVEL=INFO"
+          ]
+        },
+        {
+          "name": "classical_postgres",
+          "service": "postgres",
+          "image": "postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246",
+          "image_id": "sha256:afdbd967cf653afc901851ccf14bc5a2f310748303577963e99dd117c1554527",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "classical_tpp_gateway",
+          "service": "tpp-gateway",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:55fcc661c2cd4666d0e916410c029ae22042638bcdc8ed98805bfd9d29e08e38",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "28.0.4",
+        "ncpu": 12,
+        "mem_total_bytes": 8205291520,
+        "cgroup_version": "1"
+      }
+    }
+  },
+  "problems": [],
+  "status": "MATCH"
+}

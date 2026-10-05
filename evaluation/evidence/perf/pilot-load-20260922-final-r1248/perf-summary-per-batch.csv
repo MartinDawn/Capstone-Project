@@ -1,0 +1,9 @@
+run_id,configuration,batch,offered_rate_tps,measurement_status,run_outcome,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_rate_pct,p50_ms,p95_ms,p99_ms
+pilot-load-20260922-final-r1248-perf-b1-r1-b01,B1-C0,1,1.0,VALID,COMPLETED,30.0,31,31,0,0,0,1.0333,0.0,4239.447,8160.118,9545.9
+pilot-load-20260922-final-r1248-perf-b1-r2-b01,B1-C0,1,2.0,VALID,COMPLETED,60.0,60.0,60,0,0.0,0,2.0,0.0,4434.615,6599.406,8777.196
+pilot-load-20260922-final-r1248-perf-b1-r4-b01,B1-C0,1,4.0,VALID,COMPLETED,120.0,121,121,0,0,0,4.0333,0.0,3932.96,6190.784,7832.944
+pilot-load-20260922-final-r1248-perf-b1-r8-b01,B1-C0,1,8.0,VALID,COMPLETED,240.0,240.0,240,0,0.0,0,8.0,0.0,4060.421,6520.265,8149.817
+pilot-load-20260922-final-r1248-perf-b2-r1-b01,B1-C2,1,1.0,VALID,DEGRADED,30.0,30.0,29,1,0.0,0,0.9667,3.3333,5051.233,6633.492,7432.308
+pilot-load-20260922-final-r1248-perf-b2-r2-b01,B1-C2,1,2.0,VALID,COMPLETED,60.0,60.0,60,0,0.0,0,2.0,0.0,5361.763,9951.268,12412.52
+pilot-load-20260922-final-r1248-perf-b2-r4-b01,B1-C2,1,4.0,VALID,DEGRADED,120.0,121,119,2,0,0,3.9667,1.6529,5220.051,7971.488,9091.254
+pilot-load-20260922-final-r1248-perf-b2-r8-b01,B1-C2,1,8.0,VALID,GENERATOR_LIMITED,240.0,232,231,1,0,9,7.7,0.431,5926.719,8911.884,10435.672

@@ -1,0 +1,11 @@
+[start] tpp / b1-pqc using: /root/vdam/wallet-vc-model/pqc-tpp/docker-compose.yml
+ Container pqc_tpp_gateway Starting 
+ Container pqc_tpp_gateway Started 
+ Container pqc_tpp_java Starting 
+ Container pqc_tpp_java Started 
+
+=== Active VDAM Containers ===
+NAMES             STATUS                  PORTS
+pqc_tpp_java      Up Less than a second   6001/tcp
+pqc_tpp_gateway   Up Less than a second   0.0.0.0:4443->4443/tcp, [::]:4443->4443/tcp, 4433/tcp, 0.0.0.0:6443->6443/tcp, [::]:6443->6443/tcp
+[start] tpp / b1-pqc done.

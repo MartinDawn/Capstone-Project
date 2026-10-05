@@ -1,0 +1,59 @@
+[start] conformance / b1-classical using: D:\nam4\HK251\DACN\MainProject\main\wallet-vc-model-classical\docker-compose.yml, D:\nam4\HK251\DACN\MainProject\main\evaluation\configs\conformance-ports\b1.yml
+ Container classical_tpp_gateway  Creating
+ Container classical_postgres  Creating
+ Container classical_wallet_gateway  Creating
+ Container classical_wallet_gateway  Created
+ Container classical_wallet_java  Creating
+ Container classical_postgres  Created
+ Container classical_keycloak  Creating
+ Container classical_tpp_gateway  Created
+ Container classical_tpp_java  Creating
+ Container classical_wallet_java  Created
+ Container classical_keycloak  Created
+ Container classical_bank_issuer  Creating
+ Container classical_tls_server_proxy  Creating
+ Container classical_tpp_java  Created
+ Container classical_tls_server_proxy  Created
+ Container classical_bank_issuer  Created
+ Container classical_resource_server  Creating
+ Container classical_resource_server  Created
+ Container classical_wallet_gateway  Starting
+ Container classical_tpp_gateway  Starting
+ Container classical_postgres  Starting
+ Container classical_postgres  Started
+ Container classical_postgres  Waiting
+ Container classical_tpp_gateway  Started
+ Container classical_tpp_java  Starting
+ Container classical_wallet_gateway  Started
+ Container classical_wallet_java  Starting
+ Container classical_tpp_java  Started
+ Container classical_wallet_java  Started
+ Container classical_postgres  Healthy
+ Container classical_keycloak  Starting
+ Container classical_keycloak  Started
+ Container classical_keycloak  Waiting
+ Container classical_keycloak  Waiting
+ Container classical_keycloak  Healthy
+ Container classical_bank_issuer  Starting
+ Container classical_keycloak  Healthy
+ Container classical_tls_server_proxy  Starting
+ Container classical_bank_issuer  Started
+ Container classical_keycloak  Waiting
+ Container classical_tls_server_proxy  Started
+ Container classical_keycloak  Healthy
+ Container classical_resource_server  Starting
+ Container classical_resource_server  Started
+
+=== Active VDAM Containers ===
+
+NAMES                        STATUS                    PORTS
+classical_resource_server    Up Less than a second     0.0.0.0:4000->4000/tcp
+classical_bank_issuer        Up 1 second               0.0.0.0:7000->7000/tcp
+classical_tls_server_proxy   Up 1 second               0.0.0.0:8443->8443/tcp, 80/tcp, 0.0.0.0:9443->9443/tcp
+classical_tpp_java           Up 42 seconds             0.0.0.0:6001->6001/tcp
+classical_keycloak           Up 37 seconds (healthy)   8443/tcp, 0.0.0.0:8080->8080/tcp, 9000/tcp
+classical_wallet_java        Up 42 seconds             0.0.0.0:5000->5000/tcp
+classical_tpp_gateway        Up 43 seconds             0.0.0.0:4443->4443/tcp, 80/tcp, 0.0.0.0:6443->6443/tcp
+classical_postgres           Up 43 seconds (healthy)   5432/tcp
+classical_wallet_gateway     Up 43 seconds             80/tcp, 0.0.0.0:3443->3443/tcp
+[start] conformance / b1-classical done.

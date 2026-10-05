@@ -1,0 +1,149 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_family": "artifacts",
+  "campaign_id": "smoke-artifacts-local-raef6558",
+  "experiment_purpose": "smoke",
+  "configuration_path": "evaluation/configs/cost-local.json",
+  "configuration_digest": "79cc7d0529955e043ff8abdcb2459500d610a3f96981a5cca77c5de4b6343330",
+  "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+    "dirty_patch_digest": "bdf7207e12cde3a32e1ab672f93b1aa5abf60dcc67de8965d4a4397ecfebd87d",
+    "dirty_patch_reason": ""
+  },
+  "created_at": "2026-09-23T05:32:54.676380+00:00",
+  "notes": [
+    "purpose=smoke; workloads=['Medium']; models=['B0-C0', 'B1-C0', 'B1-C2']; samples=1; sizes and digests only, no artifact content is stored"
+  ],
+  "commands": [
+    {
+      "command_id": "CMD-0001",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:27:46.929151+00:00",
+      "ended_at": "2026-09-23T05:27:49.042371+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0001-initial-stop-all-host1.log"
+    },
+    {
+      "command_id": "CMD-0002",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:27:49.042371+00:00",
+      "ended_at": "2026-09-23T05:27:51.097179+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0002-pre-stop-medium-b0-host1.log"
+    },
+    {
+      "command_id": "CMD-0003",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 local start b0",
+      "started_at": "2026-09-23T05:27:51.098174+00:00",
+      "ended_at": "2026-09-23T05:28:24.210314+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0003-start-b0-role1.log"
+    },
+    {
+      "command_id": "CMD-0004",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:28:56.655858+00:00",
+      "ended_at": "2026-09-23T05:29:21.973557+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0004-post-stop-medium-b0-host1.log"
+    },
+    {
+      "command_id": "CMD-0005",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:29:21.973557+00:00",
+      "ended_at": "2026-09-23T05:29:24.354050+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0005-pre-stop-medium-b1-host1.log"
+    },
+    {
+      "command_id": "CMD-0006",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 local start b1-classical",
+      "started_at": "2026-09-23T05:29:24.354976+00:00",
+      "ended_at": "2026-09-23T05:30:24.229810+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0006-start-b1-role1.log"
+    },
+    {
+      "command_id": "CMD-0007",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:30:58.787146+00:00",
+      "ended_at": "2026-09-23T05:31:13.449212+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0007-post-stop-medium-b1-host1.log"
+    },
+    {
+      "command_id": "CMD-0008",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:31:13.449212+00:00",
+      "ended_at": "2026-09-23T05:31:15.487512+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0008-pre-stop-medium-b2-host1.log"
+    },
+    {
+      "command_id": "CMD-0009",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 local start b1-pqc",
+      "started_at": "2026-09-23T05:31:15.487512+00:00",
+      "ended_at": "2026-09-23T05:32:14.688389+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0009-start-b2-role1.log"
+    },
+    {
+      "command_id": "CMD-0010",
+      "campaign_id": "smoke-artifacts-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T05:32:48.827672+00:00",
+      "ended_at": "2026-09-23T05:32:54.376764+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/artifacts/smoke-artifacts-local-raef6558/logs/CMD-0010-post-stop-medium-b2-host1.log"
+    }
+  ],
+  "dispositions": [
+    {
+      "stage": "artifacts",
+      "configuration": "B0-C0",
+      "workload": "Medium",
+      "run_id": "smoke-artifacts-local-raef6558-artifacts-medium-b0",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "artifacts",
+      "configuration": "B1-C0",
+      "workload": "Medium",
+      "run_id": "smoke-artifacts-local-raef6558-artifacts-medium-b1",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "artifacts",
+      "configuration": "B1-C2",
+      "workload": "Medium",
+      "run_id": "smoke-artifacts-local-raef6558-artifacts-medium-b2",
+      "status": "executed",
+      "reason": null
+    }
+  ]
+}

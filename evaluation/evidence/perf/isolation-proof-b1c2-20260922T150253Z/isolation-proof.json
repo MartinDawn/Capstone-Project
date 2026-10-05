@@ -1,0 +1,60 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "experiment_id": "EXP-PERF-02",
+  "configuration": "B1-C2",
+  "concurrency": 2,
+  "scope": "authorization_only",
+  "isolation_verified": true,
+  "started_at": "2026-09-22T15:02:53.561678+00:00",
+  "ended_at": "2026-09-22T15:03:22.198831+00:00",
+  "duration_ms": 28641.0,
+  "source_digest": "88d7d61a4150f497cc1bfcf853a0953b306728d2974c210d0a7a72353b8a10aa",
+  "source_identity": {
+    "git_commit": null,
+    "worktree_dirty": "unknown",
+    "source_digest": "88d7d61a4150f497cc1bfcf853a0953b306728d2974c210d0a7a72353b8a10aa",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": "git_head_unavailable"
+  },
+  "comparison_objects": [
+    {
+      "transaction_id": "tx-1",
+      "thread_id": "2616",
+      "session_instance_uuid": "8c15e0e6-a81d-4afb-9091-9bd864a48a30",
+      "trace_id": "iso-tx-1",
+      "access_token_digest": "1fbcc9a4c4e69feb557be4ed7be75aa776e150683b7a8d31a9fccb62e92e9d51",
+      "delegation_jti": "urn:uuid:bd566bb8-bc15-4f2f-90ca-cc5785f0b662",
+      "challenge_id": "8cc4832b-0776-4d5c-9d80-64e82b92a503"
+    },
+    {
+      "transaction_id": "tx-2",
+      "thread_id": "19692",
+      "session_instance_uuid": "6209df6b-c4d7-4a5b-82f7-6891def8671f",
+      "trace_id": "iso-tx-2",
+      "access_token_digest": "a4b4213298105b1cdcaf2bfeefade6eacb08c2c5a5c43fe71007b8c15c59dbbe",
+      "delegation_jti": "urn:uuid:23c9943c-e300-4084-8dc9-2e669e130d7d",
+      "challenge_id": "53f84bfe-41ee-46cf-857c-8e65401a4a00"
+    }
+  ],
+  "sanitized_transactions": [
+    {
+      "transaction_id": "tx-1",
+      "status": "SUCCESS",
+      "error_sanitized": null
+    },
+    {
+      "transaction_id": "tx-2",
+      "status": "SUCCESS",
+      "error_sanitized": null
+    }
+  ],
+  "isolation_checks": {
+    "no_shared_mutable_cookies": true,
+    "distinct_worker_execution_threads": true,
+    "zero_observed_cross_talk": true,
+    "details": [
+      "FAILURE_INJECTION_TEST: failing transaction isolated; concurrent transaction completed intact"
+    ]
+  }
+}

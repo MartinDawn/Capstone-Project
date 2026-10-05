@@ -1,0 +1,11 @@
+configuration,step,offered_rate_tps,duration_s,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_pct,p50_ms,p95_ms,p99_ms,p95_vs_first_ok,verdict
+B0-C0,step_01_r1,1,30,30,31,31,0,0,0,1.033,0.0,1159.0,1319.8,1360.9,1.0,OK
+B0-C0,step_02_r2,2,30,60,60,60,0,0,0,2.0,0.0,1151.9,1272.1,1362.8,0.96,OK
+B0-C0,step_03_r3,3,30,90,91,91,0,0,0,3.033,0.0,1218.2,1605.9,1847.0,1.22,OK
+B0-C0,step_04_r4,4,30,120,120,53,12,55,0,1.767,55.83,6478.5,10559.3,10992.8,8.0,SATURATED
+B0-C0,step_05_r5,5,30,150,0,0,0,0,0,,,,,,,NOT_REACHED
+B0-C0,step_06_r6,6,30,180,0,0,0,0,0,,,,,,,NOT_REACHED
+B0-C0,step_07_r7,7,30,210,0,0,0,0,0,,,,,,,NOT_REACHED
+B0-C0,step_08_r8,8,30,240,0,0,0,0,0,,,,,,,NOT_REACHED
+B0-C0,step_09_r9,9,30,270,0,0,0,0,0,,,,,,,NOT_REACHED
+B0-C0,step_10_r10,10,30,300,0,0,0,0,0,,,,,,,NOT_REACHED

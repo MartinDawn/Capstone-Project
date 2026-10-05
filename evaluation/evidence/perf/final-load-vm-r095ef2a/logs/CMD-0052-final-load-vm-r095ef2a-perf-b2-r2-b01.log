@@ -1,0 +1,4 @@
+Executing under process supervision: C:\Program Files\k6\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r2-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js
+time="2026-09-23T19:09:22+07:00" level=warning msg="Request Failed" error="Post \"https://localhost:3443/api/approve-delegate\": request timeout"
+time="2026-09-23T19:09:28+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=8704c257-2f21-4dd9-8c3b-79be71c71592\": request timeout"
+time="2026-09-23T19:09:30+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=ba082779-88fa-4a00-b6c5-55f0a079cc3c\": request timeout"

@@ -1,0 +1,272 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "evidence_class": "exploratory_not_protocol_evidence",
+  "experiment_purpose": "probe",
+  "campaign_id": "probe-b1-r1to10-20260922",
+  "run_id": "probe-b1-r1to10-20260922-probe-b2",
+  "configuration": "B1-C2",
+  "workload": "Small",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "ladder": [
+    {
+      "name": "step_01_r1",
+      "rate": 1,
+      "duration": 30
+    },
+    {
+      "name": "step_02_r2",
+      "rate": 2,
+      "duration": 30
+    },
+    {
+      "name": "step_03_r3",
+      "rate": 3,
+      "duration": 30
+    },
+    {
+      "name": "step_04_r4",
+      "rate": 4,
+      "duration": 30
+    },
+    {
+      "name": "step_05_r5",
+      "rate": 5,
+      "duration": 30
+    },
+    {
+      "name": "step_06_r6",
+      "rate": 6,
+      "duration": 30
+    },
+    {
+      "name": "step_07_r7",
+      "rate": 7,
+      "duration": 30
+    },
+    {
+      "name": "step_08_r8",
+      "rate": 8,
+      "duration": 30
+    },
+    {
+      "name": "step_09_r9",
+      "rate": 9,
+      "duration": 30
+    },
+    {
+      "name": "step_10_r10",
+      "rate": 10,
+      "duration": 30
+    }
+  ],
+  "warmup_s": 15,
+  "drain_s": 10,
+  "stop_rules": {
+    "max_fail_pct": 10.0,
+    "stop_p95_ms": 15000.0,
+    "min_throughput_ratio": 0.9
+  },
+  "vu_pool": {
+    "pre_allocated": 300,
+    "max": 1000
+  },
+  "source_digest": "638fca59815ea824ae23937ae53e01268e4a08bdc0c910a45142b348e4218e39",
+  "isolation_proof": "evaluation/evidence/perf/isolation-proof-b1c2-20260922T104631Z/isolation-proof.json",
+  "root_vc_digest": "76a1d1a71b98816bfb46f8f75fc3226da673922543e593cd9dd7d4eaaf2d7f92",
+  "started_at": "2026-09-22T10:46:51.328183+00:00",
+  "ended_at": "2026-09-22T10:53:07.453520+00:00",
+  "k6_exit_status": 99,
+  "status": "STOPPED_BY_THRESHOLD",
+  "reason": null,
+  "knee": {
+    "last_ok_rate_tps": 8,
+    "knee_rate_tps": 9,
+    "knee_verdict": "SATURATED",
+    "knee_reached": true
+  },
+  "rungs": [
+    {
+      "step": "step_01_r1",
+      "offered_rate_tps": 1,
+      "duration_s": 30,
+      "scheduled": 30,
+      "started": 30,
+      "success": 29,
+      "failed": 1,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 0.967,
+      "error_pct": 3.33,
+      "p50_ms": 2645.8,
+      "p95_ms": 2814.2,
+      "p99_ms": 2844.3,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.0
+    },
+    {
+      "step": "step_02_r2",
+      "offered_rate_tps": 2,
+      "duration_s": 30,
+      "scheduled": 60,
+      "started": 61,
+      "success": 61,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 2.033,
+      "error_pct": 0.0,
+      "p50_ms": 2634.5,
+      "p95_ms": 2786.3,
+      "p99_ms": 2846.5,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.99
+    },
+    {
+      "step": "step_03_r3",
+      "offered_rate_tps": 3,
+      "duration_s": 30,
+      "scheduled": 90,
+      "started": 91,
+      "success": 91,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 3.033,
+      "error_pct": 0.0,
+      "p50_ms": 2636.3,
+      "p95_ms": 2792.2,
+      "p99_ms": 2894.3,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.99
+    },
+    {
+      "step": "step_04_r4",
+      "offered_rate_tps": 4,
+      "duration_s": 30,
+      "scheduled": 120,
+      "started": 120,
+      "success": 110,
+      "failed": 10,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 3.667,
+      "error_pct": 8.33,
+      "p50_ms": 2581.0,
+      "p95_ms": 2763.0,
+      "p99_ms": 2789.6,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.98
+    },
+    {
+      "step": "step_05_r5",
+      "offered_rate_tps": 5,
+      "duration_s": 30,
+      "scheduled": 150,
+      "started": 151,
+      "success": 144,
+      "failed": 7,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 4.8,
+      "error_pct": 4.64,
+      "p50_ms": 2571.0,
+      "p95_ms": 2855.5,
+      "p99_ms": 3079.2,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.01
+    },
+    {
+      "step": "step_06_r6",
+      "offered_rate_tps": 6,
+      "duration_s": 30,
+      "scheduled": 180,
+      "started": 181,
+      "success": 171,
+      "failed": 10,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 5.7,
+      "error_pct": 5.52,
+      "p50_ms": 2421.0,
+      "p95_ms": 2655.4,
+      "p99_ms": 2694.1,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.94
+    },
+    {
+      "step": "step_07_r7",
+      "offered_rate_tps": 7,
+      "duration_s": 30,
+      "scheduled": 210,
+      "started": 210,
+      "success": 209,
+      "failed": 1,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 6.967,
+      "error_pct": 0.48,
+      "p50_ms": 2450.6,
+      "p95_ms": 2694.3,
+      "p99_ms": 2741.5,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.96
+    },
+    {
+      "step": "step_08_r8",
+      "offered_rate_tps": 8,
+      "duration_s": 30,
+      "scheduled": 240,
+      "started": 241,
+      "success": 226,
+      "failed": 15,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 7.533,
+      "error_pct": 6.22,
+      "p50_ms": 2397.6,
+      "p95_ms": 2648.2,
+      "p99_ms": 2704.9,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.94
+    },
+    {
+      "step": "step_09_r9",
+      "offered_rate_tps": 9,
+      "duration_s": 30,
+      "scheduled": 270,
+      "started": 270,
+      "success": 188,
+      "failed": 28,
+      "unfinished": 54,
+      "not_started": 0,
+      "throughput_tps": 6.267,
+      "error_pct": 30.37,
+      "p50_ms": 2365.1,
+      "p95_ms": 2609.8,
+      "p99_ms": 2725.9,
+      "verdict": "SATURATED",
+      "p95_vs_first_ok": 0.93
+    },
+    {
+      "step": "step_10_r10",
+      "offered_rate_tps": 10,
+      "duration_s": 30,
+      "scheduled": 300,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    }
+  ]
+}

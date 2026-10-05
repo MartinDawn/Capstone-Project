@@ -1,0 +1,272 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "evidence_class": "exploratory_not_protocol_evidence",
+  "experiment_purpose": "probe",
+  "campaign_id": "probe-b0-r1to10-20260922-2",
+  "run_id": "probe-b0-r1to10-20260922-2-probe-b0",
+  "configuration": "B0-C0",
+  "workload": "Small",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "ladder": [
+    {
+      "name": "step_01_r1",
+      "rate": 1,
+      "duration": 30
+    },
+    {
+      "name": "step_02_r2",
+      "rate": 2,
+      "duration": 30
+    },
+    {
+      "name": "step_03_r3",
+      "rate": 3,
+      "duration": 30
+    },
+    {
+      "name": "step_04_r4",
+      "rate": 4,
+      "duration": 30
+    },
+    {
+      "name": "step_05_r5",
+      "rate": 5,
+      "duration": 30
+    },
+    {
+      "name": "step_06_r6",
+      "rate": 6,
+      "duration": 30
+    },
+    {
+      "name": "step_07_r7",
+      "rate": 7,
+      "duration": 30
+    },
+    {
+      "name": "step_08_r8",
+      "rate": 8,
+      "duration": 30
+    },
+    {
+      "name": "step_09_r9",
+      "rate": 9,
+      "duration": 30
+    },
+    {
+      "name": "step_10_r10",
+      "rate": 10,
+      "duration": 30
+    }
+  ],
+  "warmup_s": 15,
+  "drain_s": 10,
+  "stop_rules": {
+    "max_fail_pct": 10.0,
+    "stop_p95_ms": 15000.0,
+    "min_throughput_ratio": 0.9
+  },
+  "vu_pool": {
+    "pre_allocated": 300,
+    "max": 1000
+  },
+  "source_digest": "638fca59815ea824ae23937ae53e01268e4a08bdc0c910a45142b348e4218e39",
+  "isolation_proof": null,
+  "root_vc_digest": null,
+  "started_at": "2026-09-22T10:25:39.084295+00:00",
+  "ended_at": "2026-09-22T10:28:31.218185+00:00",
+  "k6_exit_status": 99,
+  "status": "STOPPED_BY_THRESHOLD",
+  "reason": null,
+  "knee": {
+    "last_ok_rate_tps": 3,
+    "knee_rate_tps": 4,
+    "knee_verdict": "SATURATED",
+    "knee_reached": true
+  },
+  "rungs": [
+    {
+      "step": "step_01_r1",
+      "offered_rate_tps": 1,
+      "duration_s": 30,
+      "scheduled": 30,
+      "started": 31,
+      "success": 31,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 1.033,
+      "error_pct": 0.0,
+      "p50_ms": 1159.0,
+      "p95_ms": 1319.8,
+      "p99_ms": 1360.9,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.0
+    },
+    {
+      "step": "step_02_r2",
+      "offered_rate_tps": 2,
+      "duration_s": 30,
+      "scheduled": 60,
+      "started": 60,
+      "success": 60,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 2.0,
+      "error_pct": 0.0,
+      "p50_ms": 1151.9,
+      "p95_ms": 1272.1,
+      "p99_ms": 1362.8,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.96
+    },
+    {
+      "step": "step_03_r3",
+      "offered_rate_tps": 3,
+      "duration_s": 30,
+      "scheduled": 90,
+      "started": 91,
+      "success": 91,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 3.033,
+      "error_pct": 0.0,
+      "p50_ms": 1218.2,
+      "p95_ms": 1605.9,
+      "p99_ms": 1847.0,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.22
+    },
+    {
+      "step": "step_04_r4",
+      "offered_rate_tps": 4,
+      "duration_s": 30,
+      "scheduled": 120,
+      "started": 120,
+      "success": 53,
+      "failed": 12,
+      "unfinished": 55,
+      "not_started": 0,
+      "throughput_tps": 1.767,
+      "error_pct": 55.83,
+      "p50_ms": 6478.5,
+      "p95_ms": 10559.3,
+      "p99_ms": 10992.8,
+      "verdict": "SATURATED",
+      "p95_vs_first_ok": 8.0
+    },
+    {
+      "step": "step_05_r5",
+      "offered_rate_tps": 5,
+      "duration_s": 30,
+      "scheduled": 150,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    },
+    {
+      "step": "step_06_r6",
+      "offered_rate_tps": 6,
+      "duration_s": 30,
+      "scheduled": 180,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    },
+    {
+      "step": "step_07_r7",
+      "offered_rate_tps": 7,
+      "duration_s": 30,
+      "scheduled": 210,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    },
+    {
+      "step": "step_08_r8",
+      "offered_rate_tps": 8,
+      "duration_s": 30,
+      "scheduled": 240,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    },
+    {
+      "step": "step_09_r9",
+      "offered_rate_tps": 9,
+      "duration_s": 30,
+      "scheduled": 270,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    },
+    {
+      "step": "step_10_r10",
+      "offered_rate_tps": 10,
+      "duration_s": 30,
+      "scheduled": 300,
+      "started": 0,
+      "success": 0,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": null,
+      "error_pct": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "verdict": "NOT_REACHED",
+      "p95_vs_first_ok": null
+    }
+  ]
+}

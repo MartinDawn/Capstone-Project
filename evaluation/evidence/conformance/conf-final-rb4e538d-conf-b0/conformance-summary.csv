@@ -1,0 +1,3 @@
+suite,tier,configuration,total_cases,passed_cases,failed_cases,inconclusive_cases,not_run_cases
+B0_FAPI_Baseline,SUT_CONFORMANCE,B0-C0,7,7,0,0,0
+TOTAL,ALL_TIERS,B0-C0,7,7,0,0,0

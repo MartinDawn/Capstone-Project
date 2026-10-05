@@ -1,0 +1,4 @@
+protocol_id,campaign_id,configuration,workload,mode,batches,attempted,succeeded,failed,failure_denominator,failure_rate_pct,median_ms,mean_ms,stdev_ms,min_ms,max_ms,p95_ms,p99_ms,median_wire_bytes,mean_wire_bytes,wire_samples
+BP-20260922-v6,final-cost-vm-r936c55a,B0-C0,Medium,repeated_authorization,5,50,50,0,50,0.0,1810.3944999999999,1878.26948,261.25730465235586,1628.261,2873.711,2556.10975,2817.47909,16632.0,16632.0,50
+BP-20260922-v6,final-cost-vm-r936c55a,B1-C0,Medium,repeated_authorization,5,50,50,0,50,0.0,2658.232,2709.92108,160.77062627041428,2501.151,3216.725,3113.0679999999998,3215.33095,7483.0,7483.0,50
+BP-20260922-v6,final-cost-vm-r936c55a,B1-C2,Medium,repeated_authorization,5,50,50,0,50,0.0,3045.035,3080.9958,192.74432506566927,2793.018,4144.57,3315.19335,3809.6246199999982,28088.0,28086.82,50

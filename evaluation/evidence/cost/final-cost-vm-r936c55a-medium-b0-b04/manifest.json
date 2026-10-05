@@ -1,0 +1,87 @@
+{
+  "schema_version": "4.0.0",
+  "experiment_id": "EXP-COST-01",
+  "experiment_purpose": "final",
+  "protocol_id": "BP-20260922-v6",
+  "campaign_id": "final-cost-vm-r936c55a",
+  "run_id": "final-cost-vm-r936c55a-medium-b0-b04",
+  "paired_block_id": "final-cost-vm-r936c55a-medium-pb04",
+  "batch": 4,
+  "configuration": "B0-C0",
+  "workload": "Medium",
+  "mode": "repeated_authorization",
+  "scope": "authorization_only",
+  "measurement_boundary": "first authorization request through access-token issuance",
+  "concurrency": 1,
+  "driver": "python_sequential",
+  "latency_clock": "time.perf_counter_ns (monotonic); wall-clock timestamps are provenance only",
+  "model_order_in_block": [
+    "B1-C0",
+    "B1-C2",
+    "B0-C0"
+  ],
+  "position_in_block": 3,
+  "settings": {
+    "batches": 5,
+    "attempts_per_batch": 10,
+    "warmup_attempts": 2
+  },
+  "protocol_digest": "1395e6c46d844446698b9b32902d6a7784fb13291633b0492ce60d43503d0f44",
+  "configuration_digest": "e144efede093b6484b767f773e37c6913d039a4c0926f75982ab336582aca3c3",
+  "fixture_digest": "5ab7741a7c31144311a19828f2160b9cf8607fd8fe064be711948f89bb6aa863",
+  "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+  "source_identity": {
+    "git_commit": "936c55a48685d781d49970498f31bebf4b63b2ae",
+    "worktree_dirty": "false",
+    "source_digest": "09db2dbfc49fb42288a4bb8214462a16773abe1698a267a82d43d5e5c1f9d64b",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": ""
+  },
+  "sut_commits": {
+    "B0-C0": {
+      "directory": "traditional-fapi",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C0": {
+      "directory": "wallet-vc-model-classical",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C2": {
+      "directory": "wallet-vc-model",
+      "commit": null,
+      "scope": "evaluation_repository"
+    }
+  },
+  "environment": "vm",
+  "fingerprint": {
+    "file": "fingerprint.json",
+    "sha256": "8934049c9790963bf2bcac3b34bf5e349ab3532a9594181602dd739d78f3fd0b"
+  },
+  "started_at": "2026-09-23T08:40:09.168618+00:00",
+  "ended_at": "2026-09-23T08:42:50.174881+00:00",
+  "status": "COMPLETED",
+  "reason": null,
+  "warmup_attempts_recorded": 2,
+  "metrics": {
+    "attempted": 10,
+    "succeeded": 10,
+    "failed": 0,
+    "failure_denominator": 10,
+    "failure_rate_pct": 0.0,
+    "median_ms": 1827.022,
+    "mean_ms": 1926.6196,
+    "stdev_ms": 298.063207820161,
+    "min_ms": 1757.849,
+    "max_ms": 2758.952,
+    "p95_ms": 2395.7192000000005,
+    "p99_ms": 2686.30544,
+    "median_wire_bytes": 16632.0,
+    "mean_wire_bytes": 16632.0,
+    "wire_samples": 10
+  },
+  "f1": {
+    "applicable": false
+  }
+}

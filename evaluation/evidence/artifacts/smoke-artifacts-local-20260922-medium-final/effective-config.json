@@ -1,0 +1,110 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_purpose": "smoke",
+  "environment": "local",
+  "models": [
+    "B0-C0",
+    "B1-C0",
+    "B1-C2"
+  ],
+  "command_environment": {
+    "WALLET_HOST": "localhost",
+    "VDAM_ISSUER_URL": "https://localhost:9443",
+    "VDAM_TPP_URL": "https://localhost:4443",
+    "VDAM_WALLET_URL": "https://localhost:3443",
+    "B0_TPP_URL": "https://localhost:4443"
+  },
+  "lifecycle": {
+    "stop_all_commands": [
+      [
+        "powershell",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "manage.ps1",
+        "stop",
+        "all"
+      ]
+    ],
+    "start_commands": {
+      "B0-C0": [
+        [
+          "powershell",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "manage.ps1",
+          "local",
+          "start",
+          "b0"
+        ]
+      ],
+      "B1-C0": [
+        [
+          "powershell",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "manage.ps1",
+          "local",
+          "start",
+          "b1-classical"
+        ]
+      ],
+      "B1-C2": [
+        [
+          "powershell",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "manage.ps1",
+          "local",
+          "start",
+          "b1-pqc"
+        ]
+      ]
+    },
+    "startup_wait_seconds": 30,
+    "readiness_timeout_seconds": 180,
+    "readiness_urls_by_model": {
+      "B0-C0": [
+        "https://localhost:8443/realms/traditional-fapi/.well-known/openid-configuration",
+        "https://localhost:4443/api/config"
+      ],
+      "B1-C0": [
+        "https://localhost:9443/.well-known/openid-credential-issuer",
+        "https://localhost:4443/api/config",
+        "https://localhost:3443/api/vcs"
+      ],
+      "B1-C2": [
+        "https://localhost:9443/.well-known/openid-credential-issuer",
+        "https://localhost:4443/api/config",
+        "https://localhost:3443/api/vcs"
+      ]
+    },
+    "fingerprint_hosts": [
+      {
+        "name": "local",
+        "docker": [
+          "docker"
+        ]
+      }
+    ]
+  },
+  "approval": {
+    "state": "proposed",
+    "decision_id": null,
+    "frozen_digest": null
+  },
+  "cost": {
+    "workloads": [
+      "Medium"
+    ],
+    "models": [
+      "B0-C0",
+      "B1-C0",
+      "B1-C2"
+    ]
+  }
+}

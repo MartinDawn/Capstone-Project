@@ -1,0 +1,7 @@
+suite,tier,configuration,total_cases,passed_cases,failed_cases,inconclusive_cases,not_run_cases
+Boundary_Matrix_20,ORACLE_UNIT,B1-C2,20,20,0,0,0
+VDAM_Oracle_Math,ORACLE_UNIT,B1-C2,10,10,0,0,0
+Hybrid_PQC_Verification,CRYPTOGRAPHIC_UNIT,B1-C2,7,7,0,0,0
+VDAM_Valid_SUT,SUT_CONFORMANCE,B1-C2,11,11,0,0,0
+VDAM_Negative_SUT,SUT_CONFORMANCE,B1-C2,38,38,0,0,0
+TOTAL,ALL_TIERS,B1-C2,86,86,0,0,0

@@ -1,0 +1,92 @@
+{
+  "catalog_digest": "4b49f4c92fa3f38048aa0524667f3dbd951a8b6529b80ccd77119be86bf1ae76",
+  "command": "evaluation/bin/conformance/conformance_v3.py --configuration B0-C0 --run-id conf-final-rb4e538d-conf-b0 --include-quantum",
+  "configuration": "B0-C0",
+  "ended_at": "2026-09-23T07:51:30.201592+00:00",
+  "experiment_id": "EXP-CONF-01",
+  "experiment_purpose": "smoke",
+  "fixture_digest": "74a54e68c6436fa3c3c7a642fa8a4bb474473038cfd8c61801d1c2c1c9daa7a8",
+  "gate_blockers": [],
+  "gate_disposition": "pass",
+  "protocol_id": "BP-20260915-v3",
+  "quantum_suite": {
+    "deferred_case_ids": [],
+    "deferred_reason": null,
+    "included": false
+  },
+  "required_catalog": [
+    {
+      "applicable": true,
+      "case_id": "B0-F01",
+      "catalog_key": "SUT_CONFORMANCE:B0-F01",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "B0-F02-AccountReduction",
+      "catalog_key": "SUT_CONFORMANCE:B0-F02-AccountReduction",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "B0-F02-PermissionReduction",
+      "catalog_key": "SUT_CONFORMANCE:B0-F02-PermissionReduction",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "B0-F03",
+      "catalog_key": "SUT_CONFORMANCE:B0-F03",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "B0-N01-WrongCert",
+      "catalog_key": "SUT_CONFORMANCE:B0-N01-WrongCert",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "B0-N01-WrongAudience",
+      "catalog_key": "SUT_CONFORMANCE:B0-N01-WrongAudience",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "B0-N01-ExpiredToken",
+      "catalog_key": "SUT_CONFORMANCE:B0-N01-ExpiredToken",
+      "required": true,
+      "suite": "B0_FAPI_Baseline",
+      "tier": "SUT_CONFORMANCE"
+    }
+  ],
+  "result_carry_forward": false,
+  "result_counts": {
+    "FAIL": 0,
+    "INCONCLUSIVE": 0,
+    "NOT_RUN": 0,
+    "PASS": 7
+  },
+  "run_id": "conf-final-rb4e538d-conf-b0",
+  "runtime_profile": "conformance",
+  "schema_version": "3.1.0",
+  "source_digest": "6ff4348a8b90f5eaafd26ac73800cbcf4a6ac6b2dc7f2bb9f52edacb4292e643",
+  "source_identity": {
+    "commit": "b4e538d6b67a3db480d85e217c4b38be68952a4b",
+    "dirty": false
+  },
+  "started_at": "2026-09-23T07:51:09.133856+00:00",
+  "state": "COMPLETE"
+}

@@ -1,0 +1,18 @@
+[start] wallet / b1-classical using: D:\nam4\HK251\DACN\MainProject\main\wallet-vc-model-classical\wallet\docker-compose.yml
+Error: start failed. If the images do not exist yet, run: .\manage.ps1 wallet prepare b1-classical
+Docker Compose 'up -d --no-build' failed for 
+'D:\nam4\HK251\DACN\MainProject\main\wallet-vc-model-classical\wallet\docker-compose.yml':  Container 
+classical_wallet_gateway  Creating Error response from daemon: Conflict. The container name 
+"/classical_wallet_gateway" is already in use by container 
+"30e00111906416e21fd890ca87815128b4b7ca29b560dfb86831739e65bd440b". You have to remove (or rename) that container to 
+be able to reuse that name.
+At D:\nam4\HK251\DACN\MainProject\main\manage.ps1:89 char:9
++         throw "Docker Compose '$($ComposeArgs -join ' ')' failed for  ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Docker Compose ...euse that name.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Docker Compose 'up -d --no-build' failed for 'D:\nam4\HK251\DACN\MainProject\main\wallet 
+   -vc-model-classical\wallet\docker-compose.yml':  Container classical_wallet_gateway  Creating Error response from   
+  daemon: Conflict. The container name "/classical_wallet_gateway" is already in use by container "30e00111906416e21   
+ fd890ca87815128b4b7ca29b560dfb86831739e65bd440b". You have to remove (or rename) that container to be able to reus    
+e that name.
+ 

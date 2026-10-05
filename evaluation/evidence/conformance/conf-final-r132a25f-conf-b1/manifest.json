@@ -1,0 +1,668 @@
+{
+  "catalog_digest": "9bc41306961813fc0c3e2c4c369ff3591de42eb7350ac5fac91ab28ca635b6a0",
+  "command": "evaluation/bin/conformance/conformance_v3.py --configuration B1-C0 --run-id conf-final-r132a25f-conf-b1 --include-quantum",
+  "configuration": "B1-C0",
+  "ended_at": "2026-09-22T16:55:40.205415+00:00",
+  "experiment_id": "EXP-CONF-01",
+  "experiment_purpose": "smoke",
+  "fixture_digest": "74a54e68c6436fa3c3c7a642fa8a4bb474473038cfd8c61801d1c2c1c9daa7a8",
+  "gate_blockers": [],
+  "gate_disposition": "pass",
+  "protocol_id": "BP-20260915-v3",
+  "quantum_suite": {
+    "deferred_case_ids": [],
+    "deferred_reason": null,
+    "included": false
+  },
+  "required_catalog": [
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B01-S-SC",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B01-S-SC",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B02-S-H",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B02-S-H",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B03-S-R",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B03-S-R",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B04-S-T",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B04-S-T",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B05-S-P",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B05-S-P",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B06-A-SC",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B06-A-SC",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B07-A-H",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B07-A-H",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B08-A-R",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B08-A-R",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B09-A-T",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B09-A-T",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B10-A-P",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B10-A-P",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B11-V-SC",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B11-V-SC",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B12-V-H",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B12-V-H",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B13-V-R",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B13-V-R",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B14-V-T",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B14-V-T",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B15-V-P",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B15-V-P",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B16-D-SC",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B16-D-SC",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B17-D-H",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B17-D-H",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B18-D-R",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B18-D-R",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B19-D-T",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B19-D-T",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05-B20-D-P",
+      "catalog_key": "ORACLE_UNIT:VD-F05-B20-D-P",
+      "required": true,
+      "suite": "Boundary_Matrix_20",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F02",
+      "catalog_key": "ORACLE_UNIT:VD-F02",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F03",
+      "catalog_key": "ORACLE_UNIT:VD-F03",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F04",
+      "catalog_key": "ORACLE_UNIT:VD-F04",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05",
+      "catalog_key": "ORACLE_UNIT:VD-F05",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F06",
+      "catalog_key": "ORACLE_UNIT:VD-F06",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-DisjointAccounts",
+      "catalog_key": "ORACLE_UNIT:VD-N05-DisjointAccounts",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-InvertedValidity",
+      "catalog_key": "ORACLE_UNIT:VD-N05-InvertedValidity",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-DisjointFields",
+      "catalog_key": "ORACLE_UNIT:VD-N05-DisjointFields",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-ZeroHistory",
+      "catalog_key": "ORACLE_UNIT:VD-N05-ZeroHistory",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-ZeroPageSize",
+      "catalog_key": "ORACLE_UNIT:VD-N05-ZeroPageSize",
+      "required": true,
+      "suite": "VDAM_Oracle_Math",
+      "tier": "ORACLE_UNIT"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F01",
+      "catalog_key": "SUT_CONFORMANCE:VD-F01",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F02",
+      "catalog_key": "SUT_CONFORMANCE:VD-F02",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F03",
+      "catalog_key": "SUT_CONFORMANCE:VD-F03",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F04",
+      "catalog_key": "SUT_CONFORMANCE:VD-F04",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F05",
+      "catalog_key": "SUT_CONFORMANCE:VD-F05",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F06",
+      "catalog_key": "SUT_CONFORMANCE:VD-F06",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F07",
+      "catalog_key": "SUT_CONFORMANCE:VD-F07",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F08",
+      "catalog_key": "SUT_CONFORMANCE:VD-F08",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F09",
+      "catalog_key": "SUT_CONFORMANCE:VD-F09",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F10",
+      "catalog_key": "SUT_CONFORMANCE:VD-F10",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-F11",
+      "catalog_key": "SUT_CONFORMANCE:VD-F11",
+      "required": true,
+      "suite": "VDAM_Valid_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N01-AudKB",
+      "catalog_key": "SUT_CONFORMANCE:VD-N01-AudKB",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N01-Nonce",
+      "catalog_key": "SUT_CONFORMANCE:VD-N01-Nonce",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N01-SdHash",
+      "catalog_key": "SUT_CONFORMANCE:VD-N01-SdHash",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N02-AudG",
+      "catalog_key": "SUT_CONFORMANCE:VD-N02-AudG",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N02-PresentationBinding",
+      "catalog_key": "SUT_CONFORMANCE:VD-N02-PresentationBinding",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N02-CrossContextParent",
+      "catalog_key": "SUT_CONFORMANCE:VD-N02-CrossContextParent",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-PresenterMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-PresenterMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-WrongDelegationSigner",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-WrongDelegationSigner",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-WrongKbSigner",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-WrongKbSigner",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-SubstitutedHolderKey",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-SubstitutedHolderKey",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-MismatchedIssuanceRecord",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-MismatchedIssuanceRecord",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-BindingHolderMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-BindingHolderMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-BindingKeySetMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-BindingKeySetMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-BindingWalletThumbprintMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-BindingWalletThumbprintMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-BindingProfileMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-BindingProfileMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N03-BindingCredentialStatusMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N03-BindingCredentialStatusMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N04-SequentialReplay",
+      "catalog_key": "SUT_CONFORMANCE:VD-N04-SequentialReplay",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N04-ConcurrentDuplicate",
+      "catalog_key": "SUT_CONFORMANCE:VD-N04-ConcurrentDuplicate",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-AuthorityExpansion",
+      "catalog_key": "SUT_CONFORMANCE:VD-N05-AuthorityExpansion",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-DisjointAccounts",
+      "catalog_key": "SUT_CONFORMANCE:VD-N05-DisjointAccounts",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-InvertedValidity",
+      "catalog_key": "SUT_CONFORMANCE:VD-N05-InvertedValidity",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-DisjointFields",
+      "catalog_key": "SUT_CONFORMANCE:VD-N05-DisjointFields",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-ZeroHistory",
+      "catalog_key": "SUT_CONFORMANCE:VD-N05-ZeroHistory",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N05-ZeroPageSize",
+      "catalog_key": "SUT_CONFORMANCE:VD-N05-ZeroPageSize",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-ExpiredState",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-ExpiredState",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-MissingRecord",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-MissingRecord",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-LookupUnavailable",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-LookupUnavailable",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-DisabledAssociation",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-DisabledAssociation",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-PostIssuanceInvalidation",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-PostIssuanceInvalidation",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-WalletCertificateInvalidated",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-WalletCertificateInvalidated",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-HolderKeyInvalidated",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-HolderKeyInvalidated",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-StaleBindingSnapshot",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-StaleBindingSnapshot",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-RollbackVersion",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-RollbackVersion",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N06-AdverseVersionBeforeCommit",
+      "catalog_key": "SUT_CONFORMANCE:VD-N06-AdverseVersionBeforeCommit",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N07-RSUnauthorizedResource",
+      "catalog_key": "SUT_CONFORMANCE:VD-N07-RSUnauthorizedResource",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N08-TamperedPackage",
+      "catalog_key": "SUT_CONFORMANCE:VD-N08-TamperedPackage",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N08-MissingRequiredDisclosure",
+      "catalog_key": "SUT_CONFORMANCE:VD-N08-MissingRequiredDisclosure",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    },
+    {
+      "applicable": true,
+      "case_id": "VD-N08-DisclosureSetMismatch",
+      "catalog_key": "SUT_CONFORMANCE:VD-N08-DisclosureSetMismatch",
+      "required": true,
+      "suite": "VDAM_Negative_SUT",
+      "tier": "SUT_CONFORMANCE"
+    }
+  ],
+  "result_carry_forward": false,
+  "result_counts": {
+    "FAIL": 0,
+    "INCONCLUSIVE": 0,
+    "NOT_RUN": 0,
+    "PASS": 79
+  },
+  "run_id": "conf-final-r132a25f-conf-b1",
+  "runtime_profile": "conformance",
+  "schema_version": "3.1.0",
+  "source_digest": "dd9627b1bbff7acf2ecd18acb813cbc1e4d7e9418d971d32585316568f5b04d3",
+  "source_identity": {
+    "commit": "132a25fe2966bf1f327b3213b34c287ee0df4bac",
+    "dirty": false
+  },
+  "started_at": "2026-09-22T16:55:18.992652+00:00",
+  "state": "COMPLETE"
+}

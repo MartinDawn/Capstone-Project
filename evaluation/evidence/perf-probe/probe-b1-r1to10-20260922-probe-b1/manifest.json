@@ -1,0 +1,272 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "evidence_class": "exploratory_not_protocol_evidence",
+  "experiment_purpose": "probe",
+  "campaign_id": "probe-b1-r1to10-20260922",
+  "run_id": "probe-b1-r1to10-20260922-probe-b1",
+  "configuration": "B1-C0",
+  "workload": "Small",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "ladder": [
+    {
+      "name": "step_01_r1",
+      "rate": 1,
+      "duration": 30
+    },
+    {
+      "name": "step_02_r2",
+      "rate": 2,
+      "duration": 30
+    },
+    {
+      "name": "step_03_r3",
+      "rate": 3,
+      "duration": 30
+    },
+    {
+      "name": "step_04_r4",
+      "rate": 4,
+      "duration": 30
+    },
+    {
+      "name": "step_05_r5",
+      "rate": 5,
+      "duration": 30
+    },
+    {
+      "name": "step_06_r6",
+      "rate": 6,
+      "duration": 30
+    },
+    {
+      "name": "step_07_r7",
+      "rate": 7,
+      "duration": 30
+    },
+    {
+      "name": "step_08_r8",
+      "rate": 8,
+      "duration": 30
+    },
+    {
+      "name": "step_09_r9",
+      "rate": 9,
+      "duration": 30
+    },
+    {
+      "name": "step_10_r10",
+      "rate": 10,
+      "duration": 30
+    }
+  ],
+  "warmup_s": 15,
+  "drain_s": 10,
+  "stop_rules": {
+    "max_fail_pct": 10.0,
+    "stop_p95_ms": 15000.0,
+    "min_throughput_ratio": 0.9
+  },
+  "vu_pool": {
+    "pre_allocated": 300,
+    "max": 1000
+  },
+  "source_digest": "638fca59815ea824ae23937ae53e01268e4a08bdc0c910a45142b348e4218e39",
+  "isolation_proof": "evaluation/evidence/perf/isolation-proof-b1c0-20260922T103730Z/isolation-proof.json",
+  "root_vc_digest": "d39a88e6b9dd2736f0172d5e8e32acf72592532ed76411b96b8eab3b1aec777a",
+  "started_at": "2026-09-22T10:37:47.032528+00:00",
+  "ended_at": "2026-09-22T10:44:44.307867+00:00",
+  "k6_exit_status": 0,
+  "status": "LADDER_COMPLETED",
+  "reason": null,
+  "knee": {
+    "last_ok_rate_tps": 10,
+    "knee_rate_tps": null,
+    "knee_verdict": null,
+    "knee_reached": false
+  },
+  "rungs": [
+    {
+      "step": "step_01_r1",
+      "offered_rate_tps": 1,
+      "duration_s": 30,
+      "scheduled": 30,
+      "started": 31,
+      "success": 31,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 1.033,
+      "error_pct": 0.0,
+      "p50_ms": 2295.5,
+      "p95_ms": 2414.4,
+      "p99_ms": 2434.9,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.0
+    },
+    {
+      "step": "step_02_r2",
+      "offered_rate_tps": 2,
+      "duration_s": 30,
+      "scheduled": 60,
+      "started": 60,
+      "success": 60,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 2.0,
+      "error_pct": 0.0,
+      "p50_ms": 2295.6,
+      "p95_ms": 2397.9,
+      "p99_ms": 2432.1,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.99
+    },
+    {
+      "step": "step_03_r3",
+      "offered_rate_tps": 3,
+      "duration_s": 30,
+      "scheduled": 90,
+      "started": 90,
+      "success": 90,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 3.0,
+      "error_pct": 0.0,
+      "p50_ms": 2256.7,
+      "p95_ms": 2385.1,
+      "p99_ms": 2447.6,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.99
+    },
+    {
+      "step": "step_04_r4",
+      "offered_rate_tps": 4,
+      "duration_s": 30,
+      "scheduled": 120,
+      "started": 120,
+      "success": 120,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 4.0,
+      "error_pct": 0.0,
+      "p50_ms": 2206.7,
+      "p95_ms": 2372.2,
+      "p99_ms": 2473.2,
+      "verdict": "OK",
+      "p95_vs_first_ok": 0.98
+    },
+    {
+      "step": "step_05_r5",
+      "offered_rate_tps": 5,
+      "duration_s": 30,
+      "scheduled": 150,
+      "started": 151,
+      "success": 151,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 5.033,
+      "error_pct": 0.0,
+      "p50_ms": 2296.5,
+      "p95_ms": 2884.0,
+      "p99_ms": 3262.4,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.19
+    },
+    {
+      "step": "step_06_r6",
+      "offered_rate_tps": 6,
+      "duration_s": 30,
+      "scheduled": 180,
+      "started": 181,
+      "success": 181,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 6.033,
+      "error_pct": 0.0,
+      "p50_ms": 2161.9,
+      "p95_ms": 2439.7,
+      "p99_ms": 2554.5,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.01
+    },
+    {
+      "step": "step_07_r7",
+      "offered_rate_tps": 7,
+      "duration_s": 30,
+      "scheduled": 210,
+      "started": 211,
+      "success": 211,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 7.033,
+      "error_pct": 0.0,
+      "p50_ms": 2223.3,
+      "p95_ms": 2746.3,
+      "p99_ms": 2864.7,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.14
+    },
+    {
+      "step": "step_08_r8",
+      "offered_rate_tps": 8,
+      "duration_s": 30,
+      "scheduled": 240,
+      "started": 240,
+      "success": 240,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 8.0,
+      "error_pct": 0.0,
+      "p50_ms": 2106.8,
+      "p95_ms": 2596.3,
+      "p99_ms": 3163.9,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.08
+    },
+    {
+      "step": "step_09_r9",
+      "offered_rate_tps": 9,
+      "duration_s": 30,
+      "scheduled": 270,
+      "started": 271,
+      "success": 271,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 9.033,
+      "error_pct": 0.0,
+      "p50_ms": 2094.0,
+      "p95_ms": 2537.1,
+      "p99_ms": 2709.0,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.05
+    },
+    {
+      "step": "step_10_r10",
+      "offered_rate_tps": 10,
+      "duration_s": 30,
+      "scheduled": 300,
+      "started": 301,
+      "success": 301,
+      "failed": 0,
+      "unfinished": 0,
+      "not_started": 0,
+      "throughput_tps": 10.033,
+      "error_pct": 0.0,
+      "p50_ms": 2105.6,
+      "p95_ms": 2565.6,
+      "p99_ms": 2705.2,
+      "verdict": "OK",
+      "p95_vs_first_ok": 1.06
+    }
+  ]
+}

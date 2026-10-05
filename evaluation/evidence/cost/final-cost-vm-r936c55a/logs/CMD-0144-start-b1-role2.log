@@ -1,0 +1,15 @@
+[start] tpp / b1-classical using: /root/vdam/wallet-vc-model-classical/tpp/docker-compose.yml
+ Container classical_tpp_gateway Creating 
+ Container classical_tpp_gateway Created 
+ Container classical_tpp_java Creating 
+ Container classical_tpp_java Created 
+ Container classical_tpp_gateway Starting 
+ Container classical_tpp_gateway Started 
+ Container classical_tpp_java Starting 
+ Container classical_tpp_java Started 
+
+=== Active VDAM Containers ===
+NAMES                   STATUS                  PORTS
+classical_tpp_java      Up Less than a second   6001/tcp
+classical_tpp_gateway   Up Less than a second   0.0.0.0:4443->4443/tcp, [::]:4443->4443/tcp, 80/tcp, 0.0.0.0:6443->6443/tcp, [::]:6443->6443/tcp
+[start] tpp / b1-classical done.

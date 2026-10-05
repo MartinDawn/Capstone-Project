@@ -1,0 +1,162 @@
+{
+  "model": "B1-C0",
+  "resource_table": "evaluation/manifests/resource-limits.json",
+  "hosts": {
+    "bank": {
+      "containers": [
+        {
+          "name": "classical_resource_server",
+          "service": "resource-server",
+          "image": "bank-resource-server",
+          "image_id": "sha256:9b8955b8b9c7bee83be4a4df3b05a8c18904e5126bf27e52571dd5c59a1f42c7",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "NODE_OPTIONS=--max-http-header-size=65536"
+          ]
+        },
+        {
+          "name": "classical_bank_issuer",
+          "service": "bank-issuer",
+          "image": "bank-bank-issuer",
+          "image_id": "sha256:947df2c7dbd4672b35dc9ccd5cef92b5391d72f7d88428deeec8648e599de6c9",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "classical_keycloak",
+          "service": "keycloak",
+          "image": "quay.io/keycloak/keycloak:26.6.4@sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4",
+          "image_id": "sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4",
+          "nano_cpus": 1500000000,
+          "memory_bytes": 1610612736,
+          "memory_swap_bytes": 3221225472,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "KC_LOG_LEVEL=INFO"
+          ]
+        },
+        {
+          "name": "classical_tls_server_proxy",
+          "service": "tls-server-proxy",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "classical_postgres",
+          "service": "postgres",
+          "image": "postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246",
+          "image_id": "sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "29.7.2",
+        "ncpu": 2,
+        "mem_total_bytes": 3664932864,
+        "cgroup_version": "2"
+      }
+    },
+    "tpp": {
+      "containers": [
+        {
+          "name": "classical_tpp_java",
+          "service": "tpp-java",
+          "image": "tpp-tpp-java",
+          "image_id": "sha256:b2ae0f55d92c16b104fcaef6b51f3481de2c6ee5660b6afa2edd4a61cd24c7ec",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "classical_tpp_gateway",
+          "service": "tpp-gateway",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "29.7.2",
+        "ncpu": 2,
+        "mem_total_bytes": 3664920576,
+        "cgroup_version": "2"
+      }
+    },
+    "client": {
+      "containers": [
+        {
+          "name": "classical_wallet_java",
+          "service": "wallet",
+          "image": "wallet-wallet",
+          "image_id": "sha256:742229c69b862c21630ec92b03d38d79ccaa8193bcdec77716e2c5badc40834a",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "classical_wallet_gateway",
+          "service": "wallet-gateway",
+          "image": "nginx:alpine@sha256:62ff2089abf5a9ed33bd232895bef5e22f7bb4b200675cec49a5ebc48e3d4ac8",
+          "image_id": "sha256:55fcc661c2cd4666d0e916410c029ae22042638bcdc8ed98805bfd9d29e08e38",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "28.0.4",
+        "ncpu": 12,
+        "mem_total_bytes": 8205291520,
+        "cgroup_version": "1"
+      }
+    }
+  },
+  "problems": [],
+  "status": "MATCH"
+}

@@ -1,0 +1,5 @@
+protocol_id,campaign_id,configuration,workload,offered_rate_tps,batches_total,batches_valid,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_rate_pct,p50_ms,p95_ms,p99_ms,min_ms,max_ms
+BP-20260922-v6,final-load-vm-r095ef2a,B1-C2,Medium,1.0,2,2,120.0,121.0,121,0,0.0,0,1.0083,0.0,4695.062,8307.717,9598.372,2968.753,15191.654
+BP-20260922-v6,final-load-vm-r095ef2a,B1-C2,Medium,2.0,2,2,240.0,242,228,14,0,0,1.9,5.7851,4163.918,7140.716,8871.541,2865.72,11276.028
+BP-20260922-v6,final-load-vm-r095ef2a,B1-C2,Medium,4.0,2,2,480.0,482,468,14,0,0,3.9,2.9046,4329.499,7588.342,9166.099,2781.866,10326.111
+BP-20260922-v6,final-load-vm-r095ef2a,B1-C2,Medium,8.0,2,2,960.0,957,904,53,0,5,7.5333,5.5381,4362.474,7623.738,9975.373,2837.37,12034.952

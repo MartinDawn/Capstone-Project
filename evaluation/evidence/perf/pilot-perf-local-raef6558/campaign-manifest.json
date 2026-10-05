@@ -1,0 +1,155 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_family": "perf",
+  "campaign_id": "pilot-perf-local-raef6558",
+  "experiment_purpose": "pilot",
+  "configuration_path": "evaluation/configs/perf-local.json",
+  "configuration_digest": "44da338396a6c6d123d795526862eba3ba608711b3e636e7905d0ede5eb99a7f",
+  "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+    "dirty_patch_digest": "bdf7207e12cde3a32e1ab672f93b1aa5abf60dcc67de8965d4a4397ecfebd87d",
+    "dirty_patch_reason": ""
+  },
+  "created_at": "2026-09-23T06:08:08.316780+00:00",
+  "notes": [
+    "offered_rate_levels_tps=[1.0], batches=1, workload=Medium, scope=authorization_only, driver=k6"
+  ],
+  "commands": [
+    {
+      "command_id": "CMD-0001",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T06:00:28.134343+00:00",
+      "ended_at": "2026-09-23T06:00:30.130661+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0001-reset-stop-b0-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0002",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 local start b0",
+      "started_at": "2026-09-23T06:00:30.130661+00:00",
+      "ended_at": "2026-09-23T06:01:02.770636+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0002-start-b0-role1.log"
+    },
+    {
+      "command_id": "CMD-0003",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-local-raef6558-perf-b0-r1-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:01:25.868975+00:00",
+      "ended_at": "2026-09-23T06:02:16.311603+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0003-pilot-perf-local-raef6558-perf-b0-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0004",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T06:02:46.338288+00:00",
+      "ended_at": "2026-09-23T06:03:12.297959+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0004-reset-stop-b1-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0005",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 local start b1-classical",
+      "started_at": "2026-09-23T06:03:12.298980+00:00",
+      "ended_at": "2026-09-23T06:03:41.729574+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0005-start-b1-role1.log"
+    },
+    {
+      "command_id": "CMD-0006",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-local-raef6558-perf-b1-r1-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:04:06.999530+00:00",
+      "ended_at": "2026-09-23T06:04:57.075484+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0006-pilot-perf-local-raef6558-perf-b1-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0007",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T06:05:27.101566+00:00",
+      "ended_at": "2026-09-23T06:05:41.420353+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0007-reset-stop-b2-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0008",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 local start b1-pqc",
+      "started_at": "2026-09-23T06:05:41.420353+00:00",
+      "ended_at": "2026-09-23T06:06:04.826319+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0008-start-b2-role1.log"
+    },
+    {
+      "command_id": "CMD-0009",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-perf-local-raef6558-perf-b2-r1-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T06:06:29.514087+00:00",
+      "ended_at": "2026-09-23T06:07:27.622050+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0009-pilot-perf-local-raef6558-perf-b2-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0010",
+      "campaign_id": "pilot-perf-local-raef6558",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T06:07:57.645319+00:00",
+      "ended_at": "2026-09-23T06:08:07.980208+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/pilot-perf-local-raef6558/logs/CMD-0010-post-stop-all-host1.log"
+    }
+  ],
+  "dispositions": [
+    {
+      "stage": "perf",
+      "configuration": "B0-C0",
+      "batch": 1,
+      "run_id": "pilot-perf-local-raef6558-perf-b0-r1-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "COMPLETED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C0",
+      "batch": 1,
+      "run_id": "pilot-perf-local-raef6558-perf-b1-r1-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "COMPLETED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "pilot-perf-local-raef6558-perf-b2-r1-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    }
+  ]
+}

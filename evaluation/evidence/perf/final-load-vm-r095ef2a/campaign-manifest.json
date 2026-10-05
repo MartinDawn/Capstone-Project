@@ -1,0 +1,775 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_family": "perf",
+  "campaign_id": "final-load-vm-r095ef2a",
+  "experiment_purpose": "final",
+  "configuration_path": "evaluation/configs/final-load-proposed.json",
+  "configuration_digest": "541540c191d653e71ec924ae06bbb68d1c8c88affd455cd24aed406f6c143ebd",
+  "source_digest": "fec89218fa9457b06455b750b084cd2ac8ea0fca5f2f6a64bcda8aa22395c48a",
+  "source_identity": {
+    "git_commit": "095ef2a47d5eefaaaeed1bf8639f1586b6e1a955",
+    "worktree_dirty": "false",
+    "source_digest": "fec89218fa9457b06455b750b084cd2ac8ea0fca5f2f6a64bcda8aa22395c48a",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": ""
+  },
+  "created_at": "2026-09-23T12:23:33.571399+00:00",
+  "notes": [
+    "offered_rate_levels_tps=[1.0, 2.0, 4.0, 8.0], batches=2, workload=Medium, scope=authorization_only, driver=k6"
+  ],
+  "commands": [
+    {
+      "command_id": "CMD-0001",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0001-reset-stop-b0-b01-host1.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0001-reset-stop-b0-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0002",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0002-reset-stop-b0-b01-host2.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0002-reset-stop-b0-b01-host2.log"
+    },
+    {
+      "command_id": "CMD-0003",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0003-reset-stop-b0-b01-host3.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0003-reset-stop-b0-b01-host3.log"
+    },
+    {
+      "command_id": "CMD-0004",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0004-start-b0-role1.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0004-start-b0-role1.log"
+    },
+    {
+      "command_id": "CMD-0005",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0005-start-b0-role2.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0005-start-b0-role2.log"
+    },
+    {
+      "command_id": "CMD-0006",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0006-final-load-vm-r095ef2a-perf-b0-r1-b01.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0006-final-load-vm-r095ef2a-perf-b0-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0007",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0007-final-load-vm-r095ef2a-perf-b0-r2-b01.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0007-final-load-vm-r095ef2a-perf-b0-r2-b01.log"
+    },
+    {
+      "command_id": "CMD-0008",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0008-final-load-vm-r095ef2a-perf-b0-r4-b01.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0008-final-load-vm-r095ef2a-perf-b0-r4-b01.log"
+    },
+    {
+      "command_id": "CMD-0009",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0009-final-load-vm-r095ef2a-perf-b0-r8-b01.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0009-final-load-vm-r095ef2a-perf-b0-r8-b01.log"
+    },
+    {
+      "command_id": "CMD-0010",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0010-reset-stop-b0-b02-host1.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0010-reset-stop-b0-b02-host1.log"
+    },
+    {
+      "command_id": "CMD-0011",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0011-reset-stop-b0-b02-host2.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0011-reset-stop-b0-b02-host2.log"
+    },
+    {
+      "command_id": "CMD-0012",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0012-reset-stop-b0-b02-host3.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0012-reset-stop-b0-b02-host3.log"
+    },
+    {
+      "command_id": "CMD-0013",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0013-start-b0-role1.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0013-start-b0-role1.log"
+    },
+    {
+      "command_id": "CMD-0014",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0014-start-b0-role2.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0014-start-b0-role2.log"
+    },
+    {
+      "command_id": "CMD-0015",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0015-final-load-vm-r095ef2a-perf-b0-r1-b02.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0015-final-load-vm-r095ef2a-perf-b0-r1-b02.log"
+    },
+    {
+      "command_id": "CMD-0016",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0016-final-load-vm-r095ef2a-perf-b0-r2-b02.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0016-final-load-vm-r095ef2a-perf-b0-r2-b02.log"
+    },
+    {
+      "command_id": "CMD-0017",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0017-final-load-vm-r095ef2a-perf-b0-r4-b02.log",
+      "started_at": "2026-09-23T12:05:23.689696+00:00",
+      "ended_at": "2026-09-23T12:05:23.689696+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0017-final-load-vm-r095ef2a-perf-b0-r4-b02.log"
+    },
+    {
+      "command_id": "CMD-0018",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0018-final-load-vm-r095ef2a-perf-b0-r8-b02.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0018-final-load-vm-r095ef2a-perf-b0-r8-b02.log"
+    },
+    {
+      "command_id": "CMD-0019",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0019-post-stop-all-host1.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0019-post-stop-all-host1.log"
+    },
+    {
+      "command_id": "CMD-0020",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0020-post-stop-all-host2.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0020-post-stop-all-host2.log"
+    },
+    {
+      "command_id": "CMD-0021",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0021-post-stop-all-host3.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0021-post-stop-all-host3.log"
+    },
+    {
+      "command_id": "CMD-0022",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0022-reset-stop-b1-b01-host1.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0022-reset-stop-b1-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0023",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0023-reset-stop-b1-b01-host2.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0023-reset-stop-b1-b01-host2.log"
+    },
+    {
+      "command_id": "CMD-0024",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0024-reset-stop-b1-b01-host3.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0024-reset-stop-b1-b01-host3.log"
+    },
+    {
+      "command_id": "CMD-0025",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0025-start-b1-role1.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0025-start-b1-role1.log"
+    },
+    {
+      "command_id": "CMD-0026",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0026-start-b1-role2.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0026-start-b1-role2.log"
+    },
+    {
+      "command_id": "CMD-0027",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0027-start-b1-role3.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0027-start-b1-role3.log"
+    },
+    {
+      "command_id": "CMD-0028",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0028-final-load-vm-r095ef2a-perf-b1-r1-b01.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0028-final-load-vm-r095ef2a-perf-b1-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0029",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0029-final-load-vm-r095ef2a-perf-b1-r2-b01.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0029-final-load-vm-r095ef2a-perf-b1-r2-b01.log"
+    },
+    {
+      "command_id": "CMD-0030",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0030-final-load-vm-r095ef2a-perf-b1-r4-b01.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0030-final-load-vm-r095ef2a-perf-b1-r4-b01.log"
+    },
+    {
+      "command_id": "CMD-0031",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0031-final-load-vm-r095ef2a-perf-b1-r8-b01.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0031-final-load-vm-r095ef2a-perf-b1-r8-b01.log"
+    },
+    {
+      "command_id": "CMD-0032",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0032-reset-stop-b1-b02-host1.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0032-reset-stop-b1-b02-host1.log"
+    },
+    {
+      "command_id": "CMD-0033",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0033-reset-stop-b1-b02-host2.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0033-reset-stop-b1-b02-host2.log"
+    },
+    {
+      "command_id": "CMD-0034",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0034-reset-stop-b1-b02-host3.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0034-reset-stop-b1-b02-host3.log"
+    },
+    {
+      "command_id": "CMD-0035",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0035-start-b1-role1.log",
+      "started_at": "2026-09-23T12:05:23.690699+00:00",
+      "ended_at": "2026-09-23T12:05:23.690699+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0035-start-b1-role1.log"
+    },
+    {
+      "command_id": "CMD-0036",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0036-start-b1-role2.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0036-start-b1-role2.log"
+    },
+    {
+      "command_id": "CMD-0037",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0037-start-b1-role3.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0037-start-b1-role3.log"
+    },
+    {
+      "command_id": "CMD-0038",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0038-final-load-vm-r095ef2a-perf-b1-r1-b02.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0038-final-load-vm-r095ef2a-perf-b1-r1-b02.log"
+    },
+    {
+      "command_id": "CMD-0039",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0039-final-load-vm-r095ef2a-perf-b1-r2-b02.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0039-final-load-vm-r095ef2a-perf-b1-r2-b02.log"
+    },
+    {
+      "command_id": "CMD-0040",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0040-final-load-vm-r095ef2a-perf-b1-r4-b02.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0040-final-load-vm-r095ef2a-perf-b1-r4-b02.log"
+    },
+    {
+      "command_id": "CMD-0041",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0041-final-load-vm-r095ef2a-perf-b1-r8-b02.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0041-final-load-vm-r095ef2a-perf-b1-r8-b02.log"
+    },
+    {
+      "command_id": "CMD-0042",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0042-post-stop-all-host1.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0042-post-stop-all-host1.log"
+    },
+    {
+      "command_id": "CMD-0043",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0043-post-stop-all-host2.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0043-post-stop-all-host2.log"
+    },
+    {
+      "command_id": "CMD-0044",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "Existing execution log: CMD-0044-post-stop-all-host3.log",
+      "started_at": "2026-09-23T12:05:23.691704+00:00",
+      "ended_at": "2026-09-23T12:05:23.691704+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0044-post-stop-all-host3.log"
+    },
+    {
+      "command_id": "CMD-0045",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T12:05:23.748959+00:00",
+      "ended_at": "2026-09-23T12:05:27.312221+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0045-reset-stop-b2-b01-host1.log"
+    },
+    {
+      "command_id": "CMD-0046",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T12:05:27.312221+00:00",
+      "ended_at": "2026-09-23T12:05:29.546961+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0046-reset-stop-b2-b01-host2.log"
+    },
+    {
+      "command_id": "CMD-0047",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T12:05:29.548027+00:00",
+      "ended_at": "2026-09-23T12:05:31.562367+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0047-reset-stop-b2-b01-host3.log"
+    },
+    {
+      "command_id": "CMD-0048",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh bank start b1-pqc'",
+      "started_at": "2026-09-23T12:05:31.562367+00:00",
+      "ended_at": "2026-09-23T12:06:06.977625+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0048-start-b2-role1.log"
+    },
+    {
+      "command_id": "CMD-0049",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh tpp start b1-pqc'",
+      "started_at": "2026-09-23T12:06:06.977625+00:00",
+      "ended_at": "2026-09-23T12:06:10.454865+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0049-start-b2-role2.log"
+    },
+    {
+      "command_id": "CMD-0050",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 wallet start b1-pqc",
+      "started_at": "2026-09-23T12:06:10.454865+00:00",
+      "ended_at": "2026-09-23T12:06:11.505393+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0050-start-b2-role3.log"
+    },
+    {
+      "command_id": "CMD-0051",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r1-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:07:25.586729+00:00",
+      "ended_at": "2026-09-23T12:09:01.402905+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0051-final-load-vm-r095ef2a-perf-b2-r1-b01.log"
+    },
+    {
+      "command_id": "CMD-0052",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r2-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:09:01.432337+00:00",
+      "ended_at": "2026-09-23T12:10:36.962835+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0052-final-load-vm-r095ef2a-perf-b2-r2-b01.log"
+    },
+    {
+      "command_id": "CMD-0053",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r4-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:10:37.000716+00:00",
+      "ended_at": "2026-09-23T12:12:12.623371+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0053-final-load-vm-r095ef2a-perf-b2-r4-b01.log"
+    },
+    {
+      "command_id": "CMD-0054",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r8-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:12:12.669418+00:00",
+      "ended_at": "2026-09-23T12:13:49.565695+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0054-final-load-vm-r095ef2a-perf-b2-r8-b01.log"
+    },
+    {
+      "command_id": "CMD-0055",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T12:14:09.627619+00:00",
+      "ended_at": "2026-09-23T12:14:15.166684+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0055-reset-stop-b2-b02-host1.log"
+    },
+    {
+      "command_id": "CMD-0056",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T12:14:15.166684+00:00",
+      "ended_at": "2026-09-23T12:14:20.789909+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0056-reset-stop-b2-b02-host2.log"
+    },
+    {
+      "command_id": "CMD-0057",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T12:14:20.791012+00:00",
+      "ended_at": "2026-09-23T12:14:23.865945+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0057-reset-stop-b2-b02-host3.log"
+    },
+    {
+      "command_id": "CMD-0058",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh bank start b1-pqc'",
+      "started_at": "2026-09-23T12:14:23.865945+00:00",
+      "ended_at": "2026-09-23T12:15:05.408664+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0058-start-b2-role1.log"
+    },
+    {
+      "command_id": "CMD-0059",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh tpp start b1-pqc'",
+      "started_at": "2026-09-23T12:15:05.408664+00:00",
+      "ended_at": "2026-09-23T12:15:08.399011+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0059-start-b2-role2.log"
+    },
+    {
+      "command_id": "CMD-0060",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 wallet start b1-pqc",
+      "started_at": "2026-09-23T12:15:08.399011+00:00",
+      "ended_at": "2026-09-23T12:15:09.393247+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0060-start-b2-role3.log"
+    },
+    {
+      "command_id": "CMD-0061",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r1-b02/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:16:15.519477+00:00",
+      "ended_at": "2026-09-23T12:17:52.134138+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0061-final-load-vm-r095ef2a-perf-b2-r1-b02.log"
+    },
+    {
+      "command_id": "CMD-0062",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r2-b02/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:17:52.163516+00:00",
+      "ended_at": "2026-09-23T12:19:31.124889+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0062-final-load-vm-r095ef2a-perf-b2-r2-b02.log"
+    },
+    {
+      "command_id": "CMD-0063",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r4-b02/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:19:31.162457+00:00",
+      "ended_at": "2026-09-23T12:21:07.776875+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0063-final-load-vm-r095ef2a-perf-b2-r4-b02.log"
+    },
+    {
+      "command_id": "CMD-0064",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/final-load-vm-r095ef2a-perf-b2-r8-b02/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js",
+      "started_at": "2026-09-23T12:21:07.847477+00:00",
+      "ended_at": "2026-09-23T12:22:49.607653+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0064-final-load-vm-r095ef2a-perf-b2-r8-b02.log"
+    },
+    {
+      "command_id": "CMD-0065",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T12:23:09.701227+00:00",
+      "ended_at": "2026-09-23T12:23:15.692180+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0065-post-stop-all-host1.log"
+    },
+    {
+      "command_id": "CMD-0066",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-23T12:23:15.692180+00:00",
+      "ended_at": "2026-09-23T12:23:22.778944+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0066-post-stop-all-host2.log"
+    },
+    {
+      "command_id": "CMD-0067",
+      "campaign_id": "final-load-vm-r095ef2a",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-23T12:23:22.778944+00:00",
+      "ended_at": "2026-09-23T12:23:33.216173+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf/final-load-vm-r095ef2a/logs/CMD-0067-post-stop-all-host3.log"
+    }
+  ],
+  "dispositions": [
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r1-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "COMPLETED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r2-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "COMPLETED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r4-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 1,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r8-b01",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 2,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r1-b02",
+      "measurement_status": "VALID",
+      "run_outcome": "COMPLETED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 2,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r2-b02",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 2,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r4-b02",
+      "measurement_status": "VALID",
+      "run_outcome": "DEGRADED",
+      "status": "executed",
+      "reason": null
+    },
+    {
+      "stage": "perf",
+      "configuration": "B1-C2",
+      "batch": 2,
+      "run_id": "final-load-vm-r095ef2a-perf-b2-r8-b02",
+      "measurement_status": "VALID",
+      "run_outcome": "GENERATOR_LIMITED",
+      "status": "executed",
+      "reason": null
+    }
+  ]
+}

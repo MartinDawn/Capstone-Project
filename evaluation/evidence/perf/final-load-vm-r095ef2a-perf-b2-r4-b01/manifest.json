@@ -1,0 +1,67 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-LOAD-01",
+  "experiment_purpose": "final",
+  "campaign_id": "final-load-vm-r095ef2a",
+  "run_id": "final-load-vm-r095ef2a-perf-b2-r4-b01",
+  "paired_block_id": "final-load-vm-r095ef2a-r4-pb01",
+  "batch": 1,
+  "configuration": "B1-C2",
+  "workload": "Medium",
+  "mode": "repeated",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "scheduler": "constant_arrival_rate_open_loop",
+  "offered_rate_tps": 4.0,
+  "window": {
+    "warmup_s": 20,
+    "warmup_drain_s": 10,
+    "measure_s": 60,
+    "drain_s": 20,
+    "cooldown_s": 20
+  },
+  "vu_pool": {
+    "pre_allocated": 50,
+    "max": 1000
+  },
+  "source_digest": "fec89218fa9457b06455b750b084cd2ac8ea0fca5f2f6a64bcda8aa22395c48a",
+  "source_identity": {
+    "git_commit": "095ef2a47d5eefaaaeed1bf8639f1586b6e1a955",
+    "worktree_dirty": "false",
+    "source_digest": "fec89218fa9457b06455b750b084cd2ac8ea0fca5f2f6a64bcda8aa22395c48a",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": ""
+  },
+  "isolation_proof": "evaluation/evidence/perf/isolation-proof-b1c2-20260923T112654Z/isolation-proof.json",
+  "root_vc_digest": "7be41a74535a13069e448639a5e871e04c685af73fa207fa4e1c23f38a6062da",
+  "started_at": "2026-09-23T12:10:36.999715+00:00",
+  "ended_at": "2026-09-23T12:12:12.623922+00:00",
+  "k6_exit_status": 0,
+  "stop_reason": null,
+  "measurement_status": "VALID",
+  "run_outcome": "DEGRADED",
+  "reason": null,
+  "metrics": {
+    "scheduled": 240.0,
+    "started": 241,
+    "not_started": 0,
+    "success": 228,
+    "failed": 13,
+    "unfinished": 0,
+    "boundary_iterations": 1.0,
+    "failed_by_stage": {
+      "fetch_request": 7,
+      "approve_delegate": 6
+    },
+    "throughput_tps": 3.8,
+    "error_rate_pct": 5.3942,
+    "p50_ms": 4046.787,
+    "p95_ms": 6686.301,
+    "p99_ms": 7675.734,
+    "min_ms": 2852.225,
+    "max_ms": 9609.297,
+    "counter_invariant_ok": true
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "4.0.0",
+  "protocol_id": "BP-20260922-v6",
+  "experiment_id": "EXP-LOAD-01",
+  "experiment_purpose": "pilot",
+  "campaign_id": "pilot-perf-vm-raef6558-b0",
+  "run_id": "pilot-perf-vm-raef6558-b0-perf-b0-r2-b01",
+  "paired_block_id": "pilot-perf-vm-raef6558-b0-r2-pb01",
+  "batch": 1,
+  "configuration": "B0-C0",
+  "workload": "Medium",
+  "mode": "repeated",
+  "scope": "authorization_only",
+  "driver": "k6",
+  "k6_version": "k6.EXE v2.0.0 (commit/8c3be52cc1, go1.26.3, windows/amd64)",
+  "scheduler": "constant_arrival_rate_open_loop",
+  "offered_rate_tps": 2.0,
+  "window": {
+    "warmup_s": 10,
+    "warmup_drain_s": 10,
+    "measure_s": 30,
+    "drain_s": 10,
+    "cooldown_s": 30
+  },
+  "vu_pool": {
+    "pre_allocated": 50,
+    "max": 1000
+  },
+  "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+    "dirty_patch_digest": "bdf7207e12cde3a32e1ab672f93b1aa5abf60dcc67de8965d4a4397ecfebd87d",
+    "dirty_patch_reason": ""
+  },
+  "isolation_proof": null,
+  "root_vc_digest": null,
+  "started_at": "2026-09-23T06:23:13.118549+00:00",
+  "ended_at": "2026-09-23T06:24:04.293978+00:00",
+  "k6_exit_status": 0,
+  "stop_reason": null,
+  "measurement_status": "VALID",
+  "run_outcome": "DEGRADED",
+  "reason": null,
+  "metrics": {
+    "scheduled": 60.0,
+    "started": 61,
+    "not_started": 0,
+    "success": 60,
+    "failed": 1,
+    "unfinished": 0,
+    "boundary_iterations": 1.0,
+    "failed_by_stage": {
+      "initiate": 1
+    },
+    "throughput_tps": 2.0,
+    "error_rate_pct": 1.6393,
+    "p50_ms": 1871.621,
+    "p95_ms": 7713.71,
+    "p99_ms": 10510.834,
+    "min_ms": 913.952,
+    "max_ms": 11371.201,
+    "counter_invariant_ok": true
+  }
+}

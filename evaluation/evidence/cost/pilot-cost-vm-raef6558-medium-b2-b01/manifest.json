@@ -1,0 +1,91 @@
+{
+  "schema_version": "4.0.0",
+  "experiment_id": "EXP-COST-01",
+  "experiment_purpose": "pilot",
+  "protocol_id": "BP-20260922-v6",
+  "campaign_id": "pilot-cost-vm-raef6558",
+  "run_id": "pilot-cost-vm-raef6558-medium-b2-b01",
+  "paired_block_id": "pilot-cost-vm-raef6558-medium-pb01",
+  "batch": 1,
+  "configuration": "B1-C2",
+  "workload": "Medium",
+  "mode": "repeated_authorization",
+  "scope": "authorization_only",
+  "measurement_boundary": "first authorization request through access-token issuance",
+  "concurrency": 1,
+  "driver": "python_sequential",
+  "latency_clock": "time.perf_counter_ns (monotonic); wall-clock timestamps are provenance only",
+  "model_order_in_block": [
+    "B0-C0",
+    "B1-C0",
+    "B1-C2"
+  ],
+  "position_in_block": 3,
+  "settings": {
+    "batches": 1,
+    "attempts_per_batch": 5,
+    "warmup_attempts": 2
+  },
+  "protocol_digest": "1395e6c46d844446698b9b32902d6a7784fb13291633b0492ce60d43503d0f44",
+  "configuration_digest": "2eedde44d5ae1cce59884dee21fa74ac9755b444c5842471830dab4599df5cfa",
+  "fixture_digest": "5ab7741a7c31144311a19828f2160b9cf8607fd8fe064be711948f89bb6aa863",
+  "source_digest": "fdbfbb969adc5d226bbc092d56cbd189fd7b02c5fe012f3c63e180961d8febb1",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "fdbfbb969adc5d226bbc092d56cbd189fd7b02c5fe012f3c63e180961d8febb1",
+    "dirty_patch_digest": "6c279bba9aeaf6a78b1b159c81353c2372b579edaa5aa07ab8cfa02a2dd5205e",
+    "dirty_patch_reason": ""
+  },
+  "sut_commits": {
+    "B0-C0": {
+      "directory": "traditional-fapi",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C0": {
+      "directory": "wallet-vc-model-classical",
+      "commit": null,
+      "scope": "evaluation_repository"
+    },
+    "B1-C2": {
+      "directory": "wallet-vc-model",
+      "commit": null,
+      "scope": "evaluation_repository"
+    }
+  },
+  "environment": "vm",
+  "fingerprint": {
+    "file": "fingerprint.json",
+    "sha256": "a27425fb118407488554affa43fe942ba6e20aaca8b69972eab5be9132c39812"
+  },
+  "started_at": "2026-09-23T07:30:03.721027+00:00",
+  "ended_at": "2026-09-23T07:32:24.440565+00:00",
+  "status": "COMPLETED",
+  "reason": null,
+  "warmup_attempts_recorded": 2,
+  "metrics": {
+    "attempted": 5,
+    "succeeded": 5,
+    "failed": 0,
+    "failure_denominator": 5,
+    "failure_rate_pct": 0.0,
+    "median_ms": 3132.789,
+    "mean_ms": 3333.2021999999997,
+    "stdev_ms": 330.30818941285725,
+    "min_ms": 3052.125,
+    "max_ms": 3801.587,
+    "p95_ms": 3753.4413999999997,
+    "p99_ms": 3791.95788,
+    "median_wire_bytes": 28088.0,
+    "mean_wire_bytes": 28088.6,
+    "wire_samples": 5
+  },
+  "f1": {
+    "outcome": "SUCCESS",
+    "latency_ms": 8075.691,
+    "wire_bytes": 68037,
+    "root_vc_bytes": 8929,
+    "reported_separately": true
+  }
+}

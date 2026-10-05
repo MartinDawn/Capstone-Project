@@ -1,0 +1,10 @@
+Executing under process supervision: C:\Program Files\k6\k6.EXE run --quiet --no-usage-report --out json=D:/nam4/HK251/DACN/MainProject/main/evaluation/evidence/perf/pilot-load-20260922-final-r1248-perf-b2-r8-b01/k6-raw.json.gz D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/auth_load.js
+time="2026-09-22T22:06:32+07:00" level=warning msg="Request Failed" error="Post \"https://localhost:3443/api/approve-delegate\": request timeout"
+time="2026-09-22T22:06:34+07:00" level=warning msg="Request Failed" error="Post \"https://8.216.28.124:4443/api/request-delegate\": request timeout"
+time="2026-09-22T22:06:36+07:00" level=warning msg="Request Failed" error="Post \"https://localhost:3443/api/approve-delegate\": request timeout"
+time="2026-09-22T22:06:37+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=07cada82-5c8f-4ba9-bc0a-d436108eaafe\": request timeout"
+time="2026-09-22T22:06:38+07:00" level=warning msg="Request Failed" error="Post \"https://localhost:3443/api/approve-delegate\": request timeout"
+time="2026-09-22T22:06:38+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=baabdc6d-e4ce-4606-b6d1-8e19ceac9fd6\": request timeout"
+time="2026-09-22T22:06:38+07:00" level=warning msg="Request Failed" error="Post \"https://localhost:3443/api/approve-delegate\": request timeout"
+time="2026-09-22T22:06:38+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=ab0ca31c-c68b-46c7-9348-cf7f564a318b\": request timeout"
+time="2026-09-22T22:07:08+07:00" level=warning msg="Request Failed" error="Get \"https://localhost:3443/api/fetch-tpp-request?requestId=a08498dd-0aa8-4cc8-904f-ad17c1f75c74\": request timeout"

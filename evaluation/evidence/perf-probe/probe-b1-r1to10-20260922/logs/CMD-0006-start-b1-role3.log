@@ -1,0 +1,12 @@
+[start] wallet / b1-classical using: D:\nam4\HK251\DACN\MainProject\main\wallet-vc-model-classical\wallet\docker-compose.yml
+ Container classical_wallet_gateway  Starting
+ Container classical_wallet_gateway  Started
+ Container classical_wallet_java  Starting
+ Container classical_wallet_java  Started
+
+=== Active VDAM Containers ===
+
+NAMES                      STATUS                  PORTS
+classical_wallet_java      Up Less than a second   5000/tcp
+classical_wallet_gateway   Up Less than a second   80/tcp, 0.0.0.0:3443->3443/tcp
+[start] wallet / b1-classical done.

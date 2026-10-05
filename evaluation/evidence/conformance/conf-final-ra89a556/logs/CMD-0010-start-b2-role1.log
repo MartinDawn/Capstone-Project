@@ -1,0 +1,59 @@
+[start] conformance / b1-pqc using: D:\nam4\HK251\DACN\MainProject\main\wallet-vc-model\docker-compose.yml, D:\nam4\HK251\DACN\MainProject\main\evaluation\configs\conformance-ports\b1.yml
+ Container pqc_wallet_gateway  Creating
+ Container pqc_tpp_gateway  Creating
+ Container pqc_postgres  Creating
+ Container pqc_postgres  Created
+ Container pqc_tpp_gateway  Created
+ Container pqc_keycloak  Creating
+ Container pqc_tpp_java  Creating
+ Container pqc_wallet_gateway  Created
+ Container pqc_wallet_java  Creating
+ Container pqc_tpp_java  Created
+ Container pqc_keycloak  Created
+ Container pqc_oqs_server_proxy  Creating
+ Container pqc_bank_issuer  Creating
+ Container pqc_wallet_java  Created
+ Container pqc_bank_issuer  Created
+ Container pqc_oqs_server_proxy  Created
+ Container pqc_resource_server  Creating
+ Container pqc_resource_server  Created
+ Container pqc_postgres  Starting
+ Container pqc_wallet_gateway  Starting
+ Container pqc_tpp_gateway  Starting
+ Container pqc_postgres  Started
+ Container pqc_postgres  Waiting
+ Container pqc_wallet_gateway  Started
+ Container pqc_wallet_java  Starting
+ Container pqc_tpp_gateway  Started
+ Container pqc_tpp_java  Starting
+ Container pqc_wallet_java  Started
+ Container pqc_tpp_java  Started
+ Container pqc_postgres  Healthy
+ Container pqc_keycloak  Starting
+ Container pqc_keycloak  Started
+ Container pqc_keycloak  Waiting
+ Container pqc_keycloak  Waiting
+ Container pqc_keycloak  Healthy
+ Container pqc_bank_issuer  Starting
+ Container pqc_keycloak  Healthy
+ Container pqc_oqs_server_proxy  Starting
+ Container pqc_bank_issuer  Started
+ Container pqc_keycloak  Waiting
+ Container pqc_oqs_server_proxy  Started
+ Container pqc_keycloak  Healthy
+ Container pqc_resource_server  Starting
+ Container pqc_resource_server  Started
+
+=== Active VDAM Containers ===
+
+NAMES                  STATUS                    PORTS
+pqc_resource_server    Up Less than a second     0.0.0.0:4000->4000/tcp
+pqc_oqs_server_proxy   Up Less than a second     0.0.0.0:8443->8443/tcp, 4433/tcp, 0.0.0.0:9443->9443/tcp
+pqc_bank_issuer        Up Less than a second     0.0.0.0:7000->7000/tcp
+pqc_wallet_java        Up 52 seconds             0.0.0.0:5000->5000/tcp
+pqc_keycloak           Up 47 seconds (healthy)   8443/tcp, 0.0.0.0:8080->8080/tcp, 9000/tcp
+pqc_tpp_java           Up 52 seconds             0.0.0.0:6001->6001/tcp
+pqc_wallet_gateway     Up 52 seconds             0.0.0.0:3443->3443/tcp, 4433/tcp
+pqc_postgres           Up 52 seconds (healthy)   5432/tcp
+pqc_tpp_gateway        Up 52 seconds             0.0.0.0:4443->4443/tcp, 4433/tcp, 0.0.0.0:6443->6443/tcp
+[start] conformance / b1-pqc done.

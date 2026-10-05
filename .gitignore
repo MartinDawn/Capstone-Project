@@ -31,8 +31,6 @@ Thumbs.db
 **/*.tmp
 **/*.swp
 
-# Evaluation evidence (per-family run packages)
-evaluation/evidence/
 
 # Generated run state
 evaluation/state/*
@@ -41,3 +39,6 @@ evaluation/state/*
 
 # Large deployment bundle, not source; rebuild instead of committing the binary
 vdam-deploy.tar.gz
+
+# Raw evaluation evidence keeps its run logs
+!evaluation/evidence/**/*.log

@@ -1,0 +1,2 @@
+protocol_id,campaign_id,configuration,workload,offered_rate_tps,batches_total,batches_valid,scheduled,started,success,failed,unfinished,not_started,throughput_tps,error_rate_pct,p50_ms,p95_ms,p99_ms,min_ms,max_ms
+BP-20260922-v6,pilot-perf-vm-b1c2-r1-check,B1-C2,Medium,1.0,1,1,30.0,30.0,30,0,0.0,0,1.0,0.0,3473.693,4939.456,7741.658,2890.526,8800.297

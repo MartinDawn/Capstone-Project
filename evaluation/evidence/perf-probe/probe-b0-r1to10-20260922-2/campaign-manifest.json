@@ -1,0 +1,122 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260922-v5",
+  "experiment_family": "perf",
+  "campaign_id": "probe-b0-r1to10-20260922-2",
+  "experiment_purpose": "smoke",
+  "configuration_path": "evaluation/configs/perf-vm.json",
+  "configuration_digest": "f670ca5bb1c41346ac5cfd8ef4a7442aec0399507beeb85ca92b47ed0e28717d",
+  "source_digest": "638fca59815ea824ae23937ae53e01268e4a08bdc0c910a45142b348e4218e39",
+  "source_identity": {
+    "git_commit": null,
+    "worktree_dirty": "unknown",
+    "source_digest": "638fca59815ea824ae23937ae53e01268e4a08bdc0c910a45142b348e4218e39",
+    "dirty_patch_digest": null,
+    "dirty_patch_reason": "git_head_unavailable"
+  },
+  "created_at": "2026-09-22T10:29:16.073909+00:00",
+  "notes": [
+    "evidence_class=exploratory_not_protocol_evidence; ladder=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] TPS; step=30s; warmup=15s; drain=10s; workload=Small; scope=authorization_only; driver=k6"
+  ],
+  "commands": [
+    {
+      "command_id": "CMD-0001",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-22T10:24:07.410290+00:00",
+      "ended_at": "2026-09-22T10:24:10.830456+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0001-reset-stop-b0-host1.log"
+    },
+    {
+      "command_id": "CMD-0002",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-22T10:24:10.830456+00:00",
+      "ended_at": "2026-09-22T10:24:12.960559+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0002-reset-stop-b0-host2.log"
+    },
+    {
+      "command_id": "CMD-0003",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-22T10:24:12.961072+00:00",
+      "ended_at": "2026-09-22T10:24:14.958182+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0003-reset-stop-b0-host3.log"
+    },
+    {
+      "command_id": "CMD-0004",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh bank start b0'",
+      "started_at": "2026-09-22T10:24:14.958182+00:00",
+      "ended_at": "2026-09-22T10:24:53.403207+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0004-start-b0-role1.log"
+    },
+    {
+      "command_id": "CMD-0005",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh tpp start b0'",
+      "started_at": "2026-09-22T10:24:53.404200+00:00",
+      "ended_at": "2026-09-22T10:24:56.070215+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0005-start-b0-role2.log"
+    },
+    {
+      "command_id": "CMD-0006",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "C:\\Program Files\\k6\\k6.EXE run --quiet --no-usage-report D:/nam4/HK251/DACN/MainProject/main/evaluation/bin/perf/k6/probe_load.js",
+      "started_at": "2026-09-22T10:25:39.085300+00:00",
+      "ended_at": "2026-09-22T10:28:31.218185+00:00",
+      "exit_status": 99,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0006-probe-b0-r1to10-20260922-2-probe-b0.log"
+    },
+    {
+      "command_id": "CMD-0007",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@8.216.28.124 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-22T10:28:46.234802+00:00",
+      "ended_at": "2026-09-22T10:29:00.455450+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0007-post-stop-all-host1.log"
+    },
+    {
+      "command_id": "CMD-0008",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -i '~/.ssh/vdam_vm_ed25519' root@47.84.189.2 'cd /root/vdam && ./manage.sh stop all'",
+      "started_at": "2026-09-22T10:29:00.455450+00:00",
+      "ended_at": "2026-09-22T10:29:13.359834+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0008-post-stop-all-host2.log"
+    },
+    {
+      "command_id": "CMD-0009",
+      "campaign_id": "probe-b0-r1to10-20260922-2",
+      "working_directory": ".",
+      "command": "powershell -ExecutionPolicy Bypass -File manage.ps1 stop all",
+      "started_at": "2026-09-22T10:29:13.359834+00:00",
+      "ended_at": "2026-09-22T10:29:15.539394+00:00",
+      "exit_status": 0,
+      "log_path": "evaluation/evidence/perf-probe/probe-b0-r1to10-20260922-2/logs/CMD-0009-post-stop-all-host3.log"
+    }
+  ],
+  "dispositions": [
+    {
+      "stage": "probe",
+      "configuration": "B0-C0",
+      "run_id": "probe-b0-r1to10-20260922-2-probe-b0",
+      "status": "executed",
+      "reason": "STOPPED_BY_THRESHOLD"
+    }
+  ]
+}

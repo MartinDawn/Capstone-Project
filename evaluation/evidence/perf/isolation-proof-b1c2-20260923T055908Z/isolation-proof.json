@@ -1,0 +1,60 @@
+{
+  "schema_version": "3.0.0",
+  "protocol_id": "BP-20260915-v3",
+  "experiment_id": "EXP-PERF-02",
+  "configuration": "B1-C2",
+  "concurrency": 2,
+  "scope": "authorization_only",
+  "isolation_verified": true,
+  "started_at": "2026-09-23T05:59:08.997504+00:00",
+  "ended_at": "2026-09-23T05:59:13.279787+00:00",
+  "duration_ms": 4281.0,
+  "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+  "source_identity": {
+    "git_commit": "aef6558cffc2b11a18797a756bf44b9b21757143",
+    "worktree_dirty": "true",
+    "source_digest": "9d70b3911da05555a9ad2ed0edd0dc4df208085faae9202bb1a3e03fb325d9f4",
+    "dirty_patch_digest": "bdf7207e12cde3a32e1ab672f93b1aa5abf60dcc67de8965d4a4397ecfebd87d",
+    "dirty_patch_reason": ""
+  },
+  "comparison_objects": [
+    {
+      "transaction_id": "tx-1",
+      "thread_id": "15272",
+      "session_instance_uuid": "39771d8d-b374-46af-8e5e-cde0607b9c16",
+      "trace_id": "iso-tx-1",
+      "access_token_digest": "df86042ab5a10e7773f53d3abfe083557e5559bdb11471d7c1de3f0f329c958c",
+      "delegation_jti": "urn:uuid:af85cff0-5384-415d-bba9-374b103ca4bf",
+      "challenge_id": "81cde18d-2266-4350-9e39-4e2be55d74d4"
+    },
+    {
+      "transaction_id": "tx-2",
+      "thread_id": "23176",
+      "session_instance_uuid": "a6df18f6-7edc-4e50-bc10-fb4451bdea77",
+      "trace_id": "iso-tx-2",
+      "access_token_digest": "330fcfb5689c72e439ca79b1562b0cd558429b559d580f8831b0c885fd187ff4",
+      "delegation_jti": "urn:uuid:1424055f-702a-49a3-ad2f-a715e0605ced",
+      "challenge_id": "cd4723ed-70df-4b3f-a3fd-e50e13ff6262"
+    }
+  ],
+  "sanitized_transactions": [
+    {
+      "transaction_id": "tx-1",
+      "status": "SUCCESS",
+      "error_sanitized": null
+    },
+    {
+      "transaction_id": "tx-2",
+      "status": "SUCCESS",
+      "error_sanitized": null
+    }
+  ],
+  "isolation_checks": {
+    "no_shared_mutable_cookies": true,
+    "distinct_worker_execution_threads": true,
+    "zero_observed_cross_talk": true,
+    "details": [
+      "FAILURE_INJECTION_TEST: failing transaction isolated; concurrent transaction completed intact"
+    ]
+  }
+}

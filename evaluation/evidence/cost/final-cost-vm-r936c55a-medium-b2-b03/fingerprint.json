@@ -1,0 +1,162 @@
+{
+  "model": "B1-C2",
+  "resource_table": "evaluation/manifests/resource-limits.json",
+  "hosts": {
+    "bank": {
+      "containers": [
+        {
+          "name": "pqc_resource_server",
+          "service": "resource-server",
+          "image": "pqc-bank-resource-server",
+          "image_id": "sha256:18416739df2e42d051b3fb1636256c0ccb5cb46985b9d6da4bb0182a913ebbbe",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "NODE_OPTIONS=--max-http-header-size=65536"
+          ]
+        },
+        {
+          "name": "pqc_bank_issuer",
+          "service": "bank-issuer",
+          "image": "pqc-bank-bank-issuer",
+          "image_id": "sha256:e875cfab248d3b79552e6fadac33ecbe85b47fd2f843df58dae6c9fb02c016d3",
+          "nano_cpus": 1500000000,
+          "memory_bytes": 1610612736,
+          "memory_swap_bytes": 3221225472,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "pqc_oqs_server_proxy",
+          "service": "oqs-server-proxy",
+          "image": "openquantumsafe/nginx:latest@sha256:beb0d25462d6deb7de3d16a47724761951197a2e74f0ddb451a9e8de293ed493",
+          "image_id": "sha256:beb0d25462d6deb7de3d16a47724761951197a2e74f0ddb451a9e8de293ed493",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        },
+        {
+          "name": "pqc_keycloak",
+          "service": "keycloak",
+          "image": "quay.io/keycloak/keycloak:26.6.4@sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4",
+          "image_id": "sha256:0aae0de7fca85525f727d3354df17896092de8bb26ae4c12d89c77e5df8cbce4",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "KC_LOG_LEVEL=INFO"
+          ]
+        },
+        {
+          "name": "pqc_postgres",
+          "service": "postgres",
+          "image": "postgres:15@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246",
+          "image_id": "sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "29.7.2",
+        "ncpu": 2,
+        "mem_total_bytes": 3664932864,
+        "cgroup_version": "2"
+      }
+    },
+    "tpp": {
+      "containers": [
+        {
+          "name": "pqc_tpp_java",
+          "service": "tpp-java",
+          "image": "pqc-tpp-tpp-java",
+          "image_id": "sha256:f716284e8ba9c8a22dbb8a147c52f5211b13d3119140e08899c077cdc4974d5d",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "pqc_tpp_gateway",
+          "service": "tpp-gateway",
+          "image": "openquantumsafe/nginx:latest@sha256:beb0d25462d6deb7de3d16a47724761951197a2e74f0ddb451a9e8de293ed493",
+          "image_id": "sha256:beb0d25462d6deb7de3d16a47724761951197a2e74f0ddb451a9e8de293ed493",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "29.7.2",
+        "ncpu": 2,
+        "mem_total_bytes": 3664920576,
+        "cgroup_version": "2"
+      }
+    },
+    "client": {
+      "containers": [
+        {
+          "name": "pqc_wallet_java",
+          "service": "wallet",
+          "image": "pqc-wallet-wallet",
+          "image_id": "sha256:157bd119460a8233ac16e513f3025a4dc8b171adfb2eb8cf5e712de89db58d93",
+          "nano_cpus": 1000000000,
+          "memory_bytes": 1073741824,
+          "memory_swap_bytes": 2147483648,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": [
+            "JAVA_HOME=/opt/java/openjdk",
+            "JAVA_VERSION=jdk-17.0.20+8",
+            "SPRING_PROFILES_ACTIVE=conformance"
+          ]
+        },
+        {
+          "name": "pqc_wallet_gateway",
+          "service": "wallet-gateway",
+          "image": "openquantumsafe/nginx:latest@sha256:beb0d25462d6deb7de3d16a47724761951197a2e74f0ddb451a9e8de293ed493",
+          "image_id": "sha256:aecef987553828e0ad162b8c5d7ce5ff7efb32d20f63f058f916e80f6f389e03",
+          "nano_cpus": 500000000,
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 536870912,
+          "oom_killed": false,
+          "restart_count": 0,
+          "env": []
+        }
+      ],
+      "docker": {
+        "server_version": "28.0.4",
+        "ncpu": 12,
+        "mem_total_bytes": 8205291520,
+        "cgroup_version": "1"
+      }
+    }
+  },
+  "problems": [],
+  "status": "MATCH"
+}
